@@ -7,6 +7,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -19,10 +20,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/member")
 public class MemebrApiController {
 
-    private MemberService memberService;
+    private final MemberService memberService;
+
+    @ApiOperation(value = "로그인", notes = "이메일 회원 로그인을 한다.")
+    @PostMapping(value = "/signin")
+    public
 
     @ApiOperation(value = "회원 가입", notes = "회원 가입을 한다.")
-    @PostMapping(value="/member")
+    @PostMapping(value="/signup")
     public MemberDto.SignInRes signInMember(
         @ApiParam(value="회원가입 폼입력필드 DTO", required = true)
         @RequestBody @Valid final MemberDto.SignInReq dto,
@@ -34,5 +39,7 @@ public class MemebrApiController {
 
         return new MemberDto.SignInRes();
     }
+
+
 
 }

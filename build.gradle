@@ -23,10 +23,12 @@ repositories {
 dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
-//	implementation 'org.springframework.boot:spring-boot-starter-security:'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
+	implementation 'org.springframework.boot:spring-boot-starter-security:'
+
 	compile group: 'io.springfox', name: 'springfox-swagger2', version: '2.6.1'
 	compile group: 'io.springfox', name: 'springfox-swagger-ui', version: '2.6.1'
+
 	//querydsl 추가
 	implementation 'com.querydsl:querydsl-jpa'
 	//쿼리 파라미터 로그
@@ -37,6 +39,12 @@ dependencies {
 	testImplementation('org.springframework.boot:spring-boot-starter-test') {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
+	testImplementation 'org.springframework.security:spring-security-test'
+
+	compile group: 'io.jsonwebtoken', name: 'jjwt-api', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-impl', version: '0.11.2'
+	runtime group: 'io.jsonwebtoken', name: 'jjwt-jackson', version: '0.11.2'
+
 }
 
 test {

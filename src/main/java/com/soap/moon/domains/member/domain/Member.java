@@ -52,6 +52,7 @@ public class Member extends BaseTimeEntity {
     @Column(name = "role", length = 20)
     private RoleStatus roleStatus;
 
+
     @Builder
     public Member(Account account, Password password, String name, Email email, Address address,
         MemberStatus status, LocalDateTime lastLoginAt, RoleStatus roleStatus) {
