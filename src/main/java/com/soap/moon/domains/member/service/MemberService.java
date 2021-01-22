@@ -1,40 +1,67 @@
 package com.soap.moon.domains.member.service;
 
+import com.soap.moon.domains.member.domain.Account;
+import com.soap.moon.domains.member.domain.Authority;
 import com.soap.moon.domains.member.domain.Member;
+import com.soap.moon.domains.member.domain.MemberStatus;
+import com.soap.moon.domains.member.domain.Password;
+import com.soap.moon.domains.member.dto.MemberDto;
 import com.soap.moon.domains.member.exception.MemberDuplicationException;
-import com.soap.moon.domains.member.repository.MemberCustomRepository;
+import com.soap.moon.domains.member.repository.AuthorityRepository;
 import com.soap.moon.domains.member.repository.MemberRepository;
+import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+@Slf4j
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
 public class MemberService {
 
     private final MemberRepository memberRepository;
-    private final MemberCustomRepository memberCustomRepository;
-
+    private final AuthorityRepository authorityRepository;
+    private final PasswordEncoder passwordEncoder;
     /**
      * 회원가입
      */
     @Transactional
-    public Long save(Member member){
-        validateDupicateMember(member);
-        memberRepository.save(member);
-        return member.getId();
+    public Member save(MemberDto.SignInReq dto){
+        validateDuplicateMember(dto.getUserId());
+
+        Account account = Account.builder().userId(dto.getUserId()).build();
+        Password password = Password.builder()
+            .password(passwordEncoder.encode(dto.getPassword()))
+            .build();
+
+        Optional<Authority> authority = authorityRepository.findById(1L);
+
+        Member member = Member.builder()
+            .account(account)
+            .password(password)
+            .name(dto.getName())
+            .status(MemberStatus.ACTIVE)
+            .lastLoginAt(LocalDateTime.now())
+            .authority(authority.get())
+            .build();
+
+        //member.addAuthority(authorityUser);
+        return memberRepository.save(member);
     }
 
     /**
      * 중복회원 체크
      * account컬럼 유니크 제약조건 추가
      */
-    private void validateDupicateMember(Member member) {
-        Optional<Member> findMember = memberRepository.findByAccount(member.getAccount());
+    private void validateDuplicateMember(String userId) {
+        Account account = Account.builder().userId(userId).build();
+        Optional<Member> findMember = memberRepository.findByAccount(account);
         findMember.ifPresent(fm -> {
-            throw new MemberDuplicationException("이미 존재하는 회원입니다.");
+            throw new MemberDuplicationException();
         });
     }
 

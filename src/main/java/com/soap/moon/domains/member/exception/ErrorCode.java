@@ -5,9 +5,14 @@ import lombok.Getter;
 @Getter
 public enum ErrorCode {
 
-    OK(200, "OK_001", "로그인에 실패하였습니다."),
+    // Member
+    EMAIL_DUPLICATION(400, "M001", "Id is Duplication"),
+    LOGIN_FAILED(401, "AUTH_001", "로그인에 실패하였습니다."),
 
-    LOGIN_FAILED(401, "AUTH_001", "로그인에 실패하였습니다.");
+    // Common
+    BAD_REQUEST(400, "ERROR_001", "입력값이 잘못되었습니다."),
+    MEMBER_DUPLICATEREQUEST(400, "ERROR_001", "입력값이 잘못되었습니다.");
+
 
     private int status;
     private final String code;

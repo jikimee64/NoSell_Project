@@ -13,7 +13,8 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Account {
 
-    @Column(name = "USER_ID", length = 16, nullable = false, unique = true)
+    @javax.validation.constraints.Email
+    @Column(name = "user_id", nullable = false, unique = true, updatable=false)
     private String userId;
 
     @Builder
