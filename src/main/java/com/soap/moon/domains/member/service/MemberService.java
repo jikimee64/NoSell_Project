@@ -3,6 +3,7 @@ package com.soap.moon.domains.member.service;
 import com.soap.moon.domains.member.domain.Account;
 import com.soap.moon.domains.member.domain.Authority;
 import com.soap.moon.domains.member.domain.Member;
+import com.soap.moon.domains.member.domain.MemberAuthority;
 import com.soap.moon.domains.member.domain.MemberStatus;
 import com.soap.moon.domains.member.domain.Password;
 import com.soap.moon.domains.member.dto.MemberDto;
@@ -38,7 +39,7 @@ public class MemberService {
             .password(passwordEncoder.encode(dto.getPassword()))
             .build();
 
-        Optional<Authority> authority = authorityRepository.findById(1L);
+        Optional<Authority> authorityRoleUser = authorityRepository.findById(1L);
 
         Member member = Member.builder()
             .account(account)
@@ -46,10 +47,14 @@ public class MemberService {
             .name(dto.getName())
             .status(MemberStatus.ACTIVE)
             .lastLoginAt(LocalDateTime.now())
-            .authority(authority.get())
             .build();
 
-        //member.addAuthority(authorityUser);
+        MemberAuthority memberAuthority = MemberAuthority.builder()
+            .member(member)
+            .authority(authorityRoleUser.get())
+            .build();
+
+        member.addAuthority(memberAuthority);
         return memberRepository.save(member);
     }
 

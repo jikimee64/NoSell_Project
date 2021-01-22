@@ -31,6 +31,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Table(name = "member")
 public class Member extends BaseTimeEntity {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "member_id")
@@ -56,34 +57,34 @@ public class Member extends BaseTimeEntity {
 //    @Column(name = "role", length = 20)
 //    private RoleStatus roleStatus;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-        name = "Member_Authority",
-        joinColumns = @JoinColumn(name = "user_id"),
-        inverseJoinColumns = @JoinColumn(name = "authority_id")
-    )
-    private Set<Authority> authorities = new HashSet<>();
+    //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
+//    @JoinTable(
+//        name = "Member_Authority",
+//        joinColumns = @JoinColumn(name = "user_id"),
+//        inverseJoinColumns = @JoinColumn(name = "authority_id")
+//    )
+    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
+    private Set<MemberAuthority> authorities = new HashSet<>();
 
     @Builder
     public Member(Account account, Password password, String name,
-        MemberStatus status, LocalDateTime lastLoginAt, Authority authority) {
+        MemberStatus status, LocalDateTime lastLoginAt) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(password, "password must not be null");
         Assert.notNull(name, "name must not be null");
         Assert.notNull(status, "status must not be null");
         Assert.notNull(lastLoginAt, "lastLoginAt must not be null");
-        Assert.notNull(authority, "authority must not be null");
 
         this.account = account;
         this.password = password;
         this.name = name;
         this.status = status;
         this.lastLoginAt = lastLoginAt;
-        this.authorities.add(authority);
     }
 
-//    public void addAuthority(Authority authority){
-//        authorities.add(authority);
-//    }
+    public void addAuthority(MemberAuthority memberAuthority) {
+        authorities.add(memberAuthority);
+        memberAuthority.setMember(this);
+    }
 
 }
