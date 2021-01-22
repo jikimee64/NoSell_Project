@@ -16,6 +16,8 @@ import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.Errors;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,5 +47,23 @@ public class MemebrApiController {
                 .build()
             , HttpStatus.OK);
     }
+
+    @ApiOperation(
+        httpMethod = "GET", value = "회원 단건 조회", notes = "회원에 대한 정보를 조회한다.(단건)")
+    @GetMapping(value = "/members/{id}")
+    public ResponseEntity<?> getMember(
+        @ApiParam(value = "회원단건 조회 폼입력필드 DTO", required = true)
+        @PathVariable("id") final Long memberId) {
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(memberService.findOneWithAuthoritiesByAccount(memberId))
+                .build()
+            , HttpStatus.OK);
+    }
+
+
 
 }

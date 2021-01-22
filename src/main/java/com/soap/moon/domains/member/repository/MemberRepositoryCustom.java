@@ -1,9 +1,8 @@
 package com.soap.moon.domains.member.repository;
 
-import com.soap.moon.domains.member.domain.Member;
-import java.util.Optional;
-import org.springframework.stereotype.Repository;
+import com.soap.moon.domains.member.domain.Account;
+import com.soap.moon.domains.member.dto.query.MemberAuthorityDto;
 
 public interface MemberRepositoryCustom {
-    //Optional<Member> findOneWithAuthoritiesByAccounte(String account);
+    MemberAuthorityDto findOneWithAuthoritiesByAccount(Account account);
 }

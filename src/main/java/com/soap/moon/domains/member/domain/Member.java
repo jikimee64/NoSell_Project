@@ -53,16 +53,6 @@ public class Member extends BaseTimeEntity {
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
-//    @Enumerated(EnumType.STRING)
-//    @Column(name = "role", length = 20)
-//    private RoleStatus roleStatus;
-
-    //    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-//    @JoinTable(
-//        name = "Member_Authority",
-//        joinColumns = @JoinColumn(name = "user_id"),
-//        inverseJoinColumns = @JoinColumn(name = "authority_id")
-//    )
     @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
     private Set<MemberAuthority> authorities = new HashSet<>();
 

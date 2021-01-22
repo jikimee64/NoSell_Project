@@ -7,6 +7,7 @@ import com.soap.moon.domains.member.domain.MemberAuthority;
 import com.soap.moon.domains.member.domain.MemberStatus;
 import com.soap.moon.domains.member.domain.Password;
 import com.soap.moon.domains.member.dto.MemberDto;
+import com.soap.moon.domains.member.dto.query.MemberAuthorityDto;
 import com.soap.moon.domains.member.exception.MemberDuplicationException;
 import com.soap.moon.domains.member.repository.AuthorityRepository;
 import com.soap.moon.domains.member.repository.MemberRepository;
@@ -73,8 +74,10 @@ public class MemberService {
     /**
      * 회원 1명 조회
      */
-    public Optional<Member> findById(Long id) {
-        return memberRepository.findById(id);
+    public MemberAuthorityDto findOneWithAuthoritiesByAccount(Long memberId) {
+        Optional<Member> member = memberRepository.findById(memberId);
+        return memberRepository.findOneWithAuthoritiesByAccount(member.get().getAccount());
     }
+
 
 }
