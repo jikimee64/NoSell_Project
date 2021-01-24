@@ -17,5 +17,9 @@ public class TokenDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class TokenInRes{
         public String token;
+
+        public TokenInRes(String token) {
+            this.token = token;
+        }
     }
 }

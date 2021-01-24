@@ -8,14 +8,16 @@ import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
 public class MemberDto {
 
-    @ApiModel("회원가입 POST RequestParam 객체 도메인") // 모델명
+    @ApiModel("회원가입 POST RequestParam 객체 도메인")
     @Getter
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class SignInReq {
@@ -44,7 +46,7 @@ public class MemberDto {
         }
     }
 
-    @ApiModel("로그인 POST RequestParam 객체 도메인") // 모델명
+    @ApiModel("로그인 POST RequestParam 객체 도메인")
     @Getter
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class LoginReq {
@@ -58,6 +60,24 @@ public class MemberDto {
         @NotBlank(message = "패스워드는 필수 입력 값입니다.")
         @Size(min = 3, max = 50)
         public String password;
+    }
+
+    @ApiModel("회원 단건 조회 GET")
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class selectOneRes {
+
+        @ApiModelProperty(value = "고유값", notes = "id")
+        public Long id;
+
+        @ApiModelProperty(value = "아이디", notes = "userId")
+        public String userId;
+
+        @ApiModelProperty(value = "이름", notes = "name")
+        public String name;
+
+
     }
 
 }

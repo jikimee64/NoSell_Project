@@ -13,13 +13,31 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice(annotations = RestController.class)
 public class ErrorExceptionController {
 
-    @ExceptionHandler
-    @ResponseStatus(value = HttpStatus.NOT_FOUND)
+    @ExceptionHandler(value = MemberDuplicationException.class)
     public ResponseEntity<?> memberDuplicationException(MemberDuplicationException ex) {
+        log.info("=== 제발 ===");
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.EMAIL_DUPLICATION.getCode())
-                .message(ErrorCode.EMAIL_DUPLICATION.getMessage()).build(),
+                .message(ex.getMessage()).build(),
             HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(value = MemberStatusInActiveException.class)
+    public ResponseEntity<?> memberStatusInActiveException(MemberStatusInActiveException ex) {
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.MEMBER_DUPLICATION.getCode())
+                .message(ex.getMessage()).build(),
+            HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(value = MemberNotFoundException.class)
+    public ResponseEntity<?> memberNotFoundException(MemberNotFoundException ex) {
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.MEMBER_NOT_FOUND.getCode())
+                .message(ex.getMessage()).build(),
+            HttpStatus.FORBIDDEN);
     }
 }
