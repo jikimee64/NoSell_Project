@@ -24,34 +24,18 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Api(tags = {"1. Member"})
+@Api(tags = {"1. Member"}, value = "회원 CRUD")
 @RequiredArgsConstructor
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/members")
 public class MemebrController {
 
     private final MemberService memberService;
     private final MemberRepository memberRepository;
 
     @ApiOperation(
-        httpMethod = "POST", value = "회원 가입", notes = "회원 가입을 한다.")
-    @PostMapping(value = "/members")
-    public ResponseEntity<?> signInMember(
-        @ApiParam(value = "회원가입 폼입력필드 DTO", required = true)
-        @RequestBody @Valid final MemberDto.SignInReq dto) {
-
-        return new ResponseEntity<>(
-            CommonResponse.builder()
-                .code("200")
-                .message("ok")
-                .data(memberService.save(dto).getId())
-                .build()
-            , HttpStatus.OK);
-    }
-
-    @ApiOperation(
         httpMethod = "GET", value = "회원 단건 조회", notes = "회원에 대한 정보를 조회한다.(단건)")
-    @GetMapping(value = "/members/{id}")
+    @GetMapping(value = "/{id}")
     public ResponseEntity<?> getMember(
         @ApiParam(value = "회원단건 조회 폼입력필드 DTO", required = true)
         @PathVariable("id") final Long memberId) {
@@ -68,6 +52,25 @@ public class MemebrController {
                 .build()
             , HttpStatus.OK);
     }
+
+
+
+//    @ApiOperation(
+//        httpMethod = "POST", value = "로그인", notes = "로그인을 한다.")
+//    @PostMapping(value = "/login")
+//    public ResponseEntity<?> loginMember(
+//        @ApiParam(value = "회원가입 폼입력필드 DTO", required = true)
+//        @RequestBody @Valid final MemberDto.SignInReq dto) {
+//
+//        return new ResponseEntity<>(
+//            CommonResponse.builder()
+//                .code("200")
+//                .message("ok")
+//                .data(memberService.save(dto).getId())
+//                .build()
+//            , HttpStatus.OK);
+//    }
+
 
 //    @GetMapping("/user")
 //    //@PreAuthorize("hasAnyRole('USER','ADMIN')")

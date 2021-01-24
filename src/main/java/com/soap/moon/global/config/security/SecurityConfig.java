@@ -1,5 +1,6 @@
 package com.soap.moon.global.config.security;
 
+import com.soap.moon.domains.member.domain.Role;
 import com.soap.moon.infra.jwt.JwtAccessDeniedHandler;
 import com.soap.moon.infra.jwt.JwtAuthenticationEntryPoint;
 import com.soap.moon.infra.jwt.JwtSecurityConfig;
@@ -44,13 +45,14 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
             .httpBasic()
-            .disable()
-            // token을 사용하는 방식이기 때문에 csrf를 disable합니다.
+            .disable() // rest api 이므로 기본설정 사용안함.
+            // token을 사용하는 방식이기 때문에 csrf
             .csrf().disable() //csrf 방지
+
 
             .exceptionHandling()
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-            .accessDeniedHandler(jwtAccessDeniedHandler)
+            .accessDeniedHandler(jwtAccessDeniedHandler) //인증 또는 인가에 실패한 경우 Exception 처리
 
             // enable h2-console
             .and()
@@ -65,11 +67,15 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             .and()
             .authorizeRequests()
-            .antMatchers("/api/v1/member/signin").permitAll()
-            .antMatchers("/api/v1/member/signup").permitAll()
+            .antMatchers("/api/v1/auth/signup").permitAll()
+            .antMatchers("/api/v1/auth/login").permitAll()
 
+            //인증을 반드시 통과해야하며, 인가(USER 권한)이 있는 사용자만 접근 가능
+            .antMatchers("/api/v1/members/**").hasAnyAuthority(Role.USER.getCode())
+            .anyRequest().authenticated()
 
             .and()
+            //사용자의 모든 요청은 JWT 필터를 통과하는 설정
             .apply(new JwtSecurityConfig(tokenProvider));
     }
 

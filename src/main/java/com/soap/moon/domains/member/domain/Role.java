@@ -1,12 +1,10 @@
 package com.soap.moon.domains.member.domain;
 
-import com.querydsl.core.support.QueryMixin.Role;
 import java.util.Arrays;
 import lombok.Getter;
-import lombok.RequiredArgsConstructor;
 
 @Getter
-public enum RoleStatus {
+public enum Role {
     ADMIN("ROLE_ADMIN", "관리자권한"),
     USER("ROLE_USER", "사용자권한"),
     UNKNOWN("UNKNOWN", "알수없는권한");
@@ -14,13 +12,13 @@ public enum RoleStatus {
     private String code;
     private String description;
 
-    RoleStatus(String code, String description) {
+    Role(String code, String description) {
         this.code = code;
         this.description = description;
     }
 
-    public static RoleStatus of(String code) {
-        return Arrays.stream(RoleStatus.values())
+    public static Role of(String code) {
+        return Arrays.stream(Role.values())
             .filter(r -> r.getCode().equals(code))
             .findAny()
             .orElse(UNKNOWN);

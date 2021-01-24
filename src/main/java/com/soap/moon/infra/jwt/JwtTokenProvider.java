@@ -1,5 +1,6 @@
 package com.soap.moon.infra.jwt;
 
+import com.soap.moon.domains.member.exception.CustomJwtRuntimeException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
@@ -56,7 +57,7 @@ public class JwtTokenProvider implements InitializingBean {
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
             .signWith(key, SignatureAlgorithm.HS512)
-            .setExpiration(validity)
+            .setExpiration(validity) //토큰만료시간
             .compact();
     }
 
@@ -84,16 +85,17 @@ public class JwtTokenProvider implements InitializingBean {
             return true;
         } catch (io.jsonwebtoken.security.SecurityException | MalformedJwtException e) {
             log.info("잘못된 JWT 서명입니다.");
+            throw new CustomJwtRuntimeException();
         } catch (ExpiredJwtException e) {
             log.info("만료된 JWT 토큰입니다.");
+            throw new CustomJwtRuntimeException();
         } catch (UnsupportedJwtException e) {
             log.info("지원되지 않는 JWT 토큰입니다.");
+            throw new CustomJwtRuntimeException();
         } catch (IllegalArgumentException e) {
             log.info("JWT 토큰이 잘못되었습니다.");
+            throw new CustomJwtRuntimeException();
         }
-        return false;
     }
-
-
 
 }

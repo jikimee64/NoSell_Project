@@ -15,7 +15,10 @@ public class ErrorExceptionController {
 
     @ExceptionHandler(value = MemberDuplicationException.class)
     public ResponseEntity<?> memberDuplicationException(MemberDuplicationException ex) {
-        log.info("=== 제발 ===");
+
+        log.info("memberDuplicationException");
+
+
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.EMAIL_DUPLICATION.getCode())
@@ -25,6 +28,9 @@ public class ErrorExceptionController {
 
     @ExceptionHandler(value = MemberStatusInActiveException.class)
     public ResponseEntity<?> memberStatusInActiveException(MemberStatusInActiveException ex) {
+
+        log.info("memberStatusInActiveException", ex);
+
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.MEMBER_DUPLICATION.getCode())
@@ -34,10 +40,37 @@ public class ErrorExceptionController {
 
     @ExceptionHandler(value = MemberNotFoundException.class)
     public ResponseEntity<?> memberNotFoundException(MemberNotFoundException ex) {
+
+        log.info("memberNotFoundException", ex);
+
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.MEMBER_NOT_FOUND.getCode())
                 .message(ex.getMessage()).build(),
             HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(value = CustomJwtRuntimeException.class)
+    public ResponseEntity<?> customJwtRuntimeException(CustomJwtRuntimeException ex) {
+
+        log.info("customJwtRuntimeException", ex);
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.INVALID_JWT_TOKEN.getCode())
+                .message(ex.getMessage()).build(),
+            HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(value = CustomAuthenticationException.class)
+    public ResponseEntity<?> customAuthenticationException(CustomAuthenticationException ex) {
+
+        log.info("customAuthenticationException", ex);
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
+                .message(ex.getMessage()).build(),
+            HttpStatus.UNAUTHORIZED);
     }
 }
