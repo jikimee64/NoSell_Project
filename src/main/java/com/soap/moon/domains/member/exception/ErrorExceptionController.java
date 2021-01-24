@@ -53,7 +53,7 @@ public class ErrorExceptionController {
     @ExceptionHandler(value = CustomJwtRuntimeException.class)
     public ResponseEntity<?> customJwtRuntimeException(CustomJwtRuntimeException ex) {
 
-        log.info("customJwtRuntimeException", ex);
+        log.info("========== customJwtRuntimeException ==========", ex);
 
         return new ResponseEntity<>(
             CommonResponse.builder()
@@ -70,6 +70,18 @@ public class ErrorExceptionController {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
+                .message(ex.getMessage()).build(),
+            HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(value = LoginFailedException.class)
+    public ResponseEntity<?> loginFailedException(LoginFailedException ex) {
+
+        log.info("LoginFailedException", ex);
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.LOGIN_FAILED.getCode())
                 .message(ex.getMessage()).build(),
             HttpStatus.UNAUTHORIZED);
     }

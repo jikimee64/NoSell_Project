@@ -51,8 +51,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 
             .exceptionHandling()
+            //인증 또는 인가에 실패한 경우 Exception 처리
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-            .accessDeniedHandler(jwtAccessDeniedHandler) //인증 또는 인가에 실패한 경우 Exception 처리
+            .accessDeniedHandler(jwtAccessDeniedHandler)
+            //
 
             // enable h2-console
             .and()
@@ -67,11 +69,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             .and()
             .authorizeRequests()
-            .antMatchers("/api/v1/auth/signup").permitAll()
-            .antMatchers("/api/v1/auth/login").permitAll()
+            .antMatchers("/api/v1/login/**").permitAll()
+            .antMatchers("/api/v1/signup/**").permitAll()
+            //.antMatchers("/api/v1/members/**").permitAll()
 
             //인증을 반드시 통과해야하며, 인가(USER 권한)이 있는 사용자만 접근 가능
             .antMatchers("/api/v1/members/**").hasAnyAuthority(Role.USER.getCode())
+
             .anyRequest().authenticated()
 
             .and()

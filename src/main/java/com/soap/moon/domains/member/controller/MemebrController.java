@@ -11,6 +11,7 @@ import com.soap.moon.global.common.CommonResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -54,22 +55,6 @@ public class MemebrController {
     }
 
 
-
-//    @ApiOperation(
-//        httpMethod = "POST", value = "로그인", notes = "로그인을 한다.")
-//    @PostMapping(value = "/login")
-//    public ResponseEntity<?> loginMember(
-//        @ApiParam(value = "회원가입 폼입력필드 DTO", required = true)
-//        @RequestBody @Valid final MemberDto.SignInReq dto) {
-//
-//        return new ResponseEntity<>(
-//            CommonResponse.builder()
-//                .code("200")
-//                .message("ok")
-//                .data(memberService.save(dto).getId())
-//                .build()
-//            , HttpStatus.OK);
-//    }
 
 
 //    @GetMapping("/user")
