@@ -32,7 +32,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
          * 토큰 없는 경우
          */
         if(exception == null) {
-            errorCode = ErrorCode.NON_LOGIN;
+            errorCode = ErrorCode.INVALID_JWT_TOKEN;
             setResponse(response, errorCode);
             return;
         }

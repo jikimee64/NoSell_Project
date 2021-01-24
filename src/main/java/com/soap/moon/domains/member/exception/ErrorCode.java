@@ -19,8 +19,7 @@ public enum ErrorCode {
     LOGIN_FAILED(401, "AUTH_001", "로그인에 실패하였습니다."),
     INVALID_JWT_TOKEN(401, "AUTH003", "유효하지 않은 토큰입니다."),
     EXPIRED_JWT_TOKE(401,"AUTH004","만료된 토큰입니다."),
-    ACCESS_DENIED(401, "AUTH005","접근 권한이 없습니다."),
-    NON_LOGIN(401, "AUTH006", "로그인 해주세요.");
+    ACCESS_DENIED(401, "AUTH005","접근 권한이 없습니다.");
 
     private int status;
     private final String code;

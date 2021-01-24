@@ -5,6 +5,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
@@ -93,18 +94,6 @@ public class GlobalExceptionController {
             HttpStatus.UNAUTHORIZED);
     }
 
-//    @ExceptionHandler(CustomAuthenticationException.class)
-//    protected ResponseEntity<?> handleCustomAuthenticationException(CustomAuthenticationException ex) {
-//
-//        log.info("handleCustomAuthenticationException", ex);
-//
-//        return new ResponseEntity<>(
-//            CommonResponse.builder()
-//                .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
-//                .message(ex.getMessage()).build(),
-//            HttpStatus.UNAUTHORIZED);
-//    }
-
     //시큐리티의 authenticate()에서 비밀번호가 다를때 발생
     @ExceptionHandler(BadCredentialsException.class)
     protected ResponseEntity<CommonResponse> handleBadCredentialsException(BadCredentialsException ex) {
@@ -118,5 +107,20 @@ public class GlobalExceptionController {
                 .data(ErrorCode.AUTHENTICATION_FAILED.getStatus())
                 .build(),
             HttpStatus.UNAUTHORIZED);
+    }
+
+    //만료 시간이 지난 인증 통큰 요청시...
+    @ExceptionHandler(InsufficientAuthenticationException.class)
+    protected ResponseEntity<?> handleInsufficientAuthenticationException(InsufficientAuthenticationException e) {
+
+        log.info("handleInsufficientAuthenticationException", e);
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
+                .message(ErrorCode.AUTHENTICATION_FAILED.getMessage())
+                .data(ErrorCode.AUTHENTICATION_FAILED.getStatus())
+                .build(),
+        HttpStatus.UNAUTHORIZED);
     }
 }

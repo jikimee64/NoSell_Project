@@ -54,9 +54,6 @@ public class MemebrController {
             , HttpStatus.OK);
     }
 
-
-
-
 //    @GetMapping("/user")
 //    //@PreAuthorize("hasAnyRole('USER','ADMIN')")
 //    public ResponseEntity<Member> getMyUserInfo() {
