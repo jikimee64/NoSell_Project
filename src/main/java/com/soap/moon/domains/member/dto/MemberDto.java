@@ -22,13 +22,13 @@ public class MemberDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class SignInReq {
 
-        @ApiModelProperty(value = "아이디", notes = "userId", example = "dncjf64", required = true)
+        @ApiModelProperty(value = "아이디", notes = "userId", example = "admin@j2kb.com", required = true)
         @NotBlank(message = "아이디는 필수 입력 값입니다.")
         @Email(message = "아이디 형식에 맞지 않습니다.")
         @Size(max = 30, message = "아이디는 30자 이하로 입력해주세요.")
         public String userId;
 
-        @ApiModelProperty(value = "비밀번호", notes = "password", example = "password", required = true)
+        @ApiModelProperty(value = "비밀번호", notes = "password", example = "admin", required = true)
         @NotBlank(message = "패스워드는 필수 입력 값입니다.")
         @Size(max = 16, message = "비밀번호는 15자 이하로 입력해주세요.")
         public String password;
