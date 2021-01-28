@@ -1,6 +1,5 @@
 package com.soap.moon.infra.jwt;
 
-import com.soap.moon.domains.member.exception.CustomJwtRuntimeException;
 import io.jsonwebtoken.*;
 import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;

@@ -1,7 +1,7 @@
 package com.soap.moon.infra.jwt;
 
 
-import com.soap.moon.domains.member.exception.ErrorCode;
+import com.soap.moon.global.error.ErrorCode;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.JwtException;
 import org.slf4j.Logger;

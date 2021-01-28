@@ -2,14 +2,14 @@ package com.soap.moon.domains.member.service;
 
 import com.soap.moon.domains.member.domain.Account;
 import com.soap.moon.domains.member.domain.Authority;
-import com.soap.moon.domains.member.domain.Member;
-import com.soap.moon.domains.member.domain.MemberAuthority;
-import com.soap.moon.domains.member.domain.MemberStatus;
+import com.soap.moon.domains.member.domain.User;
+import com.soap.moon.domains.member.domain.UserAuthority;
+import com.soap.moon.domains.member.domain.UserStatus;
 import com.soap.moon.domains.member.domain.Password;
-import com.soap.moon.domains.member.dto.MemberDto;
+import com.soap.moon.domains.member.dto.UserDto;
 import com.soap.moon.domains.member.exception.MemberDuplicationException;
 import com.soap.moon.domains.member.repository.AuthorityRepository;
-import com.soap.moon.domains.member.repository.MemberRepository;
+import com.soap.moon.domains.member.repository.UserRepository;
 import com.soap.moon.global.util.SecurityUtil;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -23,9 +23,9 @@ import org.springframework.transaction.annotation.Transactional;
 @Service
 @Transactional(readOnly = true)
 @RequiredArgsConstructor
-public class MemberService {
+public class UserService {
 
-    private final MemberRepository memberRepository;
+    private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
 
@@ -33,56 +33,57 @@ public class MemberService {
      * 회원가입
      */
     @Transactional
-    public Member save(MemberDto.SignInReq dto) {
-        validateDuplicateMember(dto.getUserId());
+    public User save(UserDto.SignInReq dto) {
+        validateDuplicateMember(dto.getEmail());
 
-        Account account = Account.builder().userId(dto.getUserId()).build();
+        Account account = Account.builder().email(dto.getEmail()).build();
         Password password = Password.builder()
             .password(passwordEncoder.encode(dto.getPassword()))
             .build();
 
         Optional<Authority> authorityRoleUser = authorityRepository.findById(1L);
 
-        Member member = Member.builder()
+        User user = User.builder()
             .account(account)
             .password(password)
-            .name(dto.getName())
-            .status(MemberStatus.ACTIVE)
+            .name(dto.getNickName())
+            .phoneNum(dto.getPhoneNum())
+            .status(UserStatus.ACTIVE)
             .lastLoginAt(LocalDateTime.now())
             .build();
 
-        MemberAuthority memberAuthority = MemberAuthority.builder()
-            .member(member)
+        UserAuthority userAuthority = UserAuthority.builder()
+            .user(user)
             .authority(authorityRoleUser.get())
             .build();
 
-        member.addAuthority(memberAuthority);
-        return memberRepository.save(member);
+        user.addAuthority(userAuthority);
+        return userRepository.save(user);
     }
 
     /**
      * 중복회원 체크 account컬럼 유니크 제약조건 추가
      */
     private void validateDuplicateMember(String userId) {
-        Optional<Member> findMember = memberRepository.findByAccount(getAccountByUserId(userId));
+        Optional<User> findMember = userRepository.findByAccount(getAccountByUserId(userId));
         findMember.ifPresent(fm -> {
             throw new MemberDuplicationException();
         });
     }
 
     @Transactional(readOnly = true)
-    public Optional<Member> getUserWithAuthorities(String userId) {
-        return memberRepository.findOneWithAuthoritiesByAccount(getAccountByUserId(userId));
+    public Optional<User> getUserWithAuthorities(String userId) {
+        return userRepository.findOneWithAuthoritiesByAccount(getAccountByUserId(userId));
     }
 
     @Transactional(readOnly = true)
-    public Optional<Member> getMyUserWithAuthorities() {
+    public Optional<User> getMyUserWithAuthorities() {
         return SecurityUtil.getCurrentUsername()
-            .flatMap(s -> memberRepository.findOneWithAuthoritiesByAccount(getAccountByUserId(s)));
+            .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(getAccountByUserId(s)));
     }
 
     private Account getAccountByUserId(String userId) {
-        return Account.builder().userId(userId).build();
+        return Account.builder().email(userId).build();
     }
 
 }

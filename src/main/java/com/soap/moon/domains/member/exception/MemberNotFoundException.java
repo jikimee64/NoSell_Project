@@ -1,5 +1,7 @@
 package com.soap.moon.domains.member.exception;
 
+import com.soap.moon.global.error.ErrorCode;
+
 public class MemberNotFoundException extends RuntimeException{
 
     public MemberNotFoundException() {

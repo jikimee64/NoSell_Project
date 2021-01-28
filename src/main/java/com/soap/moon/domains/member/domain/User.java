@@ -11,16 +11,11 @@ import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
-import javax.persistence.Transient;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
@@ -29,12 +24,12 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-@Table(name = "member")
-public class Member extends BaseTimeEntity {
+@Table(name = "user")
+public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "member_id")
+    @Column(name = "user_id")
     private Long id;
 
     @Embedded
@@ -46,35 +41,40 @@ public class Member extends BaseTimeEntity {
     @Column(name = "name", nullable = false)
     private String name;
 
+    @Column(name = "phone_num", nullable = false)
+    private String phoneNum;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private MemberStatus status;
+    private UserStatus status;
 
     @Column(name = "last_login_at")
     private LocalDateTime lastLoginAt;
 
-    @OneToMany(mappedBy = "member", cascade = CascadeType.ALL)
-    private Set<MemberAuthority> authorities = new HashSet<>();
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserAuthority> authorities = new HashSet<>();
 
     @Builder
-    public Member(Account account, Password password, String name,
-        MemberStatus status, LocalDateTime lastLoginAt) {
+    public User(Account account, Password password, String name, String phoneNum,
+        UserStatus status, LocalDateTime lastLoginAt) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(password, "password must not be null");
         Assert.notNull(name, "name must not be null");
+        Assert.notNull(phoneNum, "phoneNum must not be null");
         Assert.notNull(status, "status must not be null");
         Assert.notNull(lastLoginAt, "lastLoginAt must not be null");
 
         this.account = account;
         this.password = password;
         this.name = name;
+        this.phoneNum = phoneNum;
         this.status = status;
         this.lastLoginAt = lastLoginAt;
     }
 
-    public void addAuthority(MemberAuthority memberAuthority) {
-        authorities.add(memberAuthority);
-        memberAuthority.setMember(this);
+    public void addAuthority(UserAuthority userAuthority) {
+        authorities.add(userAuthority);
+        userAuthority.setUser(this);
     }
 
 }

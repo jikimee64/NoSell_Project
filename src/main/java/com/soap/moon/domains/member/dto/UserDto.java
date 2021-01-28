@@ -15,7 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import org.springframework.boot.context.properties.bind.DefaultValue;
 
-public class MemberDto {
+public class UserDto {
 
     @ApiModel("회원가입 POST RequestParam 객체 도메인")
     @Getter
@@ -26,23 +26,29 @@ public class MemberDto {
         @NotBlank(message = "아이디는 필수 입력 값입니다.")
         @Email(message = "아이디 형식에 맞지 않습니다.")
         @Size(max = 30, message = "아이디는 30자 이하로 입력해주세요.")
-        public String userId;
+        public String email;
 
         @ApiModelProperty(value = "비밀번호", notes = "password", example = "admin", required = true)
         @NotBlank(message = "패스워드는 필수 입력 값입니다.")
-        @Size(max = 16, message = "비밀번호는 15자 이하로 입력해주세요.")
+        @Size(max = 15, message = "비밀번호는 15자 이하로 입력해주세요.")
         public String password;
 
-        @ApiModelProperty(value = "이름", notes = "name", example = "홍길동", required = true)
-        @NotBlank(message = "이름은 필수 입력 값입니다.")
-        @Size(max = 20, message = "이름은는 20자 이하로 입력해주세요.")
-        public String name;
+        @ApiModelProperty(value = "휴대폰번호", notes = "phoneNum", example = "01099991111", required = true)
+        @NotBlank(message = "휴대폰번호는 필수 입력 값입니다.")
+        @Size(max = 12, message = "휴대폰번호는 11자로 입력해주세요.")
+        public String phoneNum;
+
+        @ApiModelProperty(value = "닉네임", notes = "nickName", example = "홍길동", required = true)
+        @NotBlank(message = "닉네임은 필수 입력 값입니다.")
+        @Size(min = 2, message = "닉네임은 최소 2자 이상으로 입력해주세요.")
+        public String nickName;
 
         @Builder
-        public SignInReq(String userId, String password, String name) {
-            this.userId = userId;
+        public SignInReq(String email, String password, String phoneNum, String nickName) {
+            this.email = email;
             this.password = password;
-            this.name = name;
+            this.phoneNum = phoneNum;
+            this.nickName = nickName;
         }
     }
 
@@ -71,8 +77,8 @@ public class MemberDto {
         @ApiModelProperty(value = "고유값", notes = "id")
         public Long id;
 
-        @ApiModelProperty(value = "아이디", notes = "userId")
-        public String userId;
+        @ApiModelProperty(value = "아이디", notes = "email")
+        public String email;
 
         @ApiModelProperty(value = "이름", notes = "name")
         public String name;

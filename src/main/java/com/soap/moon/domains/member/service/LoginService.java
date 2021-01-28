@@ -1,9 +1,7 @@
 package com.soap.moon.domains.member.service;
 
-import com.soap.moon.domains.member.dto.MemberDto;
+import com.soap.moon.domains.member.dto.UserDto;
 import com.soap.moon.infra.jwt.JwtTokenProvider;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -18,7 +16,7 @@ public class LoginService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
 
-    public String login(MemberDto.LoginReq loginDto) {
+    public String login(UserDto.LoginReq loginDto) {
 
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginDto.getUserId(), loginDto.getPassword());
