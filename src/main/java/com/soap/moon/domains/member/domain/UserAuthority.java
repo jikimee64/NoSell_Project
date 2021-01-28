@@ -13,36 +13,35 @@ import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class MemberAuthority {
+public class UserAuthority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="member_authority_id")
+    @Column(name="user_authority_id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "member_id")
-    private Member member;
+    @JoinColumn(name = "user_id")
+    private User user;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "authority_id")
     private Authority authority;
 
     @Builder
-    public MemberAuthority(Member member, Authority authority) {
-        Assert.notNull(member, "member must not be null!!");
+    public UserAuthority(User user, Authority authority) {
+        Assert.notNull(user, "member must not be null!!");
         Assert.notNull(authority, "authority must not be null!!");
-        this.member = member;
+        this.user = user;
         this.authority = authority;
     }
 
-    public void setMember(Member member){
-        this.member = member;
+    public void setUser(User user){
+        this.user = user;
     }
 
 }

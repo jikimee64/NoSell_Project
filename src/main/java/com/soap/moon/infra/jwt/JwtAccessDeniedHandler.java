@@ -1,5 +1,5 @@
 package com.soap.moon.infra.jwt;
-import com.soap.moon.domains.member.exception.ErrorCode;
+import com.soap.moon.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.access.AccessDeniedException;
@@ -9,7 +9,6 @@ import org.springframework.stereotype.Component;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import org.springframework.web.servlet.HandlerExceptionResolver;
 
 @Slf4j
 @Component

@@ -1,6 +1,5 @@
 package com.soap.moon.global.common;
 
-import com.soap.moon.domains.member.exception.ErrorCode;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Builder;
 import lombok.Getter;

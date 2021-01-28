@@ -1,4 +1,4 @@
-package com.soap.moon.domains.member.exception;
+package com.soap.moon.global.error;
 
 import lombok.Getter;
 

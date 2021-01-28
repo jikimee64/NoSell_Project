@@ -1,5 +1,11 @@
-package com.soap.moon.domains.member.exception;
+package com.soap.moon.global.error;
 
+import com.soap.moon.domains.member.exception.CustomAuthenticationException;
+import com.soap.moon.domains.member.exception.CustomJwtRuntimeException;
+import com.soap.moon.domains.member.exception.LoginFailedException;
+import com.soap.moon.domains.member.exception.MemberDuplicationException;
+import com.soap.moon.domains.member.exception.MemberNotFoundException;
+import com.soap.moon.domains.member.exception.MemberStatusInActiveException;
 import com.soap.moon.global.common.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -7,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 
@@ -15,12 +20,19 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 @RestControllerAdvice(annotations = RestController.class)
 public class GlobalExceptionController {
 
+    @ExceptionHandler(value = RuntimeException.class)
+    public ResponseEntity<?> runtimeException(RuntimeException ex) {
+        log.info("RuntimeException");
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code(ErrorCode.EMAIL_DUPLICATION.getCode())
+                .message("알수없는 에러입니다.").build(),
+            HttpStatus.BAD_REQUEST);
+    }
+
     @ExceptionHandler(value = MemberDuplicationException.class)
     public ResponseEntity<?> memberDuplicationException(MemberDuplicationException ex) {
-
         log.info("memberDuplicationException");
-
-
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.EMAIL_DUPLICATION.getCode())
