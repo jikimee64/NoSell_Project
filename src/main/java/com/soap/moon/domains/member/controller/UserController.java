@@ -2,7 +2,7 @@ package com.soap.moon.domains.member.controller;
 
 import com.soap.moon.domains.member.domain.User;
 import com.soap.moon.domains.member.dto.UserDto;
-import com.soap.moon.domains.member.dto.UserDto.selectOneRes;
+import com.soap.moon.domains.member.dto.UserDto.SelectOneRes;
 import com.soap.moon.domains.member.exception.MemberNotFoundException;
 import com.soap.moon.domains.member.repository.UserRepository;
 import com.soap.moon.domains.member.service.UserService;
@@ -63,7 +63,7 @@ public class UserController {
                 .code("200")
                 .message("ok")
                 .data(
-                    new selectOneRes(user.getId(), user.getAccount().getEmail(), user.getNickName()))
+                    new SelectOneRes(user.getId(), user.getAccount().getEmail(), user.getNickName()))
                 .build()
             , HttpStatus.OK);
     }

@@ -1,38 +1,39 @@
-package com.soap.moon.domains.member.domain;
+package com.soap.moon.domains.category.domain;
 
-import com.mysema.commons.lang.Assert;
 import com.soap.moon.global.common.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.EnumType;
-import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import javax.validation.constraints.Email;
 import lombok.AccessLevel;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+@Table(name = "category")
 @Entity
 @Getter
-@Table(name = "Authority")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class Authority extends BaseTimeEntity {
+public class Category extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
     private Long id;
 
-    @Column(name = "authority_name", length = 50, nullable = false)
-    private String authorityName;
+    @Column(name = "category_name")
+    private String name;
+
+    @Column(name = "parent_id")
+    private Long parentId;
 
     @Builder
-    public Authority(String authorityName){
-        Assert.notNull(authorityName, "authorityName must not be null!!");
-        this.authorityName = authorityName;
+    public Category(String name, Long parentId){
+        this.name = name;
+        this.parentId = parentId;
     }
+
 
 }

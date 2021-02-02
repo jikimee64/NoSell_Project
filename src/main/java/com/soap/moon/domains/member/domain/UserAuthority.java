@@ -1,6 +1,7 @@
 package com.soap.moon.domains.member.domain;
 
 import com.mysema.commons.lang.Assert;
+import com.soap.moon.global.common.BaseTimeEntity;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -19,7 +20,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @Table(name = "user_authority")
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-public class UserAuthority {
+public class UserAuthority extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
