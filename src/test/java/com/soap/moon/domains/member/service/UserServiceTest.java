@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest(properties = "spring.config.location=" +
-    "classpath:/application.yml" +
+    "classpath:/application-dev.yml" +
     ",classpath:/application-secret.yml")
 class UserServiceTest {
 

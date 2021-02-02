@@ -13,7 +13,6 @@ public interface CategoryRepository extends JpaRepository<Category, Long> {
     List<Category> findCategoryOneDepthByParentIdWhereZero(@Param("parentId") Long parentId);
 
     @Query("select c from Category c where c.parentId = :parentId")
-
     List<Category> findCategoryTwoDepthByParentId(@Param("parentId") Long parentId);
 
 
