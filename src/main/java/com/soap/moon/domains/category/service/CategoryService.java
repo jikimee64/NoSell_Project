@@ -18,7 +18,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
-    public Map<String, List<CategoryRes>> categoryOneDepth(){
+    public List<CategoryRes> categoryOneDepth(){
         CategoryDto categoryDto = new CategoryDto();
 
         List<Category> categories = categoryRepository
@@ -30,9 +30,10 @@ public class CategoryService {
                 .name(ce.getName()).build())
             .collect(Collectors.toList());
 
-        categoryDto.getCategoriesOneDepth().put("categoryOneDepth", collect);
+        //categoryDto.getCategoriesOneDepth().put("categoryOneDepth", collect);
 
-        return categoryDto.getCategoriesOneDepth();
+        //return categoryDto.getCategoriesOneDepth();
+        return collect;
     }
 
     public Map<String, List<CategoryRes>> categoryTwoDepth(Long id){

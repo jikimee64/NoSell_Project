@@ -2,27 +2,37 @@ package com.soap.moon.domains.product.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.Size;
+import java.time.LocalDateTime;
+import javax.persistence.SecondaryTable;
 import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Builder;
+import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-@Getter
-@NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class ProductDto {
 
-    @ApiModelProperty(value = "이름", notes = "이름")
-    public String name;
+    @ApiModel("메인 페이지 상품정보")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class mainProductRes{
+        @ApiModelProperty(value = "name", notes = "이름")
+        public String name;
 
-    @ApiModelProperty(value = "가격", notes = "가격")
-    public String price;
+        @ApiModelProperty(value = "price", notes = "가격")
+        public int price;
 
-    @ApiModelProperty(value = "판매방식", notes = "판매방식")
-    public String salesMethod;
+        @ApiModelProperty(value = "dealType", notes = "판매방식")
+        public String dealType;
+
+        @ApiModelProperty(value = "createdAt", notes = "판매등록시간")
+        public LocalDateTime createdAt;
+    }
+
 
 
 //    @ApiModel("메인페이지 제품정보 Response")

@@ -26,9 +26,9 @@ class CategoryServiceTest {
     void categoryOneDepthSelect(){
         int expectedSize = 13;
 
-        Map<String, List<CategoryRes>> map = categoryService.categoryOneDepth();
+            List<CategoryRes> categoryRes = categoryService.categoryOneDepth();
 
-        assertThat(map.get("categoryOneDepth").size()).isEqualTo(expectedSize);
+            assertThat((categoryRes).size()).isEqualTo(expectedSize);
     }
 
     @Test

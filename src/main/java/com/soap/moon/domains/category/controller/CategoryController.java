@@ -26,21 +26,6 @@ public class CategoryController {
 
     private final CategoryService categoryService;
 
-    @ApiOperation(
-        httpMethod = "GET", value = "카테고리 대분류 조회", notes = "")
-    //대분류 카테고리
-    @GetMapping
-    public ResponseEntity<?> selectCategory() {
-        return new ResponseEntity<>(
-            CommonResponse.builder()
-                .code("200")
-                .message("ok")
-                .data(
-                    categoryService.categoryOneDepth()
-                ).build()
-            , HttpStatus.OK);
-    }
-
     //중분류 카테고리
     @GetMapping("/{id}")
     public ResponseEntity<?> categoriesTwoDepth(
