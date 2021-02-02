@@ -19,7 +19,6 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-
 @Component
 @Slf4j
 public class JwtTokenProvider implements InitializingBean {
@@ -60,6 +59,7 @@ public class JwtTokenProvider implements InitializingBean {
             .compact();
     }
 
+    //토큰값을 통해 사용자 정보 GET
     public Authentication getAuthentication(String token) {
         Claims claims = Jwts
             .parserBuilder()

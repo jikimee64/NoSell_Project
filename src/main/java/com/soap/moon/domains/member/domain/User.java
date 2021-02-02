@@ -29,7 +29,7 @@ public class User extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "user_id")
+    @Column(name = "id")
     private Long id;
 
     @Embedded
@@ -38,11 +38,14 @@ public class User extends BaseTimeEntity {
     @Embedded
     private Password password;
 
-    @Column(name = "name", nullable = false)
-    private String name;
-
     @Column(name = "phone_num", nullable = false)
     private String phoneNum;
+
+    @Column(name = "nickname", nullable = false)
+    private String nickName;
+
+    @Column(name = "profile_image")
+    private String profileImage;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
@@ -55,19 +58,19 @@ public class User extends BaseTimeEntity {
     private Set<UserAuthority> authorities = new HashSet<>();
 
     @Builder
-    public User(Account account, Password password, String name, String phoneNum,
+    public User(Account account, Password password, String nickName, String phoneNum,
         UserStatus status, LocalDateTime lastLoginAt) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(password, "password must not be null");
-        Assert.notNull(name, "name must not be null");
         Assert.notNull(phoneNum, "phoneNum must not be null");
+        Assert.notNull(nickName, "nickName must not be null");
         Assert.notNull(status, "status must not be null");
         Assert.notNull(lastLoginAt, "lastLoginAt must not be null");
 
         this.account = account;
         this.password = password;
-        this.name = name;
         this.phoneNum = phoneNum;
+        this.nickName = nickName;
         this.status = status;
         this.lastLoginAt = lastLoginAt;
     }

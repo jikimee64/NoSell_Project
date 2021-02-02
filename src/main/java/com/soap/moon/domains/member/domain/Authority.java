@@ -22,7 +22,7 @@ public class Authority {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="authority_id")
+    @Column(name ="id")
     private Long id;
 
     @Column(name = "authority_name", length = 50, nullable = false)

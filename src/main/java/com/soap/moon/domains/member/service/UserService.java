@@ -41,12 +41,13 @@ public class UserService {
             .password(passwordEncoder.encode(dto.getPassword()))
             .build();
 
+        //ROLE_USER GET
         Optional<Authority> authorityRoleUser = authorityRepository.findById(1L);
 
         User user = User.builder()
             .account(account)
             .password(password)
-            .name(dto.getNickName())
+            .nickName(dto.getNickName())
             .phoneNum(dto.getPhoneNum())
             .status(UserStatus.ACTIVE)
             .lastLoginAt(LocalDateTime.now())

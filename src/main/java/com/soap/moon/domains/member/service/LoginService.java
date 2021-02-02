@@ -18,6 +18,7 @@ public class LoginService {
 
     public String login(UserDto.LoginReq loginDto) {
 
+        //아이디와 패스워드를 조합해서 인스턴스 생성
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(loginDto.getUserId(), loginDto.getPassword());
 

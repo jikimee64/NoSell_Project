@@ -16,10 +16,9 @@ public class MoonApplication {
 		SpringApplication.run(MoonApplication.class, args);
 	}
 
-	//
-	@Bean
-	public AuditorAware<String> auditorProvider(){
-		return () -> Optional.of(UUID.randomUUID().toString());
-	}
+//	@Bean
+//	public AuditorAware<String> auditorProvider(){
+//		return () -> Optional.of(UUID.randomUUID().toString());
+//	}
 
 }

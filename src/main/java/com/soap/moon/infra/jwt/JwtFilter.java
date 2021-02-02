@@ -41,6 +41,7 @@ public class JwtFilter extends GenericFilterBean {
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
             //인증에 성공하면 Spring이 관리하는 SecurityContext에 인증 객체를 설정
+            //Authentication객체를 통해 사용자가 토큰을 통해 접근할 수 있는 리소스가 FIX
             SecurityContextHolder.getContext().setAuthentication(authentication);
             logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(),
                 requestURI);

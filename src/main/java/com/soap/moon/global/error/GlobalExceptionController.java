@@ -106,7 +106,7 @@ public class GlobalExceptionController {
             HttpStatus.UNAUTHORIZED);
     }
 
-    //시큐리티의 authenticate()에서 비밀번호가 다를때 발생
+    //시큐리티의 authenticate()에서 비밀번호가 다르거나 존재하지 않을 떄 발생
     @ExceptionHandler(BadCredentialsException.class)
     protected ResponseEntity<CommonResponse> handleBadCredentialsException(BadCredentialsException ex) {
 

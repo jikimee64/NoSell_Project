@@ -53,7 +53,6 @@ class UserServiceTest {
 
         User save = userService.save(dto);
 
-
         Assertions.assertThrows(MemberDuplicationException.class, () -> {
             userService.save(dto2);
         });
