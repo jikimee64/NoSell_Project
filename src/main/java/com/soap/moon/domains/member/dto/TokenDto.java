@@ -19,7 +19,6 @@ public class TokenDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class TokenInRes{
-        @ApiModelProperty(value = "토큰값", notes = "token")
         public String token;
     }
 }

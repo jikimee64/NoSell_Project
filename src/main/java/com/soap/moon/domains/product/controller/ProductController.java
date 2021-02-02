@@ -33,7 +33,7 @@ public class ProductController {
 
     //카테고리 대분류 + 메인
     @ApiOperation(
-        httpMethod = "GET", value = "카테고리 + 상품", notes = "")
+        httpMethod = "GET", value = "카테고리 + 상품", notes = "메인페이지에 카테고리와 상품정보를 반환")
     @GetMapping("/main")
     public ResponseEntity<?> productAndCategory(){
 

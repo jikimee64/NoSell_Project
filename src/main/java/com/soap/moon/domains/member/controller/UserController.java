@@ -36,7 +36,7 @@ public class UserController {
         httpMethod = "POST", value = "회원 가입", notes = "회원 가입을 한다.")
     @PostMapping
     public ResponseEntity<?> signInMember(
-        @ApiParam(value = "회원가입 폼입력필드 DTO", required = true)
+        @ApiParam(value = "회원가입 폼입력", required = true)
         @RequestBody @Valid final UserDto.SignInReq dto) {
 
         return new ResponseEntity<>(
@@ -52,7 +52,7 @@ public class UserController {
         httpMethod = "GET", value = "회원 단건 조회", notes = "회원에 대한 정보를 조회한다.(단건)")
     @GetMapping(value = "/{id}")
     public ResponseEntity<?> getMember(
-        @ApiParam(value = "회원단건 조회 폼입력필드 DTO", required = true)
+        @ApiParam(value = "회원단건 조회 DTO", required = true)
         @PathVariable("id") final Long memberId) {
 
         User user = userRepository.findById(memberId)

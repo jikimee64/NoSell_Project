@@ -70,13 +70,10 @@ public class UserDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class SelectOneRes {
 
-        @ApiModelProperty(value = "고유값", notes = "id")
         public Long id;
 
-        @ApiModelProperty(value = "아이디", notes = "email")
         public String email;
 
-        @ApiModelProperty(value = "이름", notes = "name")
         public String name;
     }
 

@@ -27,9 +27,11 @@ public class CategoryController {
     private final CategoryService categoryService;
 
     //중분류 카테고리
+    @ApiOperation(
+        httpMethod = "GET", value = "중분류 카테고리", notes = "중분류 카테고리 Response")
     @GetMapping("/{id}")
     public ResponseEntity<?> categoriesTwoDepth(
-        @ApiParam(value = "카테고리 ID GET", required = true)
+        @ApiParam(value = "1", required = true)
         @PathVariable("id") final Long id) {
 
             return new ResponseEntity<>(
