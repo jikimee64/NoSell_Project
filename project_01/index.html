@@ -1,0 +1,694 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>main</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/reset-css@5.0.1/reset.min.css">
+    <link rel="stylesheet" href="./common/css/common.css">
+    <script src="./common/js/script.js"></script>
+</head>
+
+<body>
+    <header>
+        <!-- 320 메뉴바(#m_menu)숨김-->
+        <ul id="m_menu">
+            <li>
+                <a href="#"><i class="m_home"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="m_category"></i></a>
+                <ul class="m_sub">
+                    <li>
+                        <a href="#"><i class="m_sub_menu1"></i>패션의류</a>
+                        <ul>
+                            <li><a href="#">여성의류</a></li>
+                            <li><a href="#">남성의류</a></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu2"></i>패션잡화</a>
+                        <ul>
+                            <li><a href="#">신발/가방</a></li>
+                            <li><a href="#">패션잡화</a></li>
+                            <li><a href="#">쥬얼리</a></li>
+                            <li><a href="#">명품</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu3"></i>유아용품</a>
+                        <ul>
+                            <li><a href="#">출산/육아</a></li>
+                            <li><a href="#">장난감/완구</a></li>
+                            <li><a href="#">유아동의류/잡화</a></li>
+                            <li><a href="#">유아동생활용품</a></li>
+                        </ul>
+
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu4"></i>가구/생활</a>
+                        <ul>
+                            <li><a href="#">생활용품</a></li>
+                            <li><a href="#">가구/소품DIY</a></li>
+                            <li><a href="#">주방/욕실</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu5"></i>취미/컬렉션 </a>
+                        <ul>
+                            <li><a href="#">골동품/희귀품</a></li>
+                            <li><a href="#">RC카/드론</a></li>
+                            <li><a href="#">피규어/키덜트</a></li>
+                            <li><a href="#">게임/악기</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu6"></i>디지털/가전</a>
+                        <ul>
+                            <li><a href="#">핸드폰/태블릿</a></li>
+                            <li><a href="#">노트북/PC/주변기기</a></li>
+                            <li><a href="#">카메라/음향기기</a></li>
+                            <li><a href="#">생활가전</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu7"></i>스포츠/레저</a>
+                        <ul>
+                            <li><a href="#">여행/숙박</a></li>
+                            <li><a href="#">스포츠용품</a></li>
+                            <li><a href="#">레저용품</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu8"></i>뷰티/미용</a>
+                        <ul>
+                            <li><a href="#">화장품/향수</a></li>
+                            <li><a href="#">바디/헤어</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu9"></i>반려동식물용품</a>
+                        <ul>
+                            <li><a href="#">동물용품</a></li>
+                            <li><a href="#">식물용품</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu10"></i>자동차/공구 </a>
+                        <ul>
+                            <li><a href="#">중고차</a></li>
+                            <li><a href="#">자동차용품</a></li>
+                            <li><a href="#">바이크</a></li>
+                            <li><a href="#">바이크용품</a></li>
+                            <li><a href="#">공구/안전/산업용품</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu11"></i>도서/굿즈</a>
+                        <ul>
+                            <li><a href="#">도서/문구</a></li>
+                            <li><a href="#">스타굿즈/티켓</a></li>
+                            <li><a href="#">CD/DVD</a></li>
+                            <li><a href="#">미술용품/상품권</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu12"></i>기타</a>
+                        <ul>
+                            <li><a href="#">부동산</a></li>
+                            <li><a href="#">건강/의료</a></li>
+                            <li><a href="#">재능/서비스</a></li>
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_sub_menu13"></i>무료나눔</a>
+                        <ul>
+                            <li><a href="#">생활용품</a></li>
+                            <li><a href="#">식품/기타</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </li>
+            <li>
+                <a href="#"><i class="m_plus"></i></a>
+            </li>
+            <li>
+                <a href="#"><i class="m_mymenu"></i></a>
+            </li>
+        </ul>
+
+        <!-- #header_a 로고(.logo)/검색(.search)/유틸메뉴(.top_gnb) -->
+        <div id="header_a">
+            <a href="#"><i class="logo"></i></a>
+            <div class="search">
+                <a href="#"><i class="search"></i></a>
+                <input type="search" name="search" value="어떤 상품을 찾고 계세요?" id="top_search">
+            </div>
+            <div class="top_gnb">
+                <a href="#"><i class="login"></i>로그인</a>
+                <a href="#"><i class="join"></i>회원가입</a>
+                <a href="#"><i class="service"></i>고객센터</a>
+            </div>
+        </div>
+        <!-- #header_b 카테고리(.category)/등록(.selling) -->
+    <div class="wrap">
+        <div id="header_b">
+                <ul class="category">
+                    <li><span class="cate_btn">카테고리 &or;</span>
+                        <ul class="sub">
+                        <li>
+                            <a href="#"><i class="sub_menu1"></i>패션의류</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">여성의류</a></li>
+                                <li><a href="#">남성의류</a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu2"></i>패션잡화</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">신발/가방</a></li>
+                                <li><a href="#">패션잡화</a></li>
+                                <li><a href="#">쥬얼리</a></li>
+                                <li><a href="#">명품</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu3"></i>유아용품</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">출산/육아</a></li>
+                                <li><a href="#">장난감/완구</a></li>
+                                <li><a href="#">유아동의류/잡화</a></li>
+                                <li><a href="#">유아동생활용품</a></li>
+                            </ul>
+
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu4"></i>가구/생활</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">생활용품</a></li>
+                                <li><a href="#">가구/소품DIY</a></li>
+                                <li><a href="#">주방/욕실</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu5"></i>취미/컬렉션 </a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">골동품/희귀품</a></li>
+                                <li><a href="#">RC카/드론</a></li>
+                                <li><a href="#">피규어/키덜트</a></li>
+                                <li><a href="#">게임/악기</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu6"></i>디지털/가전</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">핸드폰/태블릿</a></li>
+                                <li><a href="#">노트북/PC/주변기기</a></li>
+                                <li><a href="#">카메라/음향기기</a></li>
+                                <li><a href="#">생활가전</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu7"></i>스포츠/레저</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">여행/숙박</a></li>
+                                <li><a href="#">스포츠용품</a></li>
+                                <li><a href="#">레저용품</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu8"></i>뷰티/미용</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">화장품/향수</a></li>
+                                <li><a href="#">바디/헤어</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu9"></i>반려동식물용품</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">동물용품</a></li>
+                                <li><a href="#">식물용품</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu10"></i>자동차/공구 </a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">자동차용품</a></li>
+                                <li><a href="#">바이크용품</a></li>
+                                <li><a href="#">공구/안전/산업용품</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu11"></i>도서/굿즈</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">도서/문구</a></li>
+                                <li><a href="#">스타굿즈/티켓</a></li>
+                                <li><a href="#">CD/DVD</a></li>
+                                <li><a href="#">미술용품/상품권</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu12"></i>기타</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">부동산</a></li>
+                                <li><a href="#">건강/의료</a></li>
+                                <li><a href="#">재능/서비스</a></li>
+                            </ul>
+                        </li>
+                        <li>
+                            <a href="#"><i class="sub_menu13"></i>무료나눔</a>
+                            <ul class="sub_bottom">
+                                <li><a href="#">생활용품</a></li>
+                                <li><a href="#">식품/기타</a></li>
+                            </ul>
+                        </li>
+                        </ul>
+                    </li>
+                </ul>      
+                <div class="selling">
+                    <a href="#" class="sell_btn"><i class="fas fa-camera"></i>판매등록</a>
+                </div>
+        </div>
+    </div>
+    </header>
+    <!-- 배너 슬라이드-->
+    <section id="slider">
+        <ul class="img_box">
+            <li class="on">
+                <img src="./common/img/banner.svg" alt="banner1">
+                <h3>#안팔경매 #네덜란드경매 #재밌는 중고경매</h3>
+            </li>
+            <li>
+                <img src="./common/img/banner.svg" alt="banner1">
+                <h3>#안팔경매 #네덜란드경매 #재밌는 중고경매</h3>
+            </li>
+            <li>
+                <img src="./common/img/banner.svg" alt="banner1">
+                <h3>#안팔경매 #네덜란드경매 #재밌는 중고경매</h3>
+            </li>
+        </ul>
+        <div class="img_btn">
+            <ul class="btn_box">
+                <li class="item1"><button class="btn on" data="1"></button></li>
+                <li class="item2"><button class="btn" data="2"></button></li>
+                <li class="item3"><button class="btn" data="3"></button></li>
+            </ul>
+        </div>
+    </section>
+    <!-- 게시글 리스트(.main_list) -->
+    <div class="main_list" id="update_slot">
+        <div>
+            <ul class="main_row">
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <!-- 썸네일 이미지(.item_box)/ 경매,택배 아이콘(.dealer_position) -->
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <!-- 일반 타이틀(.cont) -->
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_1.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <!-- 경매 타이틀.cont_bid / 시간,현재가,최초가 -->
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_1.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_1.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_1.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_1.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <!-- 더보기 -->
+    <div class="paging" id="page_slot">
+        <div class="more_wrap">
+            <a href="">더보기<i class="fas fa-chevron-down"></i></a>
+        </div>
+    </div>
+
+    <!-- 상단으로 아이콘 -->
+    <div class="home">
+        <div>
+            <a href="#"><i class="fas fa-chevron-circle-up"></i>TOP</a>
+        </div>
+     </div>
+
+     <!-- 푸터 -->
+    <footer class="footer">
+        <div class="f_wrap">
+            <div>
+                <ul class="footer_top">
+                    <li><a href="#">Anpalmarket Inc.</a></li>
+                    <li><a href="#">FAQ</a></li>
+                    <li><a href="#">이용약관</a></li>
+                    <li><a href="#">개인정보처리방침</a></li>
+                </ul>
+                <div class="footer_bottom">
+                    <span>(주)안팔마켓 대표이사 : 안팔아 |서울특별시 중구 여기살아 7-502 1층
+                    사업자등록번호 : 155-85-28495통신판매업신고번호 : 제2356-서울중구-1022호 사업자정보확인
+                    고객 문의 : 02-334-4394(평일 10시~16시) | 팩스 : 02-3231-4234 <strong> (주)안팔마켓은 통신판매중개자로서 거래당사자가 아니며, 판매자가 등록한 상품정보 및 거래에 대해 (주)헬로마켓은 일체 책임을 지지 않습니다.</strong>
+                    </span>
+                    <p> &copy; Copyright Anpalmarket ALL RIGHT RESERVED</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    
+
+
+ 
+</body>
+
+</html>
