@@ -1,7 +1,6 @@
 package com.soap.moon.domains.product.service;
 
 import com.soap.moon.domains.category.dto.CategoryDto;
-import com.soap.moon.domains.category.dto.CategoryDto.CategoryRes;
 import com.soap.moon.domains.product.domain.Product;
 import com.soap.moon.domains.product.dto.ProductDto;
 import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;

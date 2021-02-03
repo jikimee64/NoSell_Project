@@ -72,8 +72,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()
             .antMatchers("/api/v1/login/**").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/main").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/category/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
+            .antMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
             //.antMatchers("/api/v1/members/**").permitAll()
 
             //인증을 반드시 통과해야하며, 인가(USER 권한)이 있는 사용자만 접근 가능

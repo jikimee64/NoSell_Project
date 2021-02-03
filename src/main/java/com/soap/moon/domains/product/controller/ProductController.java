@@ -9,6 +9,7 @@ import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;
 import com.soap.moon.domains.product.repository.ProductRepository;
 import com.soap.moon.domains.product.service.ProductService;
 import com.soap.moon.global.common.CommonResponse;
+import com.soap.moon.global.config.aop.PerformanceTimeRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
@@ -22,36 +23,27 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-@Api(tags = {"1. product"}, value = "상품")
+@Api(tags = {"4. product"}, value = "상품")
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1/products")
 public class ProductController {
 
     private final CategoryService categoryService;
     private final ProductService productService;
 
-    //카테고리 대분류 + 메인
+    //메인페이지 상품정보
     @ApiOperation(
-        httpMethod = "GET", value = "카테고리 + 상품", notes = "메인페이지에 카테고리와 상품정보를 반환")
-    @GetMapping("/main")
+        httpMethod = "GET", value = "상품", notes = "메인페이지 상품정보")
+    @PerformanceTimeRecord
+    @GetMapping
     public ResponseEntity<?> productAndCategory(){
-
-        Map<String, Object> data = new HashMap<>();
-
-        //카테고리 정보
-        data.put("category", categoryService
-            .categoryOneDepth());
-
-        //상품정보
-        data.put("product", productService.mainProduct());
-
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
                 .data(
-                    data
+                    productService.mainProduct()
                 ).build()
             , HttpStatus.OK);
     }

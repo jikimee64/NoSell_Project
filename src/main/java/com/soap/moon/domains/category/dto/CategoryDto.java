@@ -1,5 +1,6 @@
 package com.soap.moon.domains.category.dto;
 
+import com.soap.moon.domains.category.domain.Category;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.util.HashMap;
@@ -16,21 +17,23 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
+@ApiModel("카테고리 조회 GET")
+@Data
+@AllArgsConstructor
+@NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
 public class CategoryDto {
 
-    @ApiModelProperty(value = "카테고리 중분류", notes = "categoriesTwoDepth")
-    Map<String, List<CategoryRes>> categoriesTwoDepth = new HashMap<>();
+    private Long id;
+    private String name;
+    private Long parentId;
+    private List<CategoryDto> subCategories;
 
-    @ApiModel("카테고리 조회 GET")
-    @Data
     @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class CategoryRes{
-        public Long id;
-
-        public String name;
+    public CategoryDto(Long id, String name, Long parentId){
+        this.id = id;
+        this.name = name;
+        this.parentId = parentId;
     }
 
 }
