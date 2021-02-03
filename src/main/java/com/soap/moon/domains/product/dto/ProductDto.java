@@ -21,11 +21,11 @@ public class ProductDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class mainProductRes{
 
-        //public String profileImage;
-
         public String name;
 
-        public int price;
+        public int initPrice;
+
+        public int currentPrice;
 
         public String dealType;
 

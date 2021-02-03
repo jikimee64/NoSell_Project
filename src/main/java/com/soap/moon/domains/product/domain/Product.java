@@ -5,6 +5,7 @@ import com.soap.moon.domains.category.domain.Category;
 import com.soap.moon.domains.member.domain.User;
 import com.soap.moon.global.common.BaseTimeEntity;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorColumn;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,6 +13,8 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Inheritance;
+import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
@@ -42,8 +45,11 @@ public class Product extends BaseTimeEntity {
     @Column(name = "product_status")
     private ProductStatus productStatus;
 
-    @Column(name = "price")
-    private int price;
+    @Column(name = "init_price")
+    private int initPrice;
+
+    @Column(name = "current_price")
+    private int currentPrice;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "deal_type")
@@ -67,12 +73,13 @@ public class Product extends BaseTimeEntity {
     private Category category;
 
     @Builder
-    public Product(String title, String description, ProductStatus productStatus, int price,
+    public Product(String title, String description, ProductStatus productStatus, int initPrice, int currentPrice,
         DealType dealType, DeliveryType deliveryType, SalesStatus salesStatus, User user, Category category){
         Assert.notNull(title, "title must not be null");
         Assert.notNull(description, "description must not be null");
         Assert.notNull(productStatus, "productStatus must not be null");
-        Assert.notNull(price, "price must not be null");
+        Assert.notNull(initPrice, "initPrice must not be null");
+        Assert.notNull(currentPrice, "currentPrice must not be null");
         Assert.notNull(dealType, "dealType must not be null");
         Assert.notNull(deliveryType, "deliveryType must not be null");
         Assert.notNull(salesStatus, "salesStatus must not be null");
@@ -82,7 +89,8 @@ public class Product extends BaseTimeEntity {
         this.title = title;
         this.description = description;
         this.productStatus = productStatus;
-        this.price = price;
+        this.initPrice = initPrice;
+        this.currentPrice = currentPrice;
         this.dealType = dealType;
         this.deliveryType = deliveryType;
         this.salesStatus = salesStatus;

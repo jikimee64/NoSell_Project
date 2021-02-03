@@ -26,7 +26,8 @@ public class ProductService {
             .map(s ->
                 mainProductRes.builder()
                     .name(s.getTitle())
-                    .price(s.getPrice())
+                    .initPrice(s.getInitPrice())
+                    .currentPrice(s.getCurrentPrice())
                     .dealType(s.getDealType().getDealType())
                     .createdAt(s.getCreatedAt())
                     .build())
