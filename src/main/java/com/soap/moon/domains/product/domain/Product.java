@@ -45,11 +45,8 @@ public class Product extends BaseTimeEntity {
     @Column(name = "product_status")
     private ProductStatus productStatus;
 
-    @Column(name = "init_price")
-    private int initPrice;
-
-    @Column(name = "current_price")
-    private int currentPrice;
+    @Column(name = "price")
+    private int price;
 
     @Enumerated(EnumType.STRING)
     @Column(name = "deal_type")
@@ -67,19 +64,17 @@ public class Product extends BaseTimeEntity {
     @JoinColumn(name = "user_id")
     private User user;
 
-    //twoDepth 키
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "category_id")
     private Category category;
 
     @Builder
-    public Product(String title, String description, ProductStatus productStatus, int initPrice, int currentPrice,
+    public Product(String title, String description, ProductStatus productStatus, int price,
         DealType dealType, DeliveryType deliveryType, SalesStatus salesStatus, User user, Category category){
         Assert.notNull(title, "title must not be null");
         Assert.notNull(description, "description must not be null");
         Assert.notNull(productStatus, "productStatus must not be null");
-        Assert.notNull(initPrice, "initPrice must not be null");
-        Assert.notNull(currentPrice, "currentPrice must not be null");
+        Assert.notNull(price, "initPrice must not be null");
         Assert.notNull(dealType, "dealType must not be null");
         Assert.notNull(deliveryType, "deliveryType must not be null");
         Assert.notNull(salesStatus, "salesStatus must not be null");
@@ -89,8 +84,7 @@ public class Product extends BaseTimeEntity {
         this.title = title;
         this.description = description;
         this.productStatus = productStatus;
-        this.initPrice = initPrice;
-        this.currentPrice = currentPrice;
+        this.price = price;
         this.dealType = dealType;
         this.deliveryType = deliveryType;
         this.salesStatus = salesStatus;

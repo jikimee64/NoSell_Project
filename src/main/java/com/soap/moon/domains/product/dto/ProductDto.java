@@ -23,11 +23,11 @@ public class ProductDto {
 
         public String name;
 
-        public int initPrice;
-
-        public int currentPrice;
+        public int price;
 
         public String dealType;
+
+        public String image;
 
         public LocalDateTime createdAt;
     }

@@ -2,6 +2,15 @@ spring:
 #  redis:
 #    host: localhost
 #    port: 6379
+  security:
+    oauth2:
+      client:
+        registration:
+          google:
+            client-id: 147280823959-i6o47rvpm0173at1dcstg24ne70amaas.apps.googleusercontent.com
+            client-secret: imBng1TlDEC5CmkI3wBpkaYy
+            #redirectUri:
+            scope: email, profile # 로그인 성공 후 구글에 요청할 사용자 정보
   devtools:
     restart:
       enabled: true
