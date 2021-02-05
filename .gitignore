@@ -178,3 +178,6 @@ gradle-app.setting
 
 ### Custom ###
 /src/main/resources/application-secret.yml
+/src/main/resources/nosell-3c87ec8cfb7f.json
+
+

@@ -1,11 +1,11 @@
 package com.soap.moon.global.error;
 
-import com.soap.moon.domains.member.exception.CustomAuthenticationException;
-import com.soap.moon.domains.member.exception.CustomJwtRuntimeException;
-import com.soap.moon.domains.member.exception.LoginFailedException;
-import com.soap.moon.domains.member.exception.MemberDuplicationException;
-import com.soap.moon.domains.member.exception.MemberNotFoundException;
-import com.soap.moon.domains.member.exception.MemberStatusInActiveException;
+import com.soap.moon.domains.user.exception.CustomAuthenticationException;
+import com.soap.moon.domains.user.exception.CustomJwtRuntimeException;
+import com.soap.moon.domains.user.exception.LoginFailedException;
+import com.soap.moon.domains.user.exception.MemberDuplicationException;
+import com.soap.moon.domains.user.exception.MemberNotFoundException;
+import com.soap.moon.domains.user.exception.MemberStatusInActiveException;
 import com.soap.moon.global.common.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

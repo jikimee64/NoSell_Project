@@ -1,13 +1,11 @@
 package com.soap.moon.global.config.security;
 
-import com.soap.moon.domains.member.domain.Role;
 import com.soap.moon.infra.jwt.JwtAccessDeniedHandler;
 import com.soap.moon.infra.jwt.JwtAuthenticationEntryPoint;
 import com.soap.moon.infra.jwt.JwtSecurityConfig;
 import com.soap.moon.infra.jwt.JwtTokenProvider;
-import io.swagger.models.Swagger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -81,6 +79,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //.antMatchers("/api/v1/users/**").hasAnyAuthority(Role.USER.getCode())
 
             .anyRequest().authenticated()
+
 
             .and()
             //사용자의 모든 요청은 JWT 필터를 통과하는 설정
