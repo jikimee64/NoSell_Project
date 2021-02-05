@@ -2,6 +2,8 @@ package com.soap.moon.domains.user.controller;
 
 import com.soap.moon.domains.user.domain.SocialLoginType;
 import com.soap.moon.domains.user.service.OauthService;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
+@Api(tags = {"5. OAuth"}, value = "소셜 로그인")
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/auth")
 @Slf4j
@@ -20,8 +23,10 @@ public class OauthController {
 
     /**
      * 사용자로부터 SNS 로그인 요청을 Social Login Type 을 받아 처리
-     * @param socialLoginType (GOOGLE, FACEBOOK, NAVER, KAKAO)
+     * @param socialLoginType (GOOGLE, NAVER)
      */
+    @ApiOperation(
+        httpMethod = "GET", value = "소셜 로그인", notes = "소셜 로그인 버튼 클릭")
     @GetMapping(value ="/{socialLoginType}")
     public void socialLoginType(
         @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType){
