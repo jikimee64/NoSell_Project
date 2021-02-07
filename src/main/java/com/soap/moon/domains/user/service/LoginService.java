@@ -1,7 +1,7 @@
 package com.soap.moon.domains.user.service;
 
 import com.soap.moon.domains.user.dto.UserDto;
-import com.soap.moon.infra.jwt.JwtTokenProvider;
+import com.soap.moon.global.jwt.JwtTokenProvider;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;

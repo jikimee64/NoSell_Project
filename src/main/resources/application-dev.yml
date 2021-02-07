@@ -2,11 +2,11 @@ spring:
 #  redis:
 #    host: localhost
 #    port: 6379
-  cloud:
-    gcp:
-      storage:
-        credentials:
-          location: nosell-3c87ec8cfb7f.json
+#  cloud:
+#    gcp:
+#      storage:
+#        credentials:
+#          location: nosell-3c87ec8cfb7f.json
 #  security:
 #    oauth2:
 #      client:

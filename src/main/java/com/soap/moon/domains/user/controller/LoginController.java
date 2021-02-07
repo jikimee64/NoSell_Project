@@ -4,7 +4,7 @@ import com.soap.moon.domains.user.dto.UserDto;
 import com.soap.moon.domains.user.dto.JwtTokenDto.TokenInRes;
 import com.soap.moon.domains.user.service.LoginService;
 import com.soap.moon.global.common.CommonResponse;
-import com.soap.moon.infra.jwt.JwtFilter;
+import com.soap.moon.global.jwt.JwtFilter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

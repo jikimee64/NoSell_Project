@@ -74,13 +74,13 @@ public class UserService {
 
     @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String userId) {
-        return userRepository.findOneWithAuthoritiesByAccount(getAccountByUserId(userId));
+        return userRepository.findOneWithAuthoritiesByAccount(userId);
     }
 
     @Transactional(readOnly = true)
     public Optional<User> getMyUserWithAuthorities() {
         return SecurityUtil.getCurrentUsername()
-            .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(getAccountByUserId(s)));
+            .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(s));
     }
 
     private Account getAccountByUserId(String userId) {

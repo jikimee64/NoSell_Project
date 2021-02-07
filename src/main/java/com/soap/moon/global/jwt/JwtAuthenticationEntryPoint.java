@@ -1,4 +1,4 @@
-package com.soap.moon.infra.jwt;
+package com.soap.moon.global.jwt;
 
 import com.soap.moon.global.error.ErrorCode;
 import lombok.RequiredArgsConstructor;

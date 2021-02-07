@@ -23,6 +23,7 @@ public class GlobalExceptionController {
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<?> runtimeException(RuntimeException ex) {
         log.info("RuntimeException");
+        ex.printStackTrace();
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.EMAIL_DUPLICATION.getCode())

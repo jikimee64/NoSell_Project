@@ -1,10 +1,9 @@
 package com.soap.moon.global.config.security;
 
-import com.soap.moon.infra.jwt.JwtAccessDeniedHandler;
-import com.soap.moon.infra.jwt.JwtAuthenticationEntryPoint;
-import com.soap.moon.infra.jwt.JwtSecurityConfig;
-import com.soap.moon.infra.jwt.JwtTokenProvider;
-import org.springframework.beans.factory.annotation.Autowired;
+import com.soap.moon.global.jwt.JwtAccessDeniedHandler;
+import com.soap.moon.global.jwt.JwtAuthenticationEntryPoint;
+import com.soap.moon.global.jwt.JwtSecurityConfig;
+import com.soap.moon.global.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;

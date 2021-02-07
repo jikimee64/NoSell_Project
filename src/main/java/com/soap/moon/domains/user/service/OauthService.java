@@ -1,16 +1,32 @@
 package com.soap.moon.domains.user.service;
 
+import com.soap.moon.domains.user.domain.Account;
+import com.soap.moon.domains.user.domain.Authority;
+import com.soap.moon.domains.user.domain.Password;
 import com.soap.moon.domains.user.domain.SocialLoginType;
+import com.soap.moon.domains.user.domain.User;
+import com.soap.moon.domains.user.domain.UserAuthority;
 import com.soap.moon.domains.user.domain.UserOauth;
+import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.dto.GoogleAuthDto;
 import com.soap.moon.domains.user.dto.GoogleAuthDto.GoogleProfileRes;
+import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserOauthRepository;
+import com.soap.moon.domains.user.repository.UserRepository;
 import com.soap.moon.domains.user.service.social.SocialOauth;
+import com.soap.moon.global.jwt.JwtTokenProvider;
 import java.io.IOException;
+import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 @Slf4j
@@ -22,6 +38,12 @@ public class OauthService {
     private final List<SocialOauth> socialOauthList;
     private final HttpServletResponse response;
     private final UserOauthRepository userOauthRepository;
+    private final UserRepository userRepository;
+    private final AuthorityRepository authorityRepository;
+
+    private final JwtTokenProvider jwtTokenProvider;
+    private final AuthenticationManagerBuilder authenticationManagerBuilder;
+    private final PasswordEncoder passwordEncoder;
 
     public void request(SocialLoginType socialLoginType) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
@@ -40,20 +62,63 @@ public class OauthService {
 
         String email = googleProfileRes.getEmail();
 
-        //null이면 DB저장,
-        UserOauth userOauth = userOauthRepository.findByEmail(email).orElseGet(() -> {
+        Account account = Account.builder().email(email).build();
+
+
+        //ROLE_USER GET
+        Optional<Authority> authorityRoleUser = authorityRepository.findById(1L);
+
+        //비 가입자면 DB저장,
+        User user = userRepository.findByAccount(account).orElseGet(() -> {
             log.info("구글 정보 새로 DB 저장");
-            return userOauthRepository.save(
+
+            Password password = Password.builder()
+                .password(passwordEncoder.encode(SocialLoginType.GOOGLE.getName()))
+                .build();
+
+            User signUser = User.builder()
+                .account(account)
+                .password(password)
+                .nickName("")
+                .phoneNum("")
+                .status(UserStatus.ACTIVE)
+                .lastLoginAt(LocalDateTime.now())
+                .profileImage(googleProfileRes.getPicture())
+                .build();
+
+            UserAuthority userAuthority = UserAuthority.builder()
+                .authority(authorityRoleUser.get())
+                .user(signUser)
+                .build();
+
+            signUser.addAuthority(userAuthority);
+
+            userRepository.save(
+                signUser
+            );
+
+            userOauthRepository.save(
                 UserOauth.builder()
-                    .access_token(tokenRes.getAccess_token())
-                    .email(email)
-                    .expireTime(tokenRes.getExpires_in())
-                    .imageUrl(googleProfileRes.getPicture())
+                    .user(signUser)
                     .socialLoginType(SocialLoginType.GOOGLE)
                     .build()
             );
+            return signUser;
         });
-        return userOauth.getEmail();
+
+        //아이디와 패스워드를 조합해서 인스턴스 생성
+        UsernamePasswordAuthenticationToken authenticationToken =
+            new UsernamePasswordAuthenticationToken(user.getAccount().getEmail(), SocialLoginType.GOOGLE.getName());
+
+        // authenticate() 실행시 loadUserByUsername 실행
+        // 사용자 비밀번호 체크, 패스워드 일치하지 않는다면 Exception 발생 및 이후 로직 실행 안됨
+        Authentication authentication = authenticationManagerBuilder.getObject()
+            .authenticate(authenticationToken);
+
+        //로그인 성공하면 인증 객체 생성 및 스프링 시큐리티 설정
+        SecurityContextHolder.getContext().setAuthentication(authentication);
+
+        return jwtTokenProvider.createToken(authentication);
     }
 
 
