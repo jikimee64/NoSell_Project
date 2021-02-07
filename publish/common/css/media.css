@@ -1,0 +1,55 @@
+@charset "utf-8";
+
+
+
+/* 모바일용 */
+@media (min-width:320px) and (max-width:510px) {
+
+    #header_a{justify-content: center;}
+    #header_a>a{width:0; display: none;}
+    .search{width: 90%;}
+    .top_gnb{display: none;}
+    .wrap{border: none; width: 0; height: 0; padding: 0;}
+    .selling{display: none;}
+    #header_b .cate_btn{display: none;}
+    #header_b>div,#header_b{
+        width: 0;
+        height: 0;
+        padding: 0; margin: 0;
+    }
+    #slider{height: 130px;}
+    .img_btn{display: none;} 
+    .top_btn{display: none;}
+    
+    .more_load>a{
+        font-size: .8rem;
+    }
+    .home>a{
+        font-size: .7rem;
+    }
+    .gnb{display: none;}
+
+
+    /* 320 메뉴바 */
+
+
+
+/* 태블릿용 */
+@media(min-width:510px) and (max-width:768px) {
+    .search{width: 50%;}
+    .top_gnb>a:last-child{
+        display: none;
+    }
+   .sub{
+    grid-template-columns: repeat(10,1fr);
+   }
+
+}
+
+
+
+
+
+
+
+
