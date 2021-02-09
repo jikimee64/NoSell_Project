@@ -9,7 +9,7 @@ header{
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 3% 0;
+    padding: 3% 1.5%;
     max-width: 1000px;
     margin: 0 auto;
 }
@@ -32,12 +32,13 @@ header{
 /* 로고 */
 /* #header_a *{border: 1px solid;} */
 #header_a>a{
-    width: 20%;
+    width: 15%;
     height: 30px;
     display: block;
 }
 .logo {
     width: 100%;
+    min-width: 100px;
     height: 100%;
     display: inline-block;
     background: url(../img/logo.svg) no-repeat 0 0;
@@ -108,7 +109,7 @@ header{
 /* 카테고리 버튼 .top_btn*/
 .top_btn{
     width: 100%;
-    height: 100%;
+    height: 98%;
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -140,13 +141,15 @@ header{
     background-color: #f3f3f3;
 }
 
+/* 모바일 카테고리.m_menubar */
+.m_menubar{display: none;}
+
 
 /* 카테고리 메뉴 .gnb */
 .gnb{
     position:absolute; 
     width: 100%;
-    height:230px;
-    top:99%; right:0px; 
+    top:98%; right:0px; 
     z-index: 30;
 }
 .sub{
@@ -154,23 +157,19 @@ header{
     grid-template-columns: repeat(13,1fr);
     justify-content: space-around;
     width: 100%;
-    height: 100%;
-    line-height: 2rem;
     background-color: #f3f3f3;
-    padding: 3.5% 0;
+    padding: 5% 0 9% 0;
 }
 .sub>li{
     width: 100%;
-    height: 100%;
-    line-height: 2rem;
 }
 .sub>li>a {
-    display: block;
+    display: inline-block;
     width: 100%;
     line-height: 2rem;
     font-size: .8rem;
     text-align: center;
-    color: #b6b6b6;
+    color: #9e9e9e;
     word-break: keep-all;
 }
 .sub>li>a>i {
@@ -182,74 +181,34 @@ header{
     background-repeat: no-repeat;
 }
 
-i.sub_menu1 {
-    background-position: 0 -81px;
-}
-
-i.sub_menu2 {
-    background-position: -37px -82px;
-}
-
-i.sub_menu3 {
-    background-position: -72px -82px;
-}
-
-i.sub_menu4 {
-    background-position: -109px -82px;
-}
-
-i.sub_menu5 {
-    background-position: -148px -82px;
-}
-
-i.sub_menu6 {
-    background-position: -186px -82px;
-}
-
-i.sub_menu7 {
-    background-position: -219px -82px;
-}
-
-i.sub_menu8 {
-    background-position: -255px -82px;
-}
-
-i.sub_menu9 {
-    background-position: -288px -82px;
-}
-
-.sub>li>a>i.sub_menu10 {
-    width: 48px;
-    background-position: -323px -82px;
-}
-
-i.sub_menu11 {
-    background-position: -369px -82px;
-}
-
-i.sub_menu12 {
-    background-position: -399px -82px;
-}
-
-i.sub_menu13 {
-    background-position: -437px -82px;
-}
+i.sub_menu1 {background-position: 0 -81px;}
+i.sub_menu2 {background-position: -37px -82px;}
+i.sub_menu3 {background-position: -72px -82px;}
+i.sub_menu4 {background-position: -109px -82px;}
+i.sub_menu5 {background-position: -148px -82px;}
+i.sub_menu6 {background-position: -186px -82px;}
+i.sub_menu7 {background-position: -219px -82px;}
+i.sub_menu8 {background-position: -255px -82px;}
+i.sub_menu9 {background-position: -288px -82px;}
+.sub>li>a>i.sub_menu10 {width: 48px; background-position: -323px -82px;}
+i.sub_menu11 {background-position: -369px -82px;}
+i.sub_menu12 {background-position: -399px -82px;}
+i.sub_menu13 {background-position: -437px -82px;}
 
 .sub_bottom{
-    height: 2px;
+    height: 45%;
     width: 100%;
     position: absolute;
     left: 50%; 
     transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    background-color: #fff;
     opacity: 0;
-    display: none;
-    overflow: hidden;
-    background-color: #b6b6b6;
-    transition: ease-in-out;
-    transition-duration: 1s;
+    visibility: hidden;
 }
 .sub_bottom>li{
-    width: 100%;
+    width: 20%;
     height: 100%;
     display: inline-block;
 }
@@ -258,14 +217,16 @@ i.sub_menu13 {
     height: 100%;
     display: inline-block;
     text-align: center;
-    /* line-height: 2rem; */
+    line-height: 5.5rem;
+    font-size: .9rem;
+    color: #9e9e9e;
 }
-.sub>li:hover .sub_bottom{
-    overflow: visible;
+.sub_bottom.on{
     opacity: 1;  
-    display: block;
+    visibility: visible;
 }
-.sub>li:hover a{
+.sub>li>a:hover,
+.sub_bottom>li>a:hover{
     color: #6f6e6e;
     font-family: 'GmarketSansMedium';
 }
@@ -516,7 +477,7 @@ i.sub_menu13 {
     border-left: 1px solid #b6b6b6;
     border-right: 1px solid #b6b6b6;
     text-align: center;
-    line-height: 2rem;
+    line-height: 2.5rem;
     color: #6f6e6e;
     font-size: .8rem;
     word-break: keep-all;

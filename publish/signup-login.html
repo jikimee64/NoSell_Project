@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>signup-login</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="./common/css/reset.css">
+    <link rel="stylesheet" href="./common/css/common.css">
+    <link rel="stylesheet" href="./common/css/style.css">
+    <link rel="stylesheet" href="./common/css/media.css">
+    <link rel="stylesheet" href="./common/css/signup-login.css">
+    <script src="./common/js/custom.js"></script>
+</head>
+<body>
+    <div class="form_logo">
+        <a href="#home"><img src="./common/img/logo.svg" alt="logo"></a>
+    </div>
+    <div class="form">
+        <div class="contents">
+            <div id="login">
+                <h1>로그인</h1>   
+                <form action="#" accept-charset="utf-8" name="login_form" method="post">        
+                    <div class="field-wrap">
+                        <label>아이디(이메일)<span class="req"></span></label>
+                        <input type="email" required autocomplete="off"/>
+                    </div>
+                    <div class="field-wrap">
+                        <label>비밀번호<span class="req"></span></label>
+                        <input type="password" required autocomplete="off" minlength="6" maxlength="15"/>
+                    </div>
+                    <div>reCAPTCHA TEST</div>
+                    <button type="submit" class="button_login">로그인</button>
+                    <div class="field-wrap">
+                        <span class="find_id"><a href="#">아이디 찾기</a></span>
+                        <span class="find_pw"><a href="#">비밀번호 찾기</a></span>
+                    </div>
+                    <div class="field-wrap">
+                        <p><i class="fab fa-google"></i>네이버 로그인</p>
+                        <p><i class="fab fa-google"></i>구글 로그인</p>
+                    </div>
+                </form>
+            </div>
+            <div id="signup">   
+                <h1>회원가입</h1>
+                <form action="#" accept-charset="utf-8" name="signup_form" method="post">
+                    <div class="top-row">
+                        <div class="field-wrap">
+                            <span>아이디(이메일)</span>
+                            <label>이메일 주소 입력<span class="req"></span></label>
+                            <input type="email" required autocomplete="off" />
+                            <input type="submit" value="중복확인" placeholder="중복확인">
+                        </div>
+                        <div class="field-wrap">
+                            <span>비밀번호</span>
+                            <label>영문,숫자,특수문자 포함 6-15자<span class="req"></span></label>
+                            <input type="password" required autocomplete="off" minlength="6" maxlength="15"/>
+                        </div>
+                        <div class="field-wrap">
+                            <span>비밀번호 확인</span>
+                            <label>영문,숫자,특수문자 포함 6-15자<span class="req"></span></label>
+                            <input type="password" value="password_confirm" required autocomplete="off" minlength="6" maxlength="15"/>
+                        </div>
+                        <div class="field-wrap">
+                            <span>휴대폰 번호</span>
+                            <label>숫자만 입력<span class="req"></span></label>
+                            <input type="number" required autocomplete="off" />
+                            <input type="submit" value="인증요청" placeholder="인증요청" >
+                        </div>
+                        <div class="field-wrap">
+                            <span>닉네임</span>
+                            <label>최소 2자이상 입력<span class="req"></span></label>
+                            <input type="text" required autocomplete="off" minlength="2" maxlength="12" />
+                        </div>
+                        <p>가입시 이용약관및 개인정보 취급방침,위치정보제공에 동의합니다.</p>
+                        <button type="submit" class="button_signup">회원가입</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+    <ul class="tab-group">
+        <li class="tab active">
+            <span>처음이신가요?<a href="#signup">회원가입</a></span>
+        </li>
+        <li class="tab">
+            <a href="#login">로그인</a>
+        </li>
+    </ul>
+    
+</body>
+</html>

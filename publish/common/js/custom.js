@@ -1,6 +1,7 @@
 // 카테고리 클릭 시 드롭다운 영역
 $(function(){
     $(".gnb").hide();
+    $(".sub_bottom").hide();
     $(".cate_btn").click(function(){
         $(".gnb").stop().slideDown();
         $(this).css("background-color","#f3f3f3");
@@ -9,6 +10,17 @@ $(function(){
         $(".gnb").stop().slideUp();
         $(".cate_btn").css("background-color","transparent");
     });
+    $(".sub li").click(function(){
+        $(".sub_bottom").removeClass("on");
+        $(this).children("ul").addClass("on").stop().slideDown();
+        $(this).css("color","#f3f3f3");
+    });
+
+    // 모바일 카테고리 토글
+    $(".m_menu .m_cate").click(function(){
+        $(".gnb").slideToggle();
+    });
+
 });
 
 // 배너 슬라이드 영역

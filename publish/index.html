@@ -18,17 +18,17 @@
     <header>
         <!-- #header_a 로고(.logo)/검색(.search)/유틸메뉴(.top_gnb) -->
         <div id="header_a">
-            <a href="#"><i class="logo"></i></a>
+            <a href="#home"><i class="logo"></i></a>
             <div class="search">
                 <form>
-                    <span class="search_icon" type="submit"><i class=" fa fa-search"></i></span>
+                    <button class="search_icon" type="submit" value="submit"><i class=" fa fa-search"></i></button>
                     <input type="search" name="search" placeholder="어떤 상품을 찾고 계세요?" id="top_search">
                 </form>
             </div>
             <div class="top_gnb">
-                <a href="#"><i class="login"></i>로그인</a>
-                <a href="#"><i class="join"></i>회원가입</a>
-                <a href="#"><i class="service"></i>고객센터</a>
+                <a href="#login"><i class="login"></i>로그인</a>
+                <a href="#sign_up"><i class="join"></i>회원가입</a>
+                <a href="#service"><i class="service"></i>고객센터</a>
             </div>
         </div>
         <!-- #header_b 카테고리(.cate_btn/.gnb)/등록(.sell_btn)/ -->
@@ -37,13 +37,29 @@
             <div class="top_btn">
                 <a href="#" class="cate_btn">카테고리<i class="fas fa-chevron-down"></i>
                 </a>
-                <a href="#" class="sell_btn"><i class="fas fa-camera"></i>판매등록</a>
+                <a href="#sell" class="sell_btn"><i class="fas fa-camera"></i>판매등록</a>
+            </div>
+            <div class="m_menubar">
+                <ul class="m_menu">
+                    <li>
+                        <a href="#"><i class="m_home"></i></a>
+                    </li>
+                    <li class="m_cate">
+                        <a href="#"><i class="m_category"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_plus"></i></a>
+                    </li>
+                    <li>
+                        <a href="#"><i class="m_mymenu"></i></a>
+                    </li>
+                </ul>
             </div>
             <nav class="gnb">
                 <ul class="sub">
                 <li>
                     <a href="#"><i class="sub_menu1"></i>패션의류</a>
-                    <ul class="sub_bottom">
+                    <ul class="sub_bottom on">
                         <li><a href="#">여성의류</a></li>
                         <li><a href="#">남성의류</a></li>
                     </ul>
@@ -149,8 +165,7 @@
                     </ul>
                 </li>
                 </ul>
-            </nav>      
-                
+            </nav>          
         </div>
     </div>
     </header>
@@ -169,9 +184,9 @@
         </ul>
         <div class="img_btn">
             <ul class="btn_box">
-                <li class="item1"><button class="btn on" data="1"></button></li>
-                <li class="item2"><button class="btn" data="2"></button></li>
-                <li class="item3"><button class="btn" data="3"></button></li>
+                <li class="item1"><button class="btn on"></button></li>
+                <li class="item2"><button class="btn"></button></li>
+                <li class="item3"><button class="btn"></button></li> 
             </ul>
         </div>
     </div>
@@ -186,7 +201,7 @@
                             <div class="item_box">
                                 <img src="./common/img/main_test_img1.jpg" alt="img1">
                                 <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
                                 </div>
                             </div>
                             <!-- 일반 타이틀(.cont) -->
@@ -241,7 +256,7 @@
                             <div class="item_box">
                                 <img src="./common/img/main_test_img1.jpg" alt="img1">
                                 <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
                                 </div>
                             </div>
                             <div class="cont">
@@ -256,75 +271,7 @@
                             <div class="item_box">
                                 <img src="./common/img/main_test_img1.jpg" alt="img1">
                                 <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <span class="item_title">나이키운동화</span>
-                                <span class="item_price">현재가<strong>20,000</strong>원</span>
-                            </div>    
-                        </a>
-                </li>
-                <li class="main_con">
-                    <div class="item_wrapper">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="./common/img/delivery_icon.svg" alt="delivery_icon">
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <span class="item_title">나이키운동화</span>
-                                <span class="item_price">현재가<strong>10,000</strong>원</span>
-                            </div>    
-                        </a>
-                    </div>
-                </li>
-                <li class="main_con">
-                    <div class="item_wrapper">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="./common/img/auction_icon.svg" alt="auction_icon">
-                                </div>
-                            </div>
-                            <div class="cont_bid">
-                                    <div class="bid_time">
-                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
-                                    </div>
-                                    <div class="bid_title">
-                                        <span class="item_title">Nike</span>
-                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
-                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
-                                    </div>
-                            </div>    
-                        </a>
-                    </div>
-                </li>
-                <li class="main_con">
-                    <div class="item_wrapper">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <span class="item_title">나이키운동화</span>
-                                <span class="item_price">현재가<strong>20,000</strong>원</span>
-                            </div>    
-                        </a>
-                    </div>
-                </li>
-                <li class="main_con">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
                                 </div>
                             </div>
                             <div class="cont">
@@ -377,7 +324,7 @@
                             <div class="item_box">
                                 <img src="./common/img/main_test_img1.jpg" alt="img1">
                                 <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
                                 </div>
                             </div>
                             <div class="cont">
@@ -392,75 +339,7 @@
                             <div class="item_box">
                                 <img src="./common/img/main_test_img1.jpg" alt="img1">
                                 <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <span class="item_title">나이키운동화</span>
-                                <span class="item_price">현재가<strong>20,000</strong>원</span>
-                            </div>    
-                        </a>
-                </li>
-                <li class="main_con">
-                    <div class="item_wrapper">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="./common/img/delivery_icon.svg" alt="delivery_icon">
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <span class="item_title">나이키운동화</span>
-                                <span class="item_price">현재가<strong>10,000</strong>원</span>
-                            </div>    
-                        </a>
-                    </div>
-                </li>
-                <li class="main_con">
-                    <div class="item_wrapper">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="./common/img/auction_icon.svg" alt="auction_icon">
-                                </div>
-                            </div>
-                            <div class="cont_bid">
-                                    <div class="bid_time">
-                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
-                                    </div>
-                                    <div class="bid_title">
-                                        <span class="item_title">Nike</span>
-                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
-                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
-                                    </div>
-                            </div>    
-                        </a>
-                    </div>
-                </li>
-                <li class="main_con">
-                    <div class="item_wrapper">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
-                                </div>
-                            </div>
-                            <div class="cont">
-                                <span class="item_title">나이키운동화</span>
-                                <span class="item_price">현재가<strong>20,000</strong>원</span>
-                            </div>    
-                        </a>
-                    </div>
-                </li>
-                <li class="main_con">
-                        <a class="item_list" href="#">
-                            <div class="item_box">
-                                <img src="./common/img/main_test_img1.jpg" alt="img1">
-                                <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
                                 </div>
                             </div>
                             <div class="cont">
@@ -513,7 +392,143 @@
                             <div class="item_box">
                                 <img src="./common/img/main_test_img1.jpg" alt="img1">
                                 <div class="dealer_position">
-                                    <img src="error.src" onerror="this.style.display='none'" alt="">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_icon.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction_icon.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>20,000</strong>원</span>
+                            </div>    
+                        </a>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/delivery_icon.svg" alt="delivery_icon">
+                                </div>
+                            </div>
+                            <div class="cont">
+                                <span class="item_title">나이키운동화</span>
+                                <span class="item_price">현재가<strong>10,000</strong>원</span>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="./common/img/auction_icon.svg" alt="auction_icon">
+                                </div>
+                            </div>
+                            <div class="cont_bid">
+                                    <div class="bid_time">
+                                        <span><i class="fas fa-stopwatch"></i>2/6 22:00</span>
+                                    </div>
+                                    <div class="bid_title">
+                                        <span class="item_title">Nike</span>
+                                        <span class="item_price">현재가<strong>20,000</strong>원</span>
+                                        <span class="item_price_before">최초가&nbsp;50,000원</span>
+                                    </div>
+                            </div>    
+                        </a>
+                    </div>
+                </li>
+                <li class="main_con">
+                    <div class="item_wrapper">
+                        <a class="item_list" href="#">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <div class="dealer_position">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
                                 </div>
                             </div>
                             <div class="cont">
@@ -536,7 +551,7 @@
                                 var xhttp = new XMLHttpRequest();
                                 xhttp.onreadystatechange = function () {
                                     if (this.readyState == 4 && this.status == 200) {
-                                        el.outerHTML = this.responseText;
+                                        el.innerHTML = this.responseText;
                                     }
                                 };
                                 xhttp.open('GET', includePath, true);
@@ -576,7 +591,7 @@
                      var xhttp = new XMLHttpRequest();
                      xhttp.onreadystatechange = function () {
                          if (this.readyState == 4 && this.status == 200) {
-                             el.outerHTML = this.responseText;
+                             el.innerHTML = this.responseText;
                          }
                      };
                      xhttp.open('GET', includePath, true);
