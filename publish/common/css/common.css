@@ -31,10 +31,10 @@ header{
 
 /* 로고 */
 /* #header_a *{border: 1px solid;} */
-#header_a>a{
+#header_a>h1{
     width: 15%;
     height: 30px;
-    display: block;
+    display: inline-block;   
 }
 .logo {
     width: 100%;
@@ -75,7 +75,11 @@ header{
 }
 
 /* 유틸메뉴 */
-.top_gnb>a{
+.top_gnb{
+    width: auto;
+    display: flex;
+}
+.top_gnb a{
     font-size: .5rem;
     display: inline-block;
     padding: 0 .2rem;
@@ -84,7 +88,7 @@ header{
     color: #969696;
     transition: ease .3s;
 }
-.top_gnb>a>i{
+.top_gnb a>i{
     width: 30px;
     height: 30px;
     display: block;
@@ -92,16 +96,16 @@ header{
     border: none;
     margin: 0 auto;
 }
-.top_gnb>a>i.login{
+.top_gnb a>i.login{
     background-position: -1px -43px;
    }
-.top_gnb>a>i.join{
+.top_gnb a>i.join{
     background-position: -34px -43px;
    }
-.top_gnb>a>i.service{
+.top_gnb a>i.service{
     background-position: -66px -43px;
    }
-.top_gnb>a:hover{
+.top_gnb a:hover{
     color: #2b2b2b;
 }
 
@@ -115,7 +119,7 @@ header{
     justify-content: space-between;
     align-items: center;
 }
-.top_btn>a{
+.top_btn button{
     width: 20%;
     display: inline-block;
     height: 100%;
@@ -126,7 +130,7 @@ header{
     line-height: 2.5rem;
     font-size: 1.2rem;
 }
-.top_btn>a>i{
+.top_btn button>i{
     padding:0 3%;
 }
 .sell_btn{
@@ -262,6 +266,10 @@ i.sub_menu13 {background-position: -437px -82px;}
     transition-timing-function:ease-in;
 }    
 .img_box li.on { opacity:1; left:0px; }
+.img_box li h2{
+    width: 100%;
+    height: 100%;
+}
 .img_box li img{
     display: block;
     width: 100%;
@@ -308,10 +316,6 @@ i.sub_menu13 {background-position: -437px -82px;}
     max-width: 1000px;
     margin: 0 auto;
 }
-.main_list>div{
-    width: 100%;
-    height: 100%;
-}
 .main_row{
     width: 100%;
     display: flex;
@@ -321,9 +325,8 @@ i.sub_menu13 {background-position: -437px -82px;}
 }
 .main_con{
     display: none;
-    font-family: 'GmarketSansMedium';
 }
-.item_wrapper>a.item_list{
+.item_list{
     width: 100%;
     display: block;
 }
@@ -339,7 +342,7 @@ i.sub_menu13 {background-position: -437px -82px;}
     border-radius: 3%;
     border: .5px solid #b6b6b6;
 }
-.dealer_position{
+.item_box>p.dealer_position{
     width: 30%;
     position: absolute;
     top: 2%; left: 2%;
@@ -348,8 +351,7 @@ i.sub_menu13 {background-position: -437px -82px;}
     width: 100%;
     opacity: .8;
 }
-.cont,
-.cont_bid{
+.cont{
     width: 100%;
     text-align: left;
     text-indent: .5rem;
@@ -364,6 +366,7 @@ i.sub_menu13 {background-position: -437px -82px;}
     width: 100%;
     display: block;
     font-size: .9rem;
+    font-family: 'GmarketSansMedium';
 }
 .item_price,
 .item_price_before{
@@ -378,8 +381,7 @@ i.sub_menu13 {background-position: -437px -82px;}
 .item_price>strong{
     display: inline-block;
     text-indent: .2rem;
-    font-size: 1.2rem;
-    font-family: 'IBMPlexSansKR-Bold';
+    font-size: 1rem;
 }
 
 
@@ -389,19 +391,18 @@ i.sub_menu13 {background-position: -437px -82px;}
     top: -40%; left: 0;
     background-color: #4147e1;
     border-radius: 0 0 5px 5px;
-    font-family: 'GmarketSansMedium';
     color: #fff;
     opacity: .7;
     font-size: .7rem;
     padding: 1%;
 }
-.bid_time>span{
+.bid_time>p{
     text-indent: 0;
     width: 100%;
     margin: 0 auto;
     display: block;
 }
-.bid_time>span>i{
+.bid_time>p>i{
     text-align: center;
     display: inline-block;
     margin: 0 5%;
@@ -503,20 +504,17 @@ i.sub_menu13 {background-position: -437px -82px;}
 
 /* 상단으로 아이콘 */
 .home{
-    width: 100%;
     position: relative;
+    width: 40px;
+    bottom: 0; left: 85%;
 }
-.home>div{
-    position: absolute;
-    width: 50px;
-    bottom: -200%; right: 20px;
-}
-.home>div>a,
-.home>div>a>i{
+.home>a,
+.home>a>i{
+    font-size: 1rem;
     display: block;
     text-align: center;
     color: #6f6e6e;
-    padding: 5px;
+    padding: 5px 0;
 }
 
 

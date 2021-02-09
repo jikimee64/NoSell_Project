@@ -6,7 +6,7 @@
 @media (min-width:320px) and (max-width:510px) {
 
     #header_a{justify-content: center; padding:5% 1.5% 0 1.5%;}
-    #header_a>a{width:0; display: none;}
+    #header_a>h1{width:0; display: none;}
     .search{width: 90%;}
     .top_gnb{display: none;}
     .wrap{border: none; width: 0; height: 0; padding: 0;}
@@ -71,7 +71,7 @@
 /* 태블릿용 */
 @media(min-width:510px) and (max-width:930px) {
     .search{width: 50%;}
-    .top_gnb>a:last-child{
+    .top_gnb>li:last-child{
         display: none;
     }
 
