@@ -16,7 +16,7 @@ import org.springframework.data.annotation.LastModifiedDate;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 public class Password {
 
-    @Column(name = "password", nullable = false)
+    @Column(name = "password")
     private String password;
 
     @Column(name = "login_fail_count")
@@ -29,7 +29,8 @@ public class Password {
 
     @Builder //비밀번호 암호화 추가
     public Password(final String password){
-        Assert.notNull(password, "password must not be null!!");
+        //소셜로그인 경우 패스워드가 필요없기 때문에 null 허용
+        //Assert.notNull(password, "password must not be null!!");
         this.password = password;
     }
 

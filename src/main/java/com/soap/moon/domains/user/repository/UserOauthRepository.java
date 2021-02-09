@@ -5,5 +5,4 @@ import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UserOauthRepository extends JpaRepository<UserOauth, Long> {
-    Optional<UserOauth> findByEmail(String email);
 }
