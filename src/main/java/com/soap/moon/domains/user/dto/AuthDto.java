@@ -9,9 +9,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 
-public class GoogleAuthDto {
+public class AuthDto {
 
-    @ApiModel("구글 토큰 GET")
+    @ApiModel("구글/네이버 토큰 GET")
     @Data
     @Builder
     @AllArgsConstructor
@@ -34,6 +34,34 @@ public class GoogleAuthDto {
         private String email;
         private String picture;
     }
+
+
+
+    @ApiModel("네이버 유저정보 GET")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class NaverProfileRes{
+        private Response response;
+        private String resultcode;
+        private String message;
+
+        @Data
+        @Builder
+        @AllArgsConstructor
+        @NoArgsConstructor(access = AccessLevel.PUBLIC)
+        public static class Response{
+            private String name;
+            private String email;
+            private String gender;
+            private String age;
+            private String birthday;
+            private String profile_image;
+        }
+
+    }
+
 
 
 }

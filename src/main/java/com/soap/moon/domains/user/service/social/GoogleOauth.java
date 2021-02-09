@@ -1,6 +1,7 @@
 package com.soap.moon.domains.user.service.social;
 
-import com.soap.moon.domains.user.dto.GoogleAuthDto;
+import com.soap.moon.domains.user.dto.AuthDto;
+import com.soap.moon.domains.user.dto.AuthDto.TokenRes;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -55,7 +56,7 @@ public class GoogleOauth implements SocialOauth {
     }
 
     @Override
-    public GoogleAuthDto.TokenRes requestAccessToken(String code) {
+    public AuthDto.TokenRes requestAccessToken(String code, String state) {
 
         Map<String, Object> params = new HashMap<>();
         params.put("code", code);
@@ -64,9 +65,9 @@ public class GoogleOauth implements SocialOauth {
         params.put("redirect_uri", GOOGLE_SNS_CALLBACK_URL);
         params.put("grant_type", "authorization_code");
         try {
-            ResponseEntity<GoogleAuthDto.TokenRes> responseEntity =
+            ResponseEntity<AuthDto.TokenRes> responseEntity =
                 restTemplate
-                    .postForEntity(GOOGLE_SNS_TOKEN_BASE_URL, params, GoogleAuthDto.TokenRes.class);
+                    .postForEntity(GOOGLE_SNS_TOKEN_BASE_URL, params, AuthDto.TokenRes.class);
 
             if (responseEntity.getStatusCode() == HttpStatus.OK) {
                 return responseEntity.getBody();
@@ -84,15 +85,14 @@ public class GoogleOauth implements SocialOauth {
     }
 
     @Override
-    public GoogleAuthDto.GoogleProfileRes googleUserInfo(GoogleAuthDto.TokenRes tokenRes) {
+    public AuthDto.GoogleProfileRes userInfoGoogle(TokenRes tokenRes) {
 //        Map<String, Object> params = new HashMap<>();
 //        System.out.println("access_token : " + tokenRes.getAccess_token());
 //        params.put("access_token", tokenRes.getAccess_token());
         try {
-            System.out.println("꺄오 : " + GOOGLE_SNS_USERINFO_URL);
-            ResponseEntity<GoogleAuthDto.GoogleProfileRes> responseEntity =
+            ResponseEntity<AuthDto.GoogleProfileRes> responseEntity =
                 restTemplate.getForEntity(GOOGLE_SNS_USERINFO_URL + "/?access_token=" + tokenRes.getAccess_token(),
-                    GoogleAuthDto.GoogleProfileRes.class);
+                    AuthDto.GoogleProfileRes.class);
 
 //            ResponseEntity<GoogleAuthDto.GoogleProfileRes> responseEntity =
 //                restTemplate.postForEntity(GOOGLE_SNS_USERINFO_URL, params,
@@ -105,7 +105,7 @@ public class GoogleOauth implements SocialOauth {
             e.printStackTrace();
             //throw new NaverApiUnauthorizedException();
         } catch (Exception e) {
-            log.info("========== googleUserInfo : 구글 API 통신 알수 없는 에러 ==========");
+            log.info("========== userInfoGoogle : 구글 API 통신 알수 없는 에러 ==========");
             e.printStackTrace();
             //throw new NavereApiErrorException();
         }

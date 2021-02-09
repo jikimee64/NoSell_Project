@@ -51,10 +51,10 @@ public class OauthController {
     @GetMapping(value = "/{socialLoginType}/callback")
     public ResponseEntity<?> callback(
         @PathVariable(name = "socialLoginType") SocialLoginType socialLoginType,
-        @RequestParam(name = "code") String code) {
-        log.info(">> 소셜 로그인 API 서버로부터 받은 code :: {}", code);
+        @RequestParam(name = "code") String code,
+        @RequestParam(name= "state", required = false) String state) {
 
-        String jwt = oauthService.requestAccessToken(socialLoginType, code);
+        String jwt = oauthService.requestAccessToken(socialLoginType, code, state);
 
         HttpHeaders httpHeaders = new HttpHeaders();
         httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);

@@ -8,8 +8,9 @@ import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.domains.user.domain.UserAuthority;
 import com.soap.moon.domains.user.domain.UserOauth;
 import com.soap.moon.domains.user.domain.UserStatus;
-import com.soap.moon.domains.user.dto.GoogleAuthDto;
-import com.soap.moon.domains.user.dto.GoogleAuthDto.GoogleProfileRes;
+import com.soap.moon.domains.user.dto.AuthDto;
+import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes;
+import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes.Response;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserOauthRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
@@ -48,31 +49,47 @@ public class OauthService {
     public void request(SocialLoginType socialLoginType) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
         String redirectURL = socialOauth.getOauthRedirectURL();
+        log.info("URL : " + redirectURL);
         try {
             response.sendRedirect(redirectURL);
         } catch (IOException e) {
+            log.info("request error : " + redirectURL);
             e.printStackTrace();
         }
     }
 
-    public String requestAccessToken(SocialLoginType socialLoginType, String code) {
+    public String requestAccessToken(SocialLoginType socialLoginType, String code, String state) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
-        GoogleAuthDto.TokenRes tokenRes = socialOauth.requestAccessToken(code);
-        GoogleProfileRes googleProfileRes = socialOauth.googleUserInfo(tokenRes);
+        //state 인자는 naver에서만 필요..(리펙토링 절실)
+        AuthDto.TokenRes tokenRes = socialOauth.requestAccessToken(code, state);
 
-        String email = googleProfileRes.getEmail();
+        String email = null;
+
+        if("NAVER".equals(socialLoginType.getName())){
+            NaverProfileRes naverProfileRes = socialOauth.userInfoNaver(tokenRes);
+            email = naverProfileRes.getResponse().getEmail();
+
+        }else{
+            AuthDto.GoogleProfileRes profileRes = socialOauth.userInfoGoogle(tokenRes);
+            email = profileRes.getEmail();
+        }
 
         Account account = Account.builder().email(email).build();
-
 
         //ROLE_USER GET
         Optional<Authority> authorityRoleUser = authorityRepository.findById(1L);
 
         //비 가입자면 DB저장,
         User user = userRepository.findByAccount(account).orElseGet(() -> {
-            log.info("구글 정보 새로 DB 저장");
+            log.info("구글/네이버 정보 새로 DB 저장");
+            Password password = null;
 
-            Password password = Password.builder()
+            if("NAVER".equals(socialLoginType.getName())){
+                password = Password.builder()
+                    .password(passwordEncoder.encode(SocialLoginType.NAVER.getName()))
+                    .build();
+            }else{
+            }   password = Password.builder()
                 .password(passwordEncoder.encode(SocialLoginType.GOOGLE.getName()))
                 .build();
 
@@ -83,7 +100,7 @@ public class OauthService {
                 .phoneNum("")
                 .status(UserStatus.ACTIVE)
                 .lastLoginAt(LocalDateTime.now())
-                .profileImage(googleProfileRes.getPicture())
+                .profileImage("")
                 .build();
 
             UserAuthority userAuthority = UserAuthority.builder()

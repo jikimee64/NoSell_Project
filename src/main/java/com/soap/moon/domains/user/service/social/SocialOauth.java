@@ -1,8 +1,9 @@
 package com.soap.moon.domains.user.service.social;
 
-import com.soap.moon.domains.user.dto.GoogleAuthDto;
+import com.soap.moon.domains.user.dto.AuthDto;
 
 import com.soap.moon.domains.user.domain.SocialLoginType;
+import com.soap.moon.domains.user.dto.AuthDto.TokenRes;
 
 public interface SocialOauth {
 
@@ -17,11 +18,15 @@ public interface SocialOauth {
      * @param code API Server 에서 받아온 code
      * @return API 서버로 부터 응답받은 Json 형태의 결과를 string으로 반환
      */
-    GoogleAuthDto.TokenRes requestAccessToken(String code);
+    AuthDto.TokenRes requestAccessToken(String code, String state);
 
     //String requestUserInfo(GoogleAuthDto.TokenRes tokenRes);
 
-    default GoogleAuthDto.GoogleProfileRes googleUserInfo(GoogleAuthDto.TokenRes tokenRes) {
+    default AuthDto.GoogleProfileRes userInfoGoogle(TokenRes tokenRes) {
+        return null;
+    }
+
+    default AuthDto.NaverProfileRes userInfoNaver(TokenRes tokenRes) {
         return null;
     }
 
