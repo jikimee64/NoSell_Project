@@ -21,6 +21,7 @@ public class CategoryService {
 
     private final CategoryRepository categoryRepository;
 
+    @Cacheable(value = "categories")
     public CategoryDto categoryRoot() {
         Map<Long, List<CategoryDto>> groupingByParent = categoryRepository.findAll()
             .stream()

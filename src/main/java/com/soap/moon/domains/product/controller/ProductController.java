@@ -15,11 +15,13 @@ import io.swagger.annotations.ApiOperation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -36,14 +38,16 @@ public class ProductController {
     @ApiOperation(
         httpMethod = "GET", value = "상품", notes = "메인페이지 상품정보")
     @PerformanceTimeRecord
-    @GetMapping
-    public ResponseEntity<?> productAndCategory(){
+    @GetMapping("/{page}")
+    public ResponseEntity<?> productAndCategory(
+        @PathVariable(name = "page") @Min(0) Integer page
+    ){
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
                 .data(
-                    productService.mainProduct()
+                    productService.mainProduct(page)
                 ).build()
             , HttpStatus.OK);
     }

@@ -8,6 +8,9 @@ import com.soap.moon.domains.product.repository.ProductRepository;
 import java.util.List;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,13 +21,17 @@ public class ProductService {
 
     private final ProductRepository productRepository;
 
-    public List<mainProductRes> mainProduct() {
+    public List<mainProductRes> mainProduct(Integer page) {
 
-        List<Product> product = productRepository.findAll();
+        //List<Product> product = productRepository.findAll(PageRequest.of(page, 40));
 
-        List<mainProductRes> collect = product.stream()
+        Page<Product> products = productRepository.findAll(PageRequest.of
+            (page, 40, Sort.by("id").descending()));
+
+        List<mainProductRes> collect = products.getContent().stream()
             .map(s ->
                 mainProductRes.builder()
+                    .id(s.getId())
                     .name(s.getTitle())
                     .price(s.getPrice())
                     .dealType(s.getDealType().getDealType())
