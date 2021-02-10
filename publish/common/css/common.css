@@ -135,7 +135,7 @@ header{
 }
 .sell_btn{
     background-color: #4e53e4;
-    color: #ffffff;
+    color: #fff;
 }
 .sell_btn:hover{
     color: #2b2b2b;
@@ -489,19 +489,17 @@ i.sub_menu13 {background-position: -437px -82px;}
     display: flex;
     flex-direction: column;
     padding: 1% 0;
+    font-style: normal;
 }
-.footer_bottom span{
-    display: inline;
-    font-size: .6rem;
-    line-height: 1rem;
+.footer_bottom>p,
+.footer_bottom>p>em{
+    font-family: 'IBMPlexSansKR-Bold'; font-size: .7rem;
     word-break:keep-all;
 }
-.footer_bottom p{
-    font-size: .7rem;
+.footer_bottom>p:first-child{
+    display: inline;
     line-height: 1rem;
 }
-
-
 /* 상단으로 아이콘 */
 .home{
     position: relative;

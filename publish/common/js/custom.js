@@ -70,7 +70,6 @@ $(document).ready(function(){
         });
     });
 
-
 // 상단으로 이동영역
     $('a[href=#top]').click(function () {
         $('body,html').animate({
@@ -95,5 +94,5 @@ window.addEventListener('load', function() {
             xhttp.open('GET', includePath, true);
             xhttp.send();
         }
-    });
+    });  
 });
