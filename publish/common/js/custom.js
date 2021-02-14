@@ -56,19 +56,19 @@ $(document).ready(function(){
 
 
 // 더보기 로딩영역
-    $(function () {
-        $(".main_row>li").slice(0, 20).show();
-        $(".more_load").on('click', function (e) {
-            e.preventDefault();
-            $(".main_row>li:hidden").slice(0, 20).slideDown();
-            if ($(".main_row>li:hidden").length == 0) {
-                $("#load").fadeOut('slow');
-            }
-            $('html,body').animate({
-                scrollTop: $(this).offset().top
-            }, 1500);
-        });
-    });
+    // $(function () {
+    //     $(".main_row>li").slice(0, 20).show();
+    //     $(".more_load").on('click', function (e) {
+    //         e.preventDefault();
+    //         $(".main_row>li:hidden").slice(0, 20).slideDown();
+    //         if ($(".main_row>li:hidden").length == 0) {
+    //             $("#load").fadeOut('slow');
+    //         }
+    //         $('html,body').animate({
+    //             scrollTop: $(this).offset().top
+    //         }, 1500);
+    //     });
+    // });
 
 // 상단으로 이동영역
     $('a[href=#top]').click(function () {

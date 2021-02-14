@@ -103,8 +103,8 @@ textarea {
 
 /* recaptcha */
 .test{
-  padding: 5% 0;
-  width: 50%;
+  padding: 6% 0;
+  width: 60%;
   margin-bottom: 4%;
   display: flex;
   justify-content: center;
@@ -134,6 +134,7 @@ textarea {
   -webkit-appearance: none;
   appearance: none;
   border: 1px solid #4147e1;
+  border-radius: 3px;
 }
 .button:hover, .button:focus {
   color: #4147e1;
@@ -163,24 +164,25 @@ textarea {
 .social>a{
   margin: 0 auto;
   display: block;
-  width: 40%;
+  width: 45%;
   font-size: .8rem;
-  line-height: 2rem;
+  line-height: 2.5rem;
   text-align: center;
-  background-color: #19CE60;
+  background-color: #14a34d;
+  border-radius: 3px;
   color: #fff;
   margin: 1% auto;
 }
 .social>a:last-child{
   color: #2b2b2b;
   background-color: #fff;
-  border: 1px solid #2b2b2b;
+  border: 1px solid #969696;
 }
 .social>a>img{
   display: inline-block;
   text-align: left;
-  width: 15px;
-  height: 15px;
+  width: 13px;
+  height: 13px;
   vertical-align: middle;
   margin: 0 5% 0 0;
 }
@@ -196,17 +198,13 @@ textarea {
   text-align: center;
 }
 .tab_group li a {
-  padding: 1%;
+  padding: 3% 0;
   font-size: 1.1rem;
   transition: .5s ease;
   font-family: 'GmarketSansBold';
   color: #4147e1;
   display: inline-block;
 }
-.tab_group li.active{
-  display: block;
-}
-
 
 @media(max-width:768px){
   h2{font-size: 1rem;}
@@ -224,7 +222,6 @@ textarea {
   .tab_group span{font-size: .8rem;}
   
 }
-
 
 
 
