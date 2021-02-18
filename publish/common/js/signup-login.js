@@ -32,7 +32,7 @@ $('.form').find('input, textarea').on('keyup blur focus', function (e) {
     e.preventDefault();
 
 
-    $(this).parent().addClass('active');
+    $(this).parent().parent().addClass('active');
     $(this).parent().siblings().removeClass('active');
 
     
