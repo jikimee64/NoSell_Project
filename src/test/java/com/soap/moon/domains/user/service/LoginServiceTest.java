@@ -31,7 +31,7 @@ class LoginServiceTest {
         String expectedEmail = "nosell@nosell.com";
         String expectedRole = Role.USER.getCode();
 
-        loginService.login(UserDto.LoginReq.builder().userId(expectedEmail).password("nosell").build());
+        loginService.login(UserDto.LoginReq.builder().email(expectedEmail).password("nosell").build());
 
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
@@ -46,7 +46,7 @@ class LoginServiceTest {
         String expectedEmail = "nosell@nosell.com";
 
         assertThrows(BadCredentialsException.class, () -> {
-            loginService.login(UserDto.LoginReq.builder().userId(expectedEmail).password("password").build());
+            loginService.login(UserDto.LoginReq.builder().email(expectedEmail).password("password").build());
         });
     }
 }

@@ -4,6 +4,9 @@ import com.mysema.commons.lang.Assert;
 import com.soap.moon.domains.category.domain.Category;
 import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.global.common.BaseTimeEntity;
+import java.util.HashSet;
+import java.util.Set;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -15,6 +18,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -65,6 +69,9 @@ public class Product extends BaseTimeEntity {
     @JoinColumn(name = "category_id")
     private Category category;
 
+    @OneToMany(mappedBy = "product")
+    private Set<ProductImage> productImages = new HashSet<>();
+
     @Builder
     public Product(String title, String description, ProductStatus productStatus, int price,
         DealType dealType, DeliveryType deliveryType, SalesStatus salesStatus, User user, Category category){
@@ -87,5 +94,10 @@ public class Product extends BaseTimeEntity {
         this.salesStatus = salesStatus;
         this.user = user;
         this.category = category;
+    }
+
+    //연관관계 메서드
+    public void addProductImage(ProductImage productImage){
+
     }
 }

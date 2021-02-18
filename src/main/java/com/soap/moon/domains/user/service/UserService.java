@@ -49,6 +49,7 @@ public class UserService {
             .password(password)
             .nickName(dto.getNickName())
             .phoneNum(dto.getPhoneNum())
+            .profileImage("https://user-images.githubusercontent.com/52563841/108304539-9a01e200-71eb-11eb-94a7-01ead35e186e.png")
             .status(UserStatus.ACTIVE)
             .lastLoginAt(LocalDateTime.now())
             .build();

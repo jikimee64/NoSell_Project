@@ -1,0 +1,1 @@
+--drop all objects : H2 테이블 전체삭제

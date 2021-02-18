@@ -48,12 +48,12 @@ public class UserDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class LoginReq {
 
-        @ApiModelProperty(value = "아이디", notes = "userId", example = "test@test.com", required = true)
+        @ApiModelProperty(value = "아이디", notes = "userId", example = "nosell@nosell.com", required = true)
         @NotBlank(message = "아이디는 필수 입력 값입니다.")
         @Email
-        public String userId;
+        public String email;
 
-        @ApiModelProperty(value = "패스워드", notes = "password", example = "password", required = true)
+        @ApiModelProperty(value = "패스워드", notes = "password", example = "nosell", required = true)
         @NotBlank(message = "패스워드는 필수 입력 값입니다.")
         @Size(min = 3, max = 50)
         public String password;

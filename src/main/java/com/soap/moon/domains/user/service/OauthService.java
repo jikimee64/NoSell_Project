@@ -10,7 +10,6 @@ import com.soap.moon.domains.user.domain.UserOauth;
 import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.dto.AuthDto;
 import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes;
-import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes.Response;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserOauthRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
@@ -19,6 +18,7 @@ import com.soap.moon.global.jwt.JwtTokenProvider;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +58,7 @@ public class OauthService {
         }
     }
 
-    public String requestAccessToken(SocialLoginType socialLoginType, String code, String state) {
+    public Map<String, String> requestAccessToken(SocialLoginType socialLoginType, String code, String state) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
         //state 인자는 naver에서만 필요..(리펙토링 절실)
         AuthDto.TokenRes tokenRes = socialOauth.requestAccessToken(code, state);

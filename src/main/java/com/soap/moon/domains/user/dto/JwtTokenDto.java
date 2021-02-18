@@ -9,13 +9,13 @@ import lombok.NoArgsConstructor;
 
 public class JwtTokenDto {
 
-
     @ApiModel("로그인 후 토큰 값 반환")
     @Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class TokenInRes{
-        public String token;
+        public String accessToken;
+
     }
 }

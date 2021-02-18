@@ -1,5 +1,6 @@
 package com.soap.moon.domains.user.controller;
 
+import com.soap.moon.domains.user.domain.Token;
 import com.soap.moon.domains.user.dto.UserDto;
 import com.soap.moon.domains.user.dto.JwtTokenDto.TokenInRes;
 import com.soap.moon.domains.user.service.LoginService;
@@ -8,6 +9,7 @@ import com.soap.moon.global.jwt.JwtFilter;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import java.util.Map;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpHeaders;
@@ -33,16 +35,16 @@ public class LoginController {
         @ApiParam(value = "로그인 폼입력값", required = true)
         @Valid @RequestBody UserDto.LoginReq loginDto) {
 
-        String jwt = loginService.login(loginDto);
+        Map<String, String> tokens = loginService.login(loginDto);
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + (tokens.get(Token.ACCESS_TOKEN.getName())));
 
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
-                .data(new TokenInRes(jwt)).build(),
+                .data(new TokenInRes(tokens.get(Token.ACCESS_TOKEN.getName()))).build(),
             httpHeaders,
             HttpStatus.OK);
     }

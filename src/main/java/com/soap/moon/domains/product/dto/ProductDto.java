@@ -1,5 +1,6 @@
 package com.soap.moon.domains.product.dto;
 
+import com.soap.moon.domains.product.domain.DealType;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
@@ -19,23 +20,14 @@ public class ProductDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class mainProductRes{
-
+    public static class mainProductRes {
         public Long id;
-
-        public String name;
-
+        public String title;
         public int price;
-
-        public String dealType;
-
-        public String image;
-
+        public DealType dealType;
+        public String image_url;
         public LocalDateTime createdAt;
     }
-
-
-
 
 
 }
