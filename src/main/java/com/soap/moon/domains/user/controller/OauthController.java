@@ -2,7 +2,7 @@ package com.soap.moon.domains.user.controller;
 
 import com.soap.moon.domains.user.domain.SocialLoginType;
 import com.soap.moon.domains.user.domain.Token;
-import com.soap.moon.domains.user.dto.JwtTokenDto.TokenInRes;
+import com.soap.moon.domains.user.dto.LoginDto;
 import com.soap.moon.domains.user.service.OauthService;
 import com.soap.moon.global.common.CommonResponse;
 import com.soap.moon.global.jwt.JwtFilter;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = {"5. OAuth"}, value = "소셜 로그인")
+@Api(tags = {"4. OAuth"}, value = "소셜 로그인")
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/v1/auth")
 @Slf4j
@@ -56,17 +56,18 @@ public class OauthController {
         @RequestParam(name = "code") String code,
         @RequestParam(name= "state", required = false) String state) {
 
-        Map<String, String> tokens = oauthService
+        Map<String, Object> map = oauthService
             .requestAccessToken(socialLoginType, code, state);
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + (tokens.get(Token.ACCESS_TOKEN.getName())));
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + (map.get(Token.ACCESS_TOKEN.getName())));
 
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
-                .data(new TokenInRes(tokens.get(Token.ACCESS_TOKEN.getName()))).build(),
+                .data(new LoginDto.LoginRes(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())),
+                    Long.valueOf(String.valueOf(map.get("id"))))).build(),
             httpHeaders,
             HttpStatus.OK);
     }

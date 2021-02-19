@@ -54,12 +54,12 @@ public class UserService {
             .lastLoginAt(LocalDateTime.now())
             .build();
 
-        UserAuthority userAuthority = UserAuthority.builder()
+        UserAuthority userAuthorityEntity = UserAuthority.builder()
             .user(user)
             .authority(authorityRoleUser.get())
             .build();
 
-        user.addAuthority(userAuthority);
+        user.addAuthority(userAuthorityEntity);
         return userRepository.save(user);
     }
 
@@ -73,12 +73,10 @@ public class UserService {
         });
     }
 
-    @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String userId) {
         return userRepository.findOneWithAuthoritiesByAccount(userId);
     }
 
-    @Transactional(readOnly = true)
     public Optional<User> getMyUserWithAuthorities() {
         return SecurityUtil.getCurrentUsername()
             .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(s));

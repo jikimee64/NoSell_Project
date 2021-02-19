@@ -10,17 +10,53 @@ values (CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'ROLE_ADMIN');
 INSERT INTO USER
 VALUES
 (
-    1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'nosell@nosell.com', CURRENT_TIMESTAMP(), 'nickNAME', 0,
+    1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'nosell@nosell.com', CURRENT_TIMESTAMP(), 'nosell_닉네임', 0,
     '$2a$10$ns9gjAMzHcBYVsLg9kHKE.QRs/EtY7L8jFfQsAD9F5Rvvt/jy0MUi',
-    CURRENT_TIMESTAMP(), '01000000000', 'profile_image','ACTIVE');
+    CURRENT_TIMESTAMP(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
 
 INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
 VALUES
 (CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),1,1);
 
-------------------------------------------------------------------------------------------
+-- ID : test@test.com
+-- PW : test
+INSERT INTO USER
+VALUES
+(
+    2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'test@test.com', CURRENT_TIMESTAMP(), 'test_닉네임', 0,
+    '$2a$10$e5Wo93q1kSzWD6ehhvOGLubVwYh9dvibacjrrgMl9t65CtBaR8rPG',
+    CURRENT_TIMESTAMP(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
+
+INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
+VALUES
+(CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),1,2);
+
+-- ID : kate@kate.com
+-- PW : kate
+INSERT INTO USER
+VALUES
+(
+    3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'kate@kate.com', CURRENT_TIMESTAMP(), 'kate_닉네임', 0,
+    '$2a$10$oXSC643DxsSawrmoD9115e4RryUnW4kPMqsp1EMKF1Qx8W4qQhIi2',
+    CURRENT_TIMESTAMP(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
+
+
+INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
+VALUES
+(CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(),1,3);
+
+------------------------------------------------------------------------------------------
+--유저 리뷰
+
+INSERT INTO USER_REVIEW (CREATED_AT, UPDATED_AT, BAD, CONTENT, GOOD, STARS, WRITER, WRITER_ID, USER_ID)
+VALUES (CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 0, '별로임 by test', 0, 2.0, 'test_닉네임', 2, 1);
+
+INSERT INTO USER_REVIEW (CREATED_AT, UPDATED_AT, BAD, CONTENT, GOOD, STARS, WRITER, WRITER_ID, USER_ID)
+VALUES (CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 0, '좋음 by kate', 0, 4.0, 'kate_닉네임', 3, 1);
+
+------------------------------------------------------------------------------------------
 --카테고리
 
 --대분류
@@ -107,8 +143,16 @@ INSERT INTO CATEGORY(CREATED_AT, UPDATED_AT, NAME, PARENT_ID) VALUES(CURRENT_TIM
 INSERT INTO CATEGORY(CREATED_AT, UPDATED_AT, NAME, PARENT_ID) VALUES(CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), '생활용품',13);
 INSERT INTO CATEGORY(CREATED_AT, UPDATED_AT, NAME, PARENT_ID) VALUES(CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), '식품/기타',13);
 
-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+--유저 카테고리
+INSERT INTO CATEGORY_USER VALUES
+(1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 1, 1); --패션의류, nosell@nosell.com
 
+INSERT INTO CATEGORY_USER VALUES
+(2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 2, 1); --패션잡화, nosell@nosell.com
+
+------------------------------------------------------------------------------------------------------------------------
+--상품
 -- 1줄(4)
 INSERT INTO PRODUCT(CREATED_AT, UPDATED_AT, DEAL_TYPE, DELIVERY_TYPE, DESCRIPTION, PRICE, PRODUCT_STATUS, SALES_STATUS, TITLE, CATEGORY_ID, USER_ID)
 VALUES(CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'NO_SELL', 'PARCEL', '내용', 10000, 'NEW', 'SALE', '여성의류 팝니다.', 14, 1);

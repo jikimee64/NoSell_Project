@@ -44,7 +44,7 @@ public class ProductService {
                     .dealType(s.getDealType())
                     .image_url(s.getImage_url())
                     .createdAt(
-                        LocalDateTime.parse( s.getCreatedAt().format(formatter),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        LocalDateTime.parse( s.getCreatedAt().format(formatter), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .build())
             .collect(Collectors.toList());
 

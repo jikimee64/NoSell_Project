@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @Slf4j
-@Api(tags = {"2. Member"}, value = "회원 CRUD")
+@Api(tags = {"1. User"}, value = "회원 CRUD")
 @RequiredArgsConstructor
 @RestController
 @RequestMapping("/api/v1/users")

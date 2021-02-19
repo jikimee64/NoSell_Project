@@ -30,7 +30,7 @@ public class JwtTokenProvider implements InitializingBean {
 
     private final String secret;
     private final long tokenValidityInMillisecondsAccess;
-    private final long tokenValidityInMillisecondsRefresh;
+    //private final long tokenValidityInMillisecondsRefresh;
 
     private Key keyAccess;
 
@@ -40,7 +40,7 @@ public class JwtTokenProvider implements InitializingBean {
         @Value("${jwt.token-validity-in-seconds-access}") long tokenValidityInSecondsRefresh) {
         this.secret = secret;
         this.tokenValidityInMillisecondsAccess = tokenValidityInSecondsAccess * 1000;
-        this.tokenValidityInMillisecondsRefresh = tokenValidityInSecondsRefresh * 1000;
+        //this.tokenValidityInMillisecondsRefresh = tokenValidityInSecondsRefresh * 1000;
     }
 
     @Override
@@ -49,29 +49,28 @@ public class JwtTokenProvider implements InitializingBean {
         this.keyAccess = Keys.hmacShaKeyFor(keyAccessByte);
     }
 
-    public Map<String, String> createToken(Authentication authentication) {
+    public String createToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
         Date validityAccess = new Date(now + this.tokenValidityInMillisecondsAccess);
-        Date validityRefresh = new Date(now + this.tokenValidityInMillisecondsRefresh);
+        //Date validityRefresh = new Date(now + this.tokenValidityInMillisecondsRefresh);
 
-        Map<String, String> tokens = new HashMap<>();
-        tokens.put(Token.ACCESS_TOKEN.getName(), Jwts.builder()
+        String tokens = Jwts.builder()
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
             .signWith(keyAccess, SignatureAlgorithm.HS512)
             .setExpiration(validityAccess) //토큰만료시간
-            .compact());
+            .compact();
 
-        tokens.put(Token.REFRESH_TOKEN.getName(), Jwts.builder()
-            .setSubject(authentication.getName())
-            .claim(AUTHORITIES_KEY, authorities)
-            .signWith(keyAccess, SignatureAlgorithm.HS512)
-            .setExpiration(validityRefresh) //토큰만료시간
-            .compact());
+//        tokens.put(Token.REFRESH_TOKEN.getName(), Jwts.builder()
+//            .setSubject(authentication.getName())
+//            .claim(AUTHORITIES_KEY, authorities)
+//            .signWith(keyAccess, SignatureAlgorithm.HS512)
+//            .setExpiration(validityRefresh) //토큰만료시간
+//            .compact());
 
         return tokens;
     }

@@ -1,8 +1,8 @@
 package com.soap.moon.domains.user.controller;
 
 import com.soap.moon.domains.user.domain.Token;
+import com.soap.moon.domains.user.dto.LoginDto;
 import com.soap.moon.domains.user.dto.UserDto;
-import com.soap.moon.domains.user.dto.JwtTokenDto.TokenInRes;
 import com.soap.moon.domains.user.service.LoginService;
 import com.soap.moon.global.common.CommonResponse;
 import com.soap.moon.global.jwt.JwtFilter;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@Api(tags = {"3. Login"}, value = "회원 로그인")
+@Api(tags = {"2. Login"}, value = "회원 로그인")
 @RequiredArgsConstructor
 @RequestMapping("/api/v1")
 public class LoginController {
@@ -33,18 +33,20 @@ public class LoginController {
     @PostMapping("/login")
     public ResponseEntity<?> authorize(
         @ApiParam(value = "로그인 폼입력값", required = true)
-        @Valid @RequestBody UserDto.LoginReq loginDto) {
+        @Valid @RequestBody LoginDto.LoginReq loginDto) {
 
-        Map<String, String> tokens = loginService.login(loginDto);
+        Map<String, Object> map = loginService.login(loginDto);
 
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + (tokens.get(Token.ACCESS_TOKEN.getName())));
+        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER,
+            "Bearer " + (map.get(Token.ACCESS_TOKEN.getName())));
 
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
-                .data(new TokenInRes(tokens.get(Token.ACCESS_TOKEN.getName()))).build(),
+                .data(new LoginDto.LoginRes(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())),
+                    Long.valueOf(String.valueOf(map.get("id"))))).build(),
             httpHeaders,
             HttpStatus.OK);
     }

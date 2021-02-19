@@ -1,6 +1,7 @@
 package com.soap.moon.domains.user.domain;
 
 import com.mysema.commons.lang.Assert;
+import com.soap.moon.domains.category.domain.CategoryUser;
 import com.soap.moon.global.common.BaseTimeEntity;
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -62,6 +63,12 @@ public class User extends BaseTimeEntity implements Serializable {
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserAuthority> authorities = new HashSet<>();
 
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<CategoryUser> categoryUsers = new HashSet<>();
+
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    private Set<UserReview> userReviews = new HashSet<>();
+
     @Builder
     public User(Account account, Password password, String nickName, String phoneNum,
         String profileImage,
@@ -87,9 +94,6 @@ public class User extends BaseTimeEntity implements Serializable {
         authorities.add(userAuthority);
         userAuthority.setUser(this);
     }
-
-
-
 
     @Override
     public boolean equals(Object o) {

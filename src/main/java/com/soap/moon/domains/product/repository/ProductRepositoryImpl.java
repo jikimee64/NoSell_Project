@@ -21,7 +21,6 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 //복잡한 조회용 쿼리
-@Transactional(readOnly = true)
 @RequiredArgsConstructor
 @Repository
 public class ProductRepositoryImpl implements ProductRepositoryCustom {

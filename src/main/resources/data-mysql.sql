@@ -10,17 +10,53 @@ values (NOW(), NOW(), 'ROLE_ADMIN');
 INSERT INTO USER
 VALUES
 (
-    1, NOW(), NOW(), 'nosell@nosell.com', NOW(), 'nickNAME', 0,
+    1, NOW(), NOW(), 'nosell@nosell.com', NOW(), 'nosell_닉네임', 0,
     '$2a$10$ns9gjAMzHcBYVsLg9kHKE.QRs/EtY7L8jFfQsAD9F5Rvvt/jy0MUi',
-    NOW(), '01000000000', 'profile_image','ACTIVE');
+    NOW(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
 
 INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
 VALUES
 (NOW(), NOW(),1,1);
 
-------------------------------------------------------------------------------------------
+-- ID : test@test.com
+-- PW : test
+INSERT INTO USER
+VALUES
+(
+    2, NOW(), NOW(), 'test@test.com', NOW(), 'test_닉네임', 0,
+    '$2a$10$e5Wo93q1kSzWD6ehhvOGLubVwYh9dvibacjrrgMl9t65CtBaR8rPG',
+    NOW(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
+
+INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
+VALUES
+(NOW(), NOW(),1,2);
+
+-- ID : kate@kate.com
+-- PW : kate
+INSERT INTO USER
+VALUES
+(
+    3, NOW(), NOW(), 'kate@kate.com', NOW(), 'kate_닉네임', 0,
+    '$2a$10$oXSC643DxsSawrmoD9115e4RryUnW4kPMqsp1EMKF1Qx8W4qQhIi2',
+    NOW(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
+
+
+INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
+VALUES
+(NOW(), NOW(),1,3);
+
+------------------------------------------------------------------------------------------
+--유저 리뷰
+
+INSERT INTO USER_REVIEW (CREATED_AT, UPDATED_AT, BAD, CONTENT, GOOD, STARS, WRITER, WRITER_ID, USER_ID)
+VALUES (NOW(), NOW(), 0, '별로임 by test', 0, 2.0, 'test_닉네임', 2, 1);
+
+INSERT INTO USER_REVIEW (CREATED_AT, UPDATED_AT, BAD, CONTENT, GOOD, STARS, WRITER, WRITER_ID, USER_ID)
+VALUES (NOW(), NOW(), 0, '좋음 by kate', 0, 4.0, 'kate_닉네임', 3, 1);
+
+------------------------------------------------------------------------------------------
 --카테고리
 
 --대분류
@@ -107,8 +143,16 @@ INSERT INTO CATEGORY(CREATED_AT, UPDATED_AT, NAME, PARENT_ID) VALUES(NOW(), NOW(
 INSERT INTO CATEGORY(CREATED_AT, UPDATED_AT, NAME, PARENT_ID) VALUES(NOW(), NOW(), '생활용품',13);
 INSERT INTO CATEGORY(CREATED_AT, UPDATED_AT, NAME, PARENT_ID) VALUES(NOW(), NOW(), '식품/기타',13);
 
-------------------------------------------------------------------------------------------------------------------------
+------------------------------------------------------------------------------------------
+--유저 카테고리
+INSERT INTO CATEGORY_USER VALUES
+(1, NOW(), NOW(), 1, 1); --패션의류, nosell@nosell.com
 
+INSERT INTO CATEGORY_USER VALUES
+(2, NOW(), NOW(), 2, 1); --패션잡화, nosell@nosell.com
+
+------------------------------------------------------------------------------------------------------------------------
+--상품
 -- 1줄(4)
 INSERT INTO PRODUCT(CREATED_AT, UPDATED_AT, DEAL_TYPE, DELIVERY_TYPE, DESCRIPTION, PRICE, PRODUCT_STATUS, SALES_STATUS, TITLE, CATEGORY_ID, USER_ID)
 VALUES(NOW(), NOW(), 'NO_SELL', 'PARCEL', '내용', 10000, 'NEW', 'SALE', '여성의류 팝니다.', 14, 1);
@@ -339,4 +383,3 @@ INSERT INTO PRODUCT(CREATED_AT, UPDATED_AT, DEAL_TYPE, DELIVERY_TYPE, DESCRIPTIO
 VALUES(NOW(), NOW(), 'DIRECT_DEAL', 'PARCEL', '내용', 17000, 'NEW', 'SALE', '식품/기타 팝니다.', 53, 1);
 INSERT INTO PRODUCT_IMAGE(CREATED_AT, UPDATED_AT, PRODUCT_ID, IMAGE_URL)
 VALUES(NOW(), NOW(), 44, 'https://user-images.githubusercontent.com/52563841/107608551-9fa57800-6c7f-11eb-8ff7-14176b5ee074.PNG');
-

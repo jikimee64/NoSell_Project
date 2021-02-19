@@ -6,7 +6,6 @@ import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.global.common.BaseTimeEntity;
 import java.util.HashSet;
 import java.util.Set;
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
