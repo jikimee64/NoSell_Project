@@ -20,13 +20,15 @@
     font-weight: normal;
     font-style: normal;
 }
-
+/* G마켓산스M/메인 */
 h1{
     font-family: 'GmarketSansMedium';
 }
+/* G마켓산스B */
 h2{
     font-family: 'GmarketSansBold';
 }
+/* IBMP_B/서브 */
 h3{
     font-family: 'IBMPlexSansKR-Bold';
 }

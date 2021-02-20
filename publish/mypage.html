@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>mypage</title>
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css">
+    <link rel="stylesheet" href="./common/css/reset.css">
+    <link rel="stylesheet" href="./common/css/mypage.css">
+    <link rel="stylesheet" href="./common/css/style.css">
+    <script src="./common/js/custom.js"></script>
+</head>
+<body>
+    <header data-include-path="header.html"></header>
+    <main>
+        <section class="breadcrum">
+            <h2>현재 연결된 메뉴</h2>
+            <ul>
+                <li><a href="#">HOME</a></li>
+                <li><a href="#">나의메뉴</a></li>
+            </ul>
+        </section>
+        <section>
+            <article class="my_left">
+                <form name="user" method="post">
+                    <p><i class="my_img"></i></p>
+                    <p><input type="text" name="user_name" value="kate" readonly>의 상점</p>
+                    <a href="#"><i class="my_star"></i>&#40;<span>02</span>&#41;</a>
+                    <p><input type="month" name="user_date" value="2021-01" readonly>시작</p>
+                </form>
+                <p>
+                    <a href="#" class="my_btn">내정보설정</a>
+                    <a href="#" class="my_btn">관심 카테고리</a>
+                </p>
+            </article>
+            <article class="my_right">
+                <ul>
+                    <li><a href="#">판매상품&#40;<span class="sell_num">2</span>&#41;</a></li>
+                    <li><a href="#">구매상품&#40;<span class="buy_num">2</span>&#41;</a></li>
+                    <li><a href="#">찜상품&#40;<span class="pick_num">0</span>&#41;</a></li>
+                    <li><a href="#">알림&#40;<span class="noti_num">0</span>&#41;</a></li>
+                </ul>
+                <p>전체<span class="all_num">3</span></p>
+                <select name="sell_state" id="sell_state" class="sell_state">
+                    <option value="">판매상태</option>
+                    <option value="selling">판매중</option>
+                    <option value="selling">경매중</option>
+                    <option value="soldout">판매.경매완료</option>
+                </select>
+                <select name="buy_state" id="buy_state" class="buy_state">
+                    <option value="">구매상태</option>
+                    <option value="buying">구매중</option>
+                    <option value="completed">구매.낙찰완료</option>
+                </select>
+                <!-- <ul>
+                    <li class="main_con">
+                        <article class="item_list">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <p class="dealer_position">
+                                    <img src="error.gif" onerror="this.style.display='none'" alt="blank">
+                                </p>
+                            </div>
+                            <div class="cont">
+                                <h3 class="item_title">나이키운동화</h3>
+                                <p class="item_price">현재가<strong>20,000</strong>원</p>
+                            </div>    
+                        </article>
+                    </li>
+                    <li class="main_con">                   
+                        <article class="item_list">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <p class="dealer_position">
+                                    <img src="./common/img/delivery_icon.svg" alt="delivery_icon">
+                                </p>
+                            </div>
+                            <div class="cont">
+                                <h3 class="item_title">나이키운동화</h3>
+                                <p class="item_price">현재가<strong>10,000</strong>원</p>
+                            </div>    
+                        </article>
+                    </li>
+                    <li class="main_con">
+                        <article class="item_list">
+                            <div class="item_box">
+                                <img src="./common/img/main_test_img1.jpg" alt="img1">
+                                <p class="dealer_position">
+                                    <img src="./common/img/auction_icon.svg" alt="auction_icon">
+                                </p>
+                            </div>
+                            <div class="cont">
+                                <div class="bid_time">
+                                    <p><i class="fas fa-stopwatch"></i>2/6 22:00</p>
+                                </div>
+                                <div class="bid_title">
+                                    <h3 class="item_title">Nike</h3>
+                                    <p class="item_price">현재가<strong>20,000</strong>원</p>
+                                    <p class="item_price_before">최초가&nbsp;50,000원</p>
+                                </div>
+                            </div>    
+                        </article>
+                    </li>
+                </ul> -->
+                <div class="more_load">
+                    <a href="">더보기<i class="fas fa-chevron-down"></i></a>
+                </div>
+            </article>
+                
+           
+        </section>
+        
+    </main>
+    <footer class="footer" data-include-path="footer.html"></footer>
+</body>
+</html>

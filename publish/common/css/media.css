@@ -3,7 +3,7 @@
 
 
 /* 모바일용 */
-@media (min-width:320px) and (max-width:510px) {
+@media (max-width:510px) {
 
     #header_a{justify-content: center; padding:5% 1.5% 0 1.5%;}
     #header_a>h1{width:0; display: none;}
@@ -16,6 +16,9 @@
     .top_btn{display: none;}
     .more_load>a{font-size: .8rem;}
     .home>a{font-size: .7rem;}
+    .main_row{
+        grid-template-columns: repeat(auto-fit, minmax(35%,1fr));
+    }
     .item_box>img{max-width: 150px; max-height: 150px;}
 
     /* 모바일 메뉴바 */
@@ -23,10 +26,10 @@
         display: block;
         width: 100%;
         min-width: 320px;
-        padding: 2% 2%;
+        padding: 1%;
         background-color: #F3F3F3;
         position: fixed;
-        top:93.5%; left: 0;
+        bottom: 0; left: 0;
         z-index: 50;
     }
     .m_menu{

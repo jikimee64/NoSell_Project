@@ -1,5 +1,5 @@
 // 카테고리 클릭 시 드롭다운 영역
-$(function(){
+$(document).ready(function(){
     $(".gnb").hide();
     $(".sub_bottom").hide();
     $(".cate_btn").click(function(){

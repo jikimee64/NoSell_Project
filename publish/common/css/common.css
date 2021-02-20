@@ -30,6 +30,7 @@ header{
     margin: 0 auto; 
     position: relative;
 }
+.top_gnb_after{display: none;}
 
 
 /* 로고 */
@@ -162,6 +163,7 @@ header{
     width: 100%;
     top:98%; right:0px; 
     z-index: 30;
+    display: none;
 }
 .sub{
     display: grid;
@@ -334,13 +336,13 @@ i.sub_menu13 {background-position: -437px -82px;}
 }
 .main_row{
     width: 100%;
-    display: -webkit-flex;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
-    align-items: flex-start;
-    -webkit-justify-content:space-around;
-    -webkit-align-items: flex-start;
+    display: -webkit-grid;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(232px,1fr));
+    grid-auto-flow: dense;
+}
+.main_con{
+    margin: 0 auto; 
 }
 .item_list{
     width: 100%;
@@ -351,6 +353,7 @@ i.sub_menu13 {background-position: -437px -82px;}
     position: relative;
 }
 .item_box>img{
+    width: 100%;
     width: 232px;
     height: 232px;
     object-fit: cover;
@@ -427,7 +430,8 @@ i.sub_menu13 {background-position: -437px -82px;}
 
 /* 더보기 */
 .more_load{
-    width: 25%;
+    width: 20%;
+    max-width: 200px;
     margin: 0 auto;
     padding: 4% 0;
     font-family: 'GmarketSansMedium';
@@ -475,7 +479,6 @@ i.sub_menu13 {background-position: -437px -82px;}
 .f_wrap>div {
     width: 100%;
     max-width: 1000px;
-    padding: 0 1% ;
     margin: 0 auto;
 }
 .footer_top{
@@ -512,6 +515,7 @@ i.sub_menu13 {background-position: -437px -82px;}
     -webkit-flex-direction: column;
     padding: 1% 0;
     font-style: normal;
+    padding: 0 1% ;
 }
 .footer_bottom>p,
 .footer_bottom>p>em{

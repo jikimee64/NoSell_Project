@@ -1,0 +1,14 @@
+@charset "utf-8";
+
+header #header_a {-webkit-justify-content:flex-start; justify-content: flex-start;}
+header #header_a h1{margin: 0 5% 0 2%;}
+header #header_a .search{margin: 0 0 0 10%;}
+header .top_gnb{display: none;}
+header .top_gnb_after{
+    display: block;
+}
+
+@media (max-width:510px){
+header #header_a>.search{margin: 0 auto; }
+}
+
