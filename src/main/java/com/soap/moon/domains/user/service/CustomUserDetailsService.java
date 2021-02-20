@@ -1,6 +1,5 @@
 package com.soap.moon.domains.user.service;
 
-import com.soap.moon.domains.user.domain.Account;
 import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.exception.MemberStatusInActiveException;

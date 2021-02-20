@@ -2,6 +2,7 @@ package com.soap.moon.domains.user.dto;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
+import java.time.LocalDateTime;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
@@ -19,6 +20,7 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class SignInReq {
+
         @ApiModelProperty(value = "아이디", notes = "userId", example = "test@test.com", required = true)
         @NotBlank(message = "아이디는 필수 입력 값입니다.")
         @Email(message = "아이디 형식에 맞지 않습니다.")
@@ -41,23 +43,6 @@ public class UserDto {
         public String nickName;
     }
 
-    @ApiModel("로그인 요청값 POST")
-    @Data
-    @Builder
-    @AllArgsConstructor
-    @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class LoginReq {
-
-        @ApiModelProperty(value = "아이디", notes = "userId", example = "test@test.com", required = true)
-        @NotBlank(message = "아이디는 필수 입력 값입니다.")
-        @Email
-        public String userId;
-
-        @ApiModelProperty(value = "패스워드", notes = "password", example = "password", required = true)
-        @NotBlank(message = "패스워드는 필수 입력 값입니다.")
-        @Size(min = 3, max = 50)
-        public String password;
-    }
 
     @ApiModel("회원 단건 조회 GET")
     @Data
@@ -72,5 +57,6 @@ public class UserDto {
 
         public String name;
     }
+
 
 }

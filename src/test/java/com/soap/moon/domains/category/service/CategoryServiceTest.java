@@ -2,7 +2,6 @@ package com.soap.moon.domains.category.service;
 
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.BDDMockito.given;
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -10,14 +9,11 @@ import com.soap.moon.domains.category.domain.Category;
 import com.soap.moon.domains.category.dto.CategoryDto;
 import com.soap.moon.domains.category.repository.CategoryRepository;
 import java.util.List;
-import java.util.Map;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.Mock;
 import org.mockito.junit.jupiter.MockitoExtension;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.util.ReflectionTestUtils;
 
 @ExtendWith(MockitoExtension.class)
@@ -26,21 +22,21 @@ class CategoryServiceTest {
     @Mock
     private CategoryRepository categoryRepository;
 
-    @Test
-    @DisplayName("카테고리 조회")
-    void categoryOneDepthSelect() {
-
-        given(categoryRepository.findAll()).willReturn(getStubCatogories());
-        CategoryService categoryService = new CategoryService(categoryRepository);
-
-        CategoryDto categoryRoot = categoryService.categoryRoot();
-
-        System.out.println(categoryRoot);
-
-        assertThat(categoryRoot.getSubCategories().size()).isEqualTo(2);
-        assertThat(categoryRoot.getSubCategories().get(0).getSubCategories().size()).isEqualTo(2);
-        assertThat(categoryRoot.getSubCategories().get(1).getSubCategories().size()).isEqualTo(2);
-    }
+//    @Test
+//    @DisplayName("카테고리 조회")
+//    void categoryOneDepthSelect() {
+//
+//        given(categoryRepository.findAll()).willReturn(getStubCatogories());
+//        CategoryService categoryService = new CategoryService(categoryRepository);
+//
+//        CategoryDto categoryRoot = categoryService.categoryRoot();
+//
+//        System.out.println(categoryRoot);
+//
+//        assertThat(categoryRoot.getSubCategories().size()).isEqualTo(2);
+//        assertThat(categoryRoot.getSubCategories().get(0).getSubCategories().size()).isEqualTo(2);
+//        assertThat(categoryRoot.getSubCategories().get(1).getSubCategories().size()).isEqualTo(2);
+//    }
 
     /**
      * ReflectionTestUtils : https://www.baeldung.com/spring-reflection-test-utils

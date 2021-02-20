@@ -1,7 +1,7 @@
 spring:
-#  redis:
-#    host: localhost
-#    port: 6379
+  redis:
+    host: localhost
+    port: 6379
 #  cloud:
 #    gcp:
 #      storage:
@@ -50,13 +50,16 @@ spring:
     username: sa
     password:
     driver-class-name: org.h2.Driver
+    platform: h2
+    initialization-mode: always
+    #platform: mysql (data-${platform}.sql)
 
   jpa:
     hibernate:
       ddl-auto: create-drop
     properties:
       hibernate:
-        # show_sql: true
+        show_sql: true
         format_sql: true
         default_batch_fetch_size: 1000
     open-in-view: false

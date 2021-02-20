@@ -26,8 +26,9 @@ public class GlobalExceptionController {
         ex.printStackTrace();
         return new ResponseEntity<>(
             CommonResponse.builder()
-                .code(ErrorCode.EMAIL_DUPLICATION.getCode())
-                .message("알수없는 에러입니다.").build(),
+                .code("RunTime")
+                .message("알수없는 런타임 에러입니다.")
+                .data("none").build(),
             HttpStatus.BAD_REQUEST);
     }
 
@@ -37,7 +38,8 @@ public class GlobalExceptionController {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.EMAIL_DUPLICATION.getCode())
-                .message(ex.getMessage()).build(),
+                .message(ex.getMessage())
+                .data(ErrorCode.EMAIL_DUPLICATION.getStatus()).build(),
             HttpStatus.BAD_REQUEST);
     }
 
@@ -49,7 +51,8 @@ public class GlobalExceptionController {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.MEMBER_DUPLICATION.getCode())
-                .message(ex.getMessage()).build(),
+                .message(ex.getMessage())
+                .data(ErrorCode.MEMBER_DUPLICATION.getStatus()).build(),
             HttpStatus.FORBIDDEN);
     }
 
@@ -61,22 +64,9 @@ public class GlobalExceptionController {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code(ErrorCode.MEMBER_NOT_FOUND.getCode())
-                .message(ex.getMessage()).build(),
-            HttpStatus.FORBIDDEN);
-    }
-
-    @ExceptionHandler(value = CustomJwtRuntimeException.class)
-    public ResponseEntity<?> customJwtRuntimeException(CustomJwtRuntimeException ex) {
-
-        log.info("========== customJwtRuntimeException ==========", ex);
-
-        return new ResponseEntity<>(
-            CommonResponse.builder()
-                .code(ErrorCode.INVALID_JWT_TOKEN.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.INVALID_JWT_TOKEN.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
+                .data(ErrorCode.MEMBER_NOT_FOUND.getStatus()).build(),
+            HttpStatus.FORBIDDEN);
     }
 
     @ExceptionHandler(value = CustomAuthenticationException.class)

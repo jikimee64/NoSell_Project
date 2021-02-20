@@ -10,7 +10,6 @@ import com.soap.moon.domains.user.domain.UserOauth;
 import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.dto.AuthDto;
 import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes;
-import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes.Response;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserOauthRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
@@ -18,7 +17,9 @@ import com.soap.moon.domains.user.service.social.SocialOauth;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -58,7 +59,7 @@ public class OauthService {
         }
     }
 
-    public String requestAccessToken(SocialLoginType socialLoginType, String code, String state) {
+    public Map<String, Object> requestAccessToken(SocialLoginType socialLoginType, String code, String state) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
         //state 인자는 naver에서만 필요..(리펙토링 절실)
         AuthDto.TokenRes tokenRes = socialOauth.requestAccessToken(code, state);
@@ -123,6 +124,8 @@ public class OauthService {
             return signUser;
         });
 
+        Map<String, Object> map = new HashMap<>();
+
         //아이디와 패스워드를 조합해서 인스턴스 생성
         UsernamePasswordAuthenticationToken authenticationToken =
             new UsernamePasswordAuthenticationToken(user.getAccount().getEmail(), SocialLoginType.GOOGLE.getName());
@@ -135,7 +138,12 @@ public class OauthService {
         //로그인 성공하면 인증 객체 생성 및 스프링 시큐리티 설정
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        return jwtTokenProvider.createToken(authentication);
+        map.put("access_token", jwtTokenProvider.createToken(authentication));
+
+        Optional<User> byAccount = userRepository.findByAccount(account);
+        map.put("id", byAccount.get().getId());
+
+        return map;
     }
 
 

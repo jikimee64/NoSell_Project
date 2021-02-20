@@ -49,16 +49,17 @@ public class UserService {
             .password(password)
             .nickName(dto.getNickName())
             .phoneNum(dto.getPhoneNum())
+            .profileImage("https://user-images.githubusercontent.com/52563841/108304539-9a01e200-71eb-11eb-94a7-01ead35e186e.png")
             .status(UserStatus.ACTIVE)
             .lastLoginAt(LocalDateTime.now())
             .build();
 
-        UserAuthority userAuthority = UserAuthority.builder()
+        UserAuthority userAuthorityEntity = UserAuthority.builder()
             .user(user)
             .authority(authorityRoleUser.get())
             .build();
 
-        user.addAuthority(userAuthority);
+        user.addAuthority(userAuthorityEntity);
         return userRepository.save(user);
     }
 
@@ -72,12 +73,10 @@ public class UserService {
         });
     }
 
-    @Transactional(readOnly = true)
     public Optional<User> getUserWithAuthorities(String userId) {
         return userRepository.findOneWithAuthoritiesByAccount(userId);
     }
 
-    @Transactional(readOnly = true)
     public Optional<User> getMyUserWithAuthorities() {
         return SecurityUtil.getCurrentUsername()
             .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(s));
