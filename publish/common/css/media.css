@@ -60,7 +60,6 @@
     /* 카테고리 메뉴 .gnb */
     .gnb{
         position: fixed;
-        /* height: auto; */
         top: auto; bottom: 0;
     }
     .sub{padding: 3% 0 15% 0;}
@@ -80,10 +79,7 @@
     }
 
     /* 카테고리 메뉴 .gnb */
-    .sub{
-        /* grid-template-columns: repeat(5,1fr); */
-        padding: 5% 30% 5% 0;
-    }
+    .sub{padding: 5% 30% 5% 0;}
     .sub li{flex: 0 1 20%;}
 
     .sub_bottom{
@@ -108,7 +104,7 @@
         display: block;
         line-height: 3rem;
         font-size: .8rem;
-}
+    }
 
 
 }

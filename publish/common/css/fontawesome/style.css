@@ -1,0 +1,65 @@
+@charset "utf-8";
+
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url("./font/GmarketSansMedium.otf") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'GmarketSansBold';
+    src: url("./font/GmarketSansBold.otf") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'IBMPlexSansKR-Bold';
+    src: url("./font/IBMPlexSansKR-SemiBold.ttf") format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+/* G마켓산스M/메인 */
+h1{
+    font-family: 'GmarketSansMedium';
+}
+/* G마켓산스B */
+h2{
+    font-family: 'GmarketSansBold';
+}
+/* IBMP_B/서브 */
+h3{
+    font-family: 'IBMPlexSansKR-Bold';
+}
+
+
+
+.fa,.fas,.far,.fal,.fab {-moz-osx-font-smoothing:grayscale;-webkit-font-smoothing:antialiased;display:inline-block;font-style:normal;font-variant:normal;text-rendering:auto;line-height:1}
+
+.fa-user-circle:before {content:"\f2bd"}
+.fa-bell:before {content:"\f0f3"}
+.fa-search:before {content:"\f002"}
+.fa-question-circle:before {content:"\f059"}
+.fa-discord:before {content:"\f392"}
+.fa-discourse:before {content:"\f393"}
+.fa-eye:before {content:"\f06e"}
+.fa-thumbs-up:before {content:"\f164"}
+.fa-thumbs-down:before {content:"\f165"}
+.fa-comments:before {content:"\f086"}
+.fa-bars:before {content:"\f0c9"}
+.fa-comments:before {content:"\f086"}
+.fa-sign-in-alt:before {content:"\f2f6"}
+.fa-deaf:before {content:"\f2a4"}
+.fa-camera:before {content: "\f030"; } 
+.fa-camera-retro:before {content: "\f083"; }
+.fa-stopwatch:before {content: "\f2f2"; }
+.fa-arrow-alt-circle-up:before {content: "\f35b"; }
+.fa-chevron-down:before {content: "\f078"; }
+
+.sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}@font-face{font-family:'Font Awesome 5 Brands';font-style:normal;font-weight:normal;src:url("webfonts/fa-brands-400.eot");src:url("webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"),url("webfonts/fa-brands-400.woff2") format("woff2"),url("webfonts/fa-brands-400.woff") format("woff"),url("webfonts/fa-brands-400.ttf") format("truetype"),url("webfonts/fa-brands-400.svg#fontawesome") format("svg")}
+.fab {font-family:'Font Awesome 5 Brands'}
+@font-face {font-family:'Font Awesome 5 Free';font-style:normal;font-weight:400;src:url("webfonts/fa-regular-400.eot");src:url("webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"),url("webfonts/fa-regular-400.woff2") format("woff2"),url("webfonts/fa-regular-400.woff") format("woff"),url("webfonts/fa-regular-400.ttf") format("truetype"),url("webfonts/fa-regular-400.svg#fontawesome") format("svg")}
+.far {font-family:'Font Awesome 5 Free';font-weight:400}
+@font-face {font-family:'Font Awesome 5 Free';font-style:normal;font-weight:900;src:url("webfonts/fa-solid-900.eot");src:url("webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"),url("webfonts/fa-solid-900.woff2") format("woff2"),url("webfonts/fa-solid-900.woff") format("woff"),url("webfonts/fa-solid-900.ttf") format("truetype"),url("webfonts/fa-solid-900.svg#fontawesome") format("svg")}
+.fa,.fas {font-family:'Font Awesome 5 Free';font-weight:900}
