@@ -3,7 +3,7 @@
 
 
 /* 모바일용 */
-@media (max-width:510px) {
+@media (max-width:500px) {
 
     #header_a{justify-content: center; padding:5% 1.5% 0 1.5%;}
     #header_a>h1{width:0; display: none;}
@@ -11,7 +11,7 @@
     .top_gnb{display: none;}
     .wrap{border: none; width: 0; height: 0; padding: 0;}
     #header_b .cate_btn{display: none;}
-    #slider{height: 130px;}
+    #slider{height: 130px; margin: 0;}
     .img_btn{display: none;} 
     .top_btn{display: none;}
     .more_load>a{font-size: .8rem;}
@@ -19,7 +19,7 @@
     .main_row{
         grid-template-columns: repeat(auto-fit, minmax(35%,1fr));
     }
-    .item_box>img{max-width: 150px; max-height: 150px;}
+    .item_box{width: 150px; height: 150px;}
 
     /* 모바일 메뉴바 */
     .m_menubar {
@@ -49,21 +49,22 @@
         width: 25px;
         height: 28px;
         display: inline-block;
-        background-image: url('../img/sprite_5.png');
-        background-repeat: no-repeat;
+        background: url('../img/sprit_7.svg') no-repeat;
+        background-size: 1700% 1700%;
     }
-    i.m_home {background-position: -198px -40px;}
-    i.m_category {background-position: -228px -40px;}
-    i.m_plus {background-position: -257px -40px;}
-    i.m_mymenu {background-position: -297px -40px;}
+    .m_menu>li>a>i.m_home {background-position: -180px -190px;}
+    .m_menu>li>a>i.m_category {background-position: -211px -190px;}
+    .m_menu>li>a>i.m_plus{ background-position: -120px -190px;}
+    .m_menu>li>a>i.m_mymenu {background-position: -244px -190px;}
 
     /* 카테고리 메뉴 .gnb */
     .gnb{
         position: fixed;
-        height: auto;
-        top: 60%; left: 0;
+        /* height: auto; */
+        top: auto; bottom: 0;
     }
-    .sub{grid-template-columns: repeat(5,1fr);     padding: 3% 2% 30% 2%;}
+    .sub{padding: 3% 0 15% 0;}
+    .sub li{flex: 0 1 25%;}
     .sub>li>a {line-height: 1rem; font-size: .7rem;}
     .sub_bottom{display: none;}
     .sub_bottom.on{opacity: 0;  visibility: hidden;}
@@ -80,9 +81,10 @@
 
     /* 카테고리 메뉴 .gnb */
     .sub{
-        grid-template-columns: repeat(5,1fr);
+        /* grid-template-columns: repeat(5,1fr); */
         padding: 5% 30% 5% 0;
     }
+    .sub li{flex: 0 1 20%;}
 
     .sub_bottom{
         height: 100%;

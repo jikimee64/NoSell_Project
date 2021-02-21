@@ -54,17 +54,20 @@ header{
     width: 40%;
     height: 28px;
     border-bottom: 2px solid #969696;
+    display: inline-flex;
 }
 .search_icon{
     width: 30px;
     height: 100%;
-    display: inline-block;
     cursor: pointer;
 }
-.search_icon>i{
-    color: #969696;
+.search_icon>i.search_i{
     display: inline-block;
     width: 100%;
+    height: 25px;
+    background: url('../img/sprit_7.svg') no-repeat;
+    background-size: 1350% 1350%;
+    background-position: -140px -122px;
 }
 .search #top_search{
     width: 80%;
@@ -97,22 +100,15 @@ header{
     width: 30px;
     height: 30px;
     display: block;
-    background: url('../img/sprite_5.png') no-repeat;
+    background: url('../img/sprit_7.svg') no-repeat;
+    background-size: 1400% 1400%;
     border: none;
     margin: 0 auto;
 }
-.top_gnb a>i.login{
-    background-position: -1px -43px;
-   }
-.top_gnb a>i.join{
-    background-position: -34px -43px;
-   }
-.top_gnb a>i.service{
-    background-position: -66px -43px;
-   }
-.top_gnb a:hover{
-    color: #2b2b2b;
-}
+.top_gnb a>i.login{background-position: 2px -163px;}
+.top_gnb a>i.join{background-position: -27px -163px;}
+.top_gnb a>i.service{background-position: -55px -163px;}
+.top_gnb a:hover{color: #2b2b2b;}
 
 
 /* 카테고리 버튼 .top_btn*/
@@ -163,24 +159,23 @@ header{
     width: 100%;
     top:98%; right:0px; 
     z-index: 30;
-    display: none;
+    /* display: none; */
 }
 .sub{
-    display: grid;
-    display: -ms-grid;
-    display: -webkit-grid;
-    grid-template-columns: repeat(13,1fr);
-    -webkit-grid-template-columns: repeat(13,1fr);
-    -ms-grid-template-columns: repeat(13,1fr);
-    justify-content: space-around;
-    -webkit-justify-content: space-around;
-    -ms-justify-content: space-around;
+    display: flex;
+    flex-wrap: wrap;
+    display: -ms-flex;
+    display: -webkit-flex;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    -ms-justify-content: flex-start;
     width: 100%;
     background-color: #f3f3f3;
     padding: 5% 0 9% 0;
 }
 .sub>li{
     width: 100%;
+    flex:  1 1 5%;
 }
 .sub>li>a {
     display: inline-block;
@@ -196,23 +191,23 @@ header{
     margin: 0 auto;
     width: 35px;
     height: 33px;
-    background-image: url('../img/sprite_5.png');
-    background-repeat: no-repeat;
+    background: url('../img/sprit_7.svg') no-repeat;
+    background-size: 1350% 1350%;
 }
 
-i.sub_menu1 {background-position: 0 -81px;}
-i.sub_menu2 {background-position: -37px -82px;}
-i.sub_menu3 {background-position: -72px -82px;}
-i.sub_menu4 {background-position: -109px -82px;}
-i.sub_menu5 {background-position: -148px -82px;}
-i.sub_menu6 {background-position: -186px -82px;}
-i.sub_menu7 {background-position: -219px -82px;}
-i.sub_menu8 {background-position: -255px -82px;}
-i.sub_menu9 {background-position: -288px -82px;}
-.sub>li>a>i.sub_menu10 {width: 48px; background-position: -323px -82px;}
-i.sub_menu11 {background-position: -369px -82px;}
-i.sub_menu12 {background-position: -399px -82px;}
-i.sub_menu13 {background-position: -437px -82px;}
+.sub>li>a>i.sub_menu1 {background-position: 2px -207px;}
+.sub>li>a>i.sub_menu2 {background-position: -35px -207px;}
+.sub>li>a>i.sub_menu3 {background-position: -71px -207px;}
+.sub>li>a>i.sub_menu4 {background-position: -109px -207px;}
+.sub>li>a>i.sub_menu5 {background-position: -144px -207px;}
+.sub>li>a>i.sub_menu6 {background-position: -181px -207px;}
+.sub>li>a>i.sub_menu7 {background-position: -217px -207px;}
+.sub>li>a>i.sub_menu8 {background-position: -250px -207px;}
+.sub>li>a>i.sub_menu9 {background-position: -283px -207px;}
+.sub>li>a>i.sub_menu10 { background-size:1000% 1000%; width:48px;  background-position: -322px -152px;}
+.sub>li>a>i.sub_menu11 {background-position: -363px -207px;}
+.sub>li>a>i.sub_menu12 {background-position: -395px -207px;}
+.sub>li>a>i.sub_menu13 {background-position: -430px -207px;}
 
 .sub_bottom{
     height: 45%;
@@ -350,12 +345,13 @@ i.sub_menu13 {background-position: -437px -82px;}
 }
 .item_box{
     width: 100%;
+    width: 232px;
+    height: 232px;
     position: relative;
 }
 .item_box>img{
     width: 100%;
-    width: 232px;
-    height: 232px;
+    height: 100%;
     object-fit: cover;
     border-radius: 3%;
     border: .5px solid #b6b6b6;
@@ -408,13 +404,13 @@ i.sub_menu13 {background-position: -437px -82px;}
 .bid_time{
     width: 100%;
     position: absolute;
-    top: -40%; left: 0;
+    bottom: 0; left: 0;
     background-color: #4147e1;
     border-radius: 0 0 5px 5px;
     color: #fff;
     opacity: .7;
     font-size: .7rem;
-    padding: 1%;
+    padding: 3%;
 }
 .bid_time>p{
     text-indent: 0;

@@ -8,7 +8,7 @@ $(document).ready(function(){
     });
     $(".gnb").mouseleave(function(){
         $(".gnb").stop().slideUp();
-        $(".cate_btn").css("background-color","transparent");
+        $("#cate_btn").css("background-color","transparent");
     });
     $(".sub li").click(function(){
         $(".sub_bottom").removeClass("on");
