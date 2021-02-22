@@ -6,6 +6,7 @@ import io.jsonwebtoken.io.Decoders;
 import io.jsonwebtoken.security.Keys;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.function.Function;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,17 +31,17 @@ public class JwtTokenProvider implements InitializingBean {
 
     private final String secret;
     private final long tokenValidityInMillisecondsAccess;
-    //private final long tokenValidityInMillisecondsRefresh;
+    private final long tokenValidityInMillisecondsRefresh;
 
     private Key keyAccess;
 
     public JwtTokenProvider(
         @Value("${jwt.secret}") String secret,
         @Value("${jwt.token-validity-in-seconds-access}") long tokenValidityInSecondsAccess,
-        @Value("${jwt.token-validity-in-seconds-access}") long tokenValidityInSecondsRefresh) {
+        @Value("${jwt.token-validity-in-seconds-refresh}") long tokenValidityInSecondsRefresh) {
         this.secret = secret;
         this.tokenValidityInMillisecondsAccess = tokenValidityInSecondsAccess * 1000;
-        //this.tokenValidityInMillisecondsRefresh = tokenValidityInSecondsRefresh * 1000;
+        this.tokenValidityInMillisecondsRefresh = tokenValidityInSecondsRefresh * 1000;
     }
 
     @Override
@@ -49,30 +50,38 @@ public class JwtTokenProvider implements InitializingBean {
         this.keyAccess = Keys.hmacShaKeyFor(keyAccessByte);
     }
 
-    public String createToken(Authentication authentication) {
+    public String doGenerateToken(Authentication authentication) {
         String authorities = authentication.getAuthorities().stream()
             .map(GrantedAuthority::getAuthority)
             .collect(Collectors.joining(","));
 
         long now = (new Date()).getTime();
         Date validityAccess = new Date(now + this.tokenValidityInMillisecondsAccess);
-        //Date validityRefresh = new Date(now + this.tokenValidityInMillisecondsRefresh);
 
-        String tokens = Jwts.builder()
+        return Jwts.builder()
             .setSubject(authentication.getName())
             .claim(AUTHORITIES_KEY, authorities)
             .signWith(keyAccess, SignatureAlgorithm.HS512)
             .setExpiration(validityAccess) //토큰만료시간
             .compact();
 
-//        tokens.put(Token.REFRESH_TOKEN.getName(), Jwts.builder()
-//            .setSubject(authentication.getName())
-//            .claim(AUTHORITIES_KEY, authorities)
-//            .signWith(keyAccess, SignatureAlgorithm.HS512)
-//            .setExpiration(validityRefresh) //토큰만료시간
-//            .compact());
+    }
 
-        return tokens;
+    public String doGenerateRefreshToken(String email) {
+
+        long now = (new Date()).getTime();
+        Date validityRefresh = new Date(now + this.tokenValidityInMillisecondsRefresh);
+
+        return Jwts.builder()
+            .setSubject(email)
+            .signWith(keyAccess, SignatureAlgorithm.HS512)
+            .setExpiration(validityRefresh) //토큰만료시간
+            .compact();
+
+//        return Jwts.builder().setClaims(claims).setSubject(subject).setIssuedAt(new Date(System.currentTimeMillis()))
+//            .setExpiration(new Date(System.currentTimeMillis() + refreshExpirationDateInMs))
+//            .signWith(SignatureAlgorithm.HS512, secret).compact();
+
     }
 
     //토큰값을 통해 사용자 정보 GET
@@ -109,11 +118,32 @@ public class JwtTokenProvider implements InitializingBean {
         }
         return false;
     }
+//    //retrieve expiration date from jwt token
+//    public Date getExpirationDateFromToken(String token) {
+//        return getClaimFromToken(token, Claims::getExpiration);
+//    }
+//
+//    public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+//        final Claims claims = getAllClaimsFromToken(token);
+//        return claimsResolver.apply(claims);
+//    }
+//
+//    //for retrieveing any information from token we will need the secret key
+//    private Claims getAllClaimsFromToken(String token) {
+//        return Jwts.parser().setSigningKey(secret).parseClaimsJws(token).getBody();
+//    }
+//
+//    //check if the token has expired
+//    public Boolean isTokenExpired(String token) {
+//        final Date expiration = getExpirationDateFromToken(token);
+//        return expiration.before(new Date());
+//    }
 
     //토근 검사용
-    public void validateExceptionToken(String token) throws ExpiredJwtException, io.jsonwebtoken.security.SecurityException,
+    public Boolean validateExceptionToken(String token) throws ExpiredJwtException, io.jsonwebtoken.security.SecurityException,
         UnsupportedJwtException, IllegalArgumentException {
         Jwts.parserBuilder().setSigningKey(keyAccess).build().parseClaimsJws(token);
+        return true;
     }
 
 }

@@ -1,12 +1,16 @@
 package com.soap.moon.domains.product.controller;
 
 import com.soap.moon.domains.category.service.CategoryService;
+import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;
 import com.soap.moon.domains.product.service.ProductService;
+import com.soap.moon.domains.user.dto.UserDto.SelectOneRes;
 import com.soap.moon.global.common.CommonResponse;
 import com.soap.moon.global.config.aop.PerformanceTimeRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import io.swagger.annotations.ApiResponse;
+import io.swagger.annotations.ApiResponses;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
@@ -29,6 +33,9 @@ public class ProductController {
     //메인페이지 상품정보
     @ApiOperation(
         httpMethod = "GET", value = "메인 페이지 상품(전체)", notes = "메인페이지 상품정보")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "메인 페이지 상품 전체 조회 성공", response = mainProductRes.class)
+    })
     @PerformanceTimeRecord
     @GetMapping("/{page}/list")
     public ResponseEntity<?> getProductList(
@@ -48,6 +55,9 @@ public class ProductController {
     //메인페이지 상품정보
     @ApiOperation(
         httpMethod = "GET", value = "서브 페이지 카테고리별 상품", notes = "메인페이지 카테고리 클릭 후 그에맞는 상품정보 반환")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "서브 페이지 카테고리별 상품 조회 성공", response = mainProductRes.class)
+    })
     @PerformanceTimeRecord
     @GetMapping("/{page}/list/categories/{categoryId}")
     public ResponseEntity<?> getProductListByCategory(

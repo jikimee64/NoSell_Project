@@ -31,15 +31,36 @@ public class LoginDto {
         public String password;
     }
 
-    @ApiModel("로그인 후 id값, 토큰 값 반환")
+    @ApiModel("로그인 후 id값, 토큰 값(accessToken, refreshToken 반환")
     @Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class LoginRes{
         private String accessToken;
+        private String refreshToken;
         private Long userId;
+    }
 
+    @ApiModel("토큰 refresh 요청시 요청값")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class refreshReq{
+        @ApiModelProperty(value = "accessToken", notes = "accessToken", example = "accessToken", required = true)
+        private String accessToken;
+        @ApiModelProperty(value = "refreshToken", notes = "refreshToken", example = "refreshToken", required = true)
+        private String refreshToken;
+    }
+
+    @ApiModel("토큰 refresh 요청시 반환값")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class refreshRes{
+        private String accessToken;
     }
 
 }

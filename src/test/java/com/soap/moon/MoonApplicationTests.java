@@ -1,13 +1,13 @@
-package com.soap.moon;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-
-@SpringBootTest
-class MoonApplicationTests {
-
-	@Test
-	void contextLoads() {
-	}
-
-}
+//package com.soap.moon;
+//
+//import org.junit.jupiter.api.Test;
+//import org.springframework.boot.test.context.SpringBootTest;
+//
+//@SpringBootTest
+//class MoonApplicationTests {
+//
+//	@Test
+//	void contextLoads() {
+//	}
+//
+//}
