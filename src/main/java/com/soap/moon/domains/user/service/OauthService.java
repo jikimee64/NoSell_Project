@@ -4,6 +4,7 @@ import com.soap.moon.domains.user.domain.Account;
 import com.soap.moon.domains.user.domain.Authority;
 import com.soap.moon.domains.user.domain.Password;
 import com.soap.moon.domains.user.domain.SocialLoginType;
+import com.soap.moon.domains.user.domain.Token;
 import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.domains.user.domain.UserAuthority;
 import com.soap.moon.domains.user.domain.UserOauth;
@@ -46,6 +47,7 @@ public class OauthService {
     private final JwtTokenProvider jwtTokenProvider;
     private final AuthenticationManagerBuilder authenticationManagerBuilder;
     private final PasswordEncoder passwordEncoder;
+    private final CustomUserDetailsService customUserDetailsService;
 
     public void request(SocialLoginType socialLoginType) {
         SocialOauth socialOauth = this.findSocialOauthByType(socialLoginType);
@@ -69,7 +71,6 @@ public class OauthService {
         if("NAVER".equals(socialLoginType.getName())){
             NaverProfileRes naverProfileRes = socialOauth.userInfoNaver(tokenRes);
             email = naverProfileRes.getResponse().getEmail();
-
         }else{
             AuthDto.GoogleProfileRes profileRes = socialOauth.userInfoGoogle(tokenRes);
             email = profileRes.getEmail();
@@ -138,7 +139,8 @@ public class OauthService {
         //로그인 성공하면 인증 객체 생성 및 스프링 시큐리티 설정
         SecurityContextHolder.getContext().setAuthentication(authentication);
 
-        map.put("access_token", jwtTokenProvider.createToken(authentication));
+        map.put(Token.ACCESS_TOKEN.getName(), jwtTokenProvider.doGenerateToken(authentication));
+        map.put(Token.REFRESH_TOKEN.getName(), jwtTokenProvider.doGenerateRefreshToken(user.getAccount().getEmail()));
 
         Optional<User> byAccount = userRepository.findByAccount(account);
         map.put("id", byAccount.get().getId());

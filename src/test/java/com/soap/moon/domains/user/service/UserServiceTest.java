@@ -37,21 +37,19 @@ class UserServiceTest {
     @Test
     @DisplayName("회원가입 중복 검증")
     void Duplicate_Verification() {
-        SignInReq dto = SignInReq.builder()
-            .email("admin@admin.com")
-            .password("password")
-            .phoneNum("01099991111")
-            .nickName("name")
-            .build();
+//        SignInReq dto = SignInReq.builder()
+//            .email("admin@admin.com")
+//            .password("password")
+//            .phoneNum("01099991111")
+//            .nickName("name")
+//            .build();
 
         SignInReq dto2 = SignInReq.builder()
-            .email("admin@admin.com")
+            .email("nosell@nosell.com")
             .password("password")
             .phoneNum("01099991111")
             .nickName("name")
             .build();
-
-        User save = userService.save(dto);
 
         Assertions.assertThrows(MemberDuplicationException.class, () -> {
             userService.save(dto2);

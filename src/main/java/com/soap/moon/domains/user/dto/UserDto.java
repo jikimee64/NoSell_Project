@@ -52,11 +52,17 @@ public class UserDto {
     public static class SelectOneRes {
 
         public Long id;
-
         public String email;
-
         public String name;
     }
 
+    @ApiModel("회원 토큰값 이용한 권한 검사")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class CheckUserAuthRes {
+        public Boolean isAuth;
+    }
 
 }

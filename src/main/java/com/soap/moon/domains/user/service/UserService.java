@@ -7,9 +7,11 @@ import com.soap.moon.domains.user.domain.UserAuthority;
 import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.domain.Password;
 import com.soap.moon.domains.user.dto.UserDto;
+import com.soap.moon.domains.user.dto.UserDto.CheckUserAuthRes;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
+import com.soap.moon.global.jwt.JwtTokenProvider;
 import com.soap.moon.global.util.SecurityUtil;
 import java.time.LocalDateTime;
 import java.util.Optional;
@@ -28,6 +30,7 @@ public class UserService {
     private final UserRepository userRepository;
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtTokenProvider jwtTokenProvider;
 
     /**
      * 회원가입
@@ -73,6 +76,16 @@ public class UserService {
         });
     }
 
+    public UserDto.CheckUserAuthRes checkUserAuth(String token){
+        Boolean flag = null;
+        try{
+            flag = jwtTokenProvider.validateExceptionToken(token);
+        }catch (Exception e){
+            flag = false;
+        }
+        return CheckUserAuthRes.builder().isAuth(flag).build();
+    }
+
     public Optional<User> getUserWithAuthorities(String userId) {
         return userRepository.findOneWithAuthoritiesByAccount(userId);
     }
@@ -85,5 +98,7 @@ public class UserService {
     private Account getAccountByUserId(String userId) {
         return Account.builder().email(userId).build();
     }
+
+
 
 }

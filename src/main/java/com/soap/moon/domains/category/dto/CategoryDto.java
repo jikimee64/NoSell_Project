@@ -1,5 +1,6 @@
 package com.soap.moon.domains.category.dto;
 
+import com.soap.moon.domains.user.dto.query.UserReviewDto.MyPageCommon;
 import io.swagger.annotations.ApiModel;
 import java.util.List;
 import lombok.AccessLevel;
@@ -35,6 +36,15 @@ public class CategoryDto {
     public static class UserLikeCategory{
         private Long categoryId;
         private String name;
+    }
+
+    @Data
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    @Builder
+    public static class getCategoryOfUserRes{
+        private List<UserLikeCategory> categories;
+        private MyPageCommon myPageCommon;
     }
 
 }

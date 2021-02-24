@@ -22,6 +22,7 @@ import javax.persistence.Table;
 import javax.persistence.UniqueConstraint;
 import lombok.AccessLevel;
 import lombok.Builder;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -31,6 +32,7 @@ import lombok.NoArgsConstructor;
 @Table(name = "user", uniqueConstraints = {
     @UniqueConstraint(columnNames = "email")
 })
+@EqualsAndHashCode
 public class User extends BaseTimeEntity implements Serializable {
 
     @Id
