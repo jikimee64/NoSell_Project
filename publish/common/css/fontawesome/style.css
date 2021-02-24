@@ -1,37 +1,32 @@
 @charset "utf-8";
 
+/* G마켓산스M/메인 */
 @font-face {
     font-family: 'GmarketSansMedium';
     src: url("./font/GmarketSansMedium.otf") format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
+/* G마켓산스B */
 @font-face {
     font-family: 'GmarketSansBold';
     src: url("./font/GmarketSansBold.otf") format('woff');
     font-weight: normal;
     font-style: normal;
 }
-
+/* IBMP_B/서브 */
 @font-face {
     font-family: 'IBMPlexSansKR-Bold';
     src: url("./font/IBMPlexSansKR-SemiBold.ttf") format('woff');
     font-weight: normal;
     font-style: normal;
 }
-/* G마켓산스M/메인 */
-h1{
-    font-family: 'GmarketSansMedium';
-}
-/* G마켓산스B */
-h2{
-    font-family: 'GmarketSansBold';
-}
-/* IBMP_B/서브 */
-h3{
-    font-family: 'IBMPlexSansKR-Bold';
-}
+
+
+
+
+
+
 
 
 
@@ -56,6 +51,9 @@ h3{
 .fa-stopwatch:before {content: "\f2f2"; }
 .fa-arrow-alt-circle-up:before {content: "\f35b"; }
 .fa-chevron-down:before {content: "\f078"; }
+.fa-bell:before {content: "\f0f3"; }
+.fa-user-circle:before {content: "\f2bd"; }
+.fa-star:before {content: "\f005"; }
 
 .sr-only{border:0;clip:rect(0,0,0,0);height:1px;margin:-1px;overflow:hidden;padding:0;position:absolute;width:1px}.sr-only-focusable:active,.sr-only-focusable:focus{clip:auto;height:auto;margin:0;overflow:visible;position:static;width:auto}@font-face{font-family:'Font Awesome 5 Brands';font-style:normal;font-weight:normal;src:url("webfonts/fa-brands-400.eot");src:url("webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"),url("webfonts/fa-brands-400.woff2") format("woff2"),url("webfonts/fa-brands-400.woff") format("woff"),url("webfonts/fa-brands-400.ttf") format("truetype"),url("webfonts/fa-brands-400.svg#fontawesome") format("svg")}
 .fab {font-family:'Font Awesome 5 Brands'}

@@ -5,10 +5,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>header</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="./common/css/fontawesome/fontawesome-all.css">
+    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
     <link rel="stylesheet" href="./common/css/reset.css">
-    <link rel="stylesheet" href="./common/css/common.css">
+    <link rel="stylesheet" href="./common/css/header.css">
     <link rel="stylesheet" href="./common/css/fontawesome/style.css">
     <link rel="stylesheet" href="./common/css/media.css">
     <script src="./common/js/custom.js"></script>
@@ -27,10 +27,24 @@
             <li><a href="#service"><i class="service"></i>고객센터</a></li>
         </ul>
         <ul class="top_gnb_after">
-            <li><a href="#"><i></i>알림</a>
-                
+            <li class="notify">
+                <p class="title"><i class="fas fa-bell"></i><span class="count">3</span></p>                
+                <ul>
+                    <li><i class="fas fa-bell"></i>알림소식</li>
+                    <li>게시글에 댓글 +1 <span>15분 전</span></li>
+                    <li>게시글에 댓글 +1 <span>15분 전</span></li>
+                    <li>경매에 낙찰 됐습니다.<span>하루 전</span></li>
+                    <li>모두보기<i class="fas fa-chevron-right"></i></li>
+                </ul>
             </li>
-            <li><a href="#"><i></i>이름</a></li>
+            <li class="user">
+                <p class="title"><i class="fas fa-user-circle"></i>케이트님</p>                
+                <ul>
+                    <li><a href="#">내 별점<i class="star"></i></a></li>
+                    <li><a href="#">kate님의 상점</a></li>
+                    <li><a href="#">로그아웃</a></li>
+                </ul>
+            </li>    
         </ul>
     </article>
     <!-- #header_b 카테고리(.cate_btn/.gnb)/등록(.sell_btn)/ -->

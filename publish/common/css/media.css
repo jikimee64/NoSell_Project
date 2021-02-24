@@ -4,11 +4,11 @@
 
 /* 모바일용 */
 @media (max-width:500px) {
-
+    
     #header_a{justify-content: center; padding:5% 1.5% 0 1.5%;}
     #header_a>h1{width:0; display: none;}
     .search{width: 90%;}
-    .top_gnb{display: none;}
+    .top_gnb, .top_gnb_after{display: none;}
     .wrap{border: none; width: 0; height: 0; padding: 0;}
     #header_b .cate_btn{display: none;}
     #slider{height: 130px; margin: 0;}
@@ -16,10 +16,6 @@
     .top_btn{display: none;}
     .more_load>a{font-size: .8rem;}
     .home>a{font-size: .7rem;}
-    .main_row{
-        grid-template-columns: repeat(auto-fit, minmax(35%,1fr));
-    }
-    .item_box{width: 150px; height: 150px;}
 
     /* 모바일 메뉴바 */
     .m_menubar {
@@ -67,16 +63,21 @@
     .sub>li>a {line-height: 1rem; font-size: .7rem;}
     .sub_bottom{display: none;}
     .sub_bottom.on{opacity: 0;  visibility: hidden;}
+
+    .item {
+        width: 50%;
+    }
 }
 
 
 
 /* 태블릿용 */
-@media(min-width:510px) and (max-width:930px) {
+@media(min-width:500px) and (max-width:930px) {
     .search{width: 50%;}
     .top_gnb>li:last-child{
         display: none;
     }
+    .top_gnb_after>li.notify{display: none;}
 
     /* 카테고리 메뉴 .gnb */
     .sub{padding: 5% 30% 5% 0;}
@@ -104,6 +105,9 @@
         display: block;
         line-height: 3rem;
         font-size: .8rem;
+    }
+    .item {
+        width: 33.33%;
     }
 
 

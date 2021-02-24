@@ -96,3 +96,27 @@ window.addEventListener('load', function() {
         }
     });  
 });
+
+// 로그인 후 유틸메뉴
+$(function(){
+    $(".top_gnb_after li").click(function(){
+        $(this).find("ul").toggleClass("open");
+    });
+});
+
+// 마이페이지
+$(function(){
+    $(".my_tab_list>ul>li").click(function(){
+        var idx = $(this).index();
+        
+        $(".my_tab_list>ul>li").removeClass("on");
+        $(this).addClass("on");
+
+        $(".my_state_list>ul>li").removeClass("on");
+        $(".my_state_list>ul>li").eq(idx).addClass("on");
+
+        $(".my_cont_list>ul>li").removeClass("on");
+        $(".my_cont_list>ul>li").eq(idx).addClass("on");
+    });
+});
+
