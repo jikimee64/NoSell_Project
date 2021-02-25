@@ -13,201 +13,24 @@
     <script src="./common/js/custom.js"></script>
 </head>
 <body>
-    <header data-include-path="header.html"></header>
-    <main>
-        <section class="my_fixed" id="my_fixed" >
-            <div class="breadcrum">
-                <a href="#">HOME</a>
-                <a href="#">나의메뉴</a>
-            </div>
-            <div class="user_info">
-                <div>
-                    <a href="#" class="info_pic"><i class="fas fa-user-circle"></i></a>
-                    <p class="info_name"><span>케이트</span>님의 상점</p>
-                    <a href="#" class="star_rating">
-                        <span class="wrap_star"><span></span></span>
-                        <span class="star_count">02</span>
-                    </a>
-                    <p><span class="info_month">2021년 01월</span> 시작</p>
-                </div>
-                <p>
-                    <a href="#" class="info_btn">내정보설정</a>
-                    <a href="#" class="info_btn">관심 카테고리</a>
-                </p>
-            </div>
-        </section>
-        <section class="mypage_con" id="mypage_con">
+        <div class="breadcrum">
+            <a href="#">HOME</a>
+            <a href="#">나의메뉴</a>
+        </div>
+        <div class="user_info">
             <div>
-                <ul class="contents">
-                    <li class="my_tab_list">
-                        <ul>
-                            <li class="my_tab on">판매상품<span class="tab_num">2</span></li>
-                            <li class="my_tab">구매상품<span class="tab_num">2</span></li>
-                            <li class="my_tab">찜상품<span class="tab_num">0</span></li>
-                            <li class="my_tab">알림<span class="tab_num">0</span></li>
-                        </ul>
-                    </li>
-                    <li class="my_state_list">
-                        <ul>
-                            <li class="my_state on">
-                                <p>전체<span class="all_num">3</span></p>
-                                <select name="sell_state" id="sell_state" class="sell_state">
-                                    <option value="">판매상태</option>
-                                    <option value="selling">판매중</option>
-                                    <option value="selling">경매중</option>
-                                    <option value="soldout">판매.경매완료</option>
-                                </select>
-                            </li>
-                            <li class="my_state">
-                                <p>전체<span class="all_num">3</span></p>
-                                <select name="buy_state" id="buy_state" class="buy_state">
-                                    <option value="">구매상태</option>
-                                    <option value="buying">구매중</option>
-                                    <option value="completed">구매.낙찰완료</option>
-                                </select>
-                            </li>
-                        </ul> 
-                    </li>
-                    <li class="my_cont_list">
-                        <ul>
-                            <li class="con_inner on">
-                                <ul class="user_list">
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test1.jpg" />
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">Nike</h3>
-                                                <p class="item_price">현재가<strong>20,000</strong>원</p>
-                                                <p class="item_price_before">최초가&nbsp;50,000원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/auc_tag.svg" />
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test7.jpg" />
-                                                <img src="./common/img/sold.png" alt="sold">
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">나이키운동화사고싶다고오사줘사줘사줘</h3>
-                                                <p class="item_price">현재가<strong>10,000</strong>원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/del_tag.svg" />
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test8.jpg" />
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">Nike</h3>
-                                                <p class="item_price">현재가<strong>20,000,000,000</strong>원</p>
-                                                <p class="item_price_before">최초가&nbsp;50,000원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/auc_tag.svg" />
-                                                <img src="./common/img/del_tag.svg" />
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="more_load">
-                                    <a href="#">더보기 <i class="fas fa-chevron-down"></i></a>
-                                </div>
-                            </li>
-                            <li class="my_noti">
-                                <ul class="user_list">
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test1.jpg" />
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">Nike</h3>
-                                                <p class="item_price">현재가<strong>20,000</strong>원</p>
-                                                <p class="item_price_before">최초가&nbsp;50,000원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/auc_tag.svg" />
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test7.jpg" />
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">나이키운동화사고싶다고오사줘사줘사줘</h3>
-                                                <p class="item_price">현재가<strong>10,000</strong>원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/del_tag.svg" />
-                                            </div>
-                                        </a>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test8.jpg" />
-                                                <img src="./common/img/clear.png" alt="clear">
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">Nike</h3>
-                                                <p class="item_price">현재가<strong>20,000,000,000</strong>원</p>
-                                                <p class="item_price_before">최초가&nbsp;50,000원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/auc_tag.svg" />
-                                                <img src="./common/img/del_tag.svg" />
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                                <div class="more_load">
-                                    <a href="#">더보기 <i class="fas fa-chevron-down"></i></a>
-                                </div>
-                            </li>
-                            <li class="my_like">
-                                <ul class="user_list">
-                                    <li class="item">
-                                        <a href="#">
-                                            <div class="item_img">
-                                                <img src="./common/img/test8.jpg" />
-                                            </div>
-                                            <div class="cont">
-                                                <h3 class="item_tit">Nike</h3>
-                                                <p class="item_price">현재가<strong>20,000,000,000</strong>원</p>
-                                                <p class="item_price_before">최초가&nbsp;50,000원</p>
-                                            </div>
-                                            <div class="item_tag">
-                                                <img src="./common/img/auc_tag.svg" />
-                                                <img src="./common/img/del_tag.svg" />
-                                                <i class="heart"></i>
-                                            </div>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </li>
-                            <li class="my_like">
-                                <p></p>
-                                <p>알림1</p>
-                                <p>알림1</p>
-                            </li>
-                        </ul>
-                    </li>
-                </ul>
+                <a href="#" class="info_pic"><i class="fas fa-user-circle"></i></a>
+                <p class="info_name"><span>케이트</span>님의 상점</p>
+                <a href="#" class="star_rating">
+                    <span class="wrap_star"><span></span></span>
+                    <span class="star_count">02</span>
+                </a>
+                <p><span class="info_month">2021년 01월</span> 시작</p>
             </div>
-        </section>       
-    </main>
-    <footer class="footer" data-include-path="footer.html"></footer>
+            <p>
+                <a href="#" class="info_btn">내정보설정</a>
+                <a href="./category_option.html" class="info_btn">관심 카테고리</a>
+            </p>
+        </div>
 </body>
 </html>

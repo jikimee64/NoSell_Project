@@ -63,17 +63,3 @@
     display: inline;
     line-height: 1rem;
 }
-/* 상단으로 아이콘 */
-.home{
-    position: relative;
-    width: 40px;
-    bottom: 0; left: 85%;
-}
-.home>a,
-.home>a>i{
-    font-size: 1rem;
-    display: block;
-    text-align: center;
-    color: #6f6e6e;
-    padding: 5px 0;
-}

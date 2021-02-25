@@ -1,0 +1,100 @@
+.main {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+ul.list {
+    width: 100%;
+    min-height: 600px;
+    margin: 0 auto;
+    display:flex;   
+    flex-direction:row;
+    flex-wrap:wrap;
+    position: relative;
+    overflow: hidden;
+}
+
+.item {
+    width: 25%;
+    height: auto;
+    display:flex;
+    position:relative;
+    cursor: pointer;
+    padding: .5%;
+
+}
+
+.item_img {
+    width: 100%;
+    padding-top: 100%;
+    margin-bottom: 70px;
+    height: calc(100% - 70px);
+    position:relative;  
+}
+
+.item_img > img {
+    position: absolute;
+    bottom: 0; left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+
+.item_img > p.bid_time{
+    width: 100%;
+    position: absolute;
+    bottom: 0; left: 0;
+    background-color: #4147e1;
+    border-radius: 0 0 5px 5px;
+    color: #fff;
+    opacity: .7;
+    margin: 0 auto;
+    padding: 2% 0;
+    font-size: .8rem;
+    font-family: 'IBMPlexSansKR-Bold';  
+}
+.item_img > p.bid_time i{
+    display: inline-block;
+    padding: 0 2%;
+}
+
+.cont{
+    position: absolute;
+    bottom: 0; 
+    width: 100%;
+    padding: .5%;
+    height: 70px;
+}
+.item_tit,
+.item_price {
+    vertical-align: baseline;
+    font-size: 1rem;
+    line-height: 1.4rem;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+}
+.cont .item_price{
+    font-size: 1.2rem;
+    font-weight: normal;
+}
+.cont .item_price strong{
+    padding: 0 0 0 1%;
+}
+
+
+.item_tag {
+    position:absolute;
+    top:5px;
+    left:5px;
+    margin:5px 0px 0px 5px;
+}
+
+.item_tag > img {
+    width: 5%;
+    min-width: 40px;
+    height: auto;
+}
+

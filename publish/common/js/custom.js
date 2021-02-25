@@ -1,3 +1,11 @@
+
+// 로그인 후 유틸메뉴
+$(document).ready(function(){
+    $(".top_gnb_after li").click(function(){
+        $(this).find("ul").toggleClass("open");
+    });
+});
+
 // 카테고리 클릭 시 드롭다운 영역
 $(document).ready(function(){
     $(".gnb").hide();
@@ -53,6 +61,14 @@ $(document).ready(function(){
         numAni(btnNum);
         intv = setInterval(function(){  nextAni(); }, 2950);
     });
+    
+// 상단으로 이동영역
+    $('a[href=#top]').click(function () {
+        $('body,html').animate({
+            scrollTop: 0
+        }, 600);
+        return false;
+    });
 
 
 // 더보기 로딩영역
@@ -69,43 +85,11 @@ $(document).ready(function(){
     //         }, 1500);
     //     });
     // });
-
-// 상단으로 이동영역
-    $('a[href=#top]').click(function () {
-        $('body,html').animate({
-            scrollTop: 0
-        }, 600);
-        return false;
-    });
 });
 
-// include
-window.addEventListener('load', function() {
-    var allElements = document.getElementsByTagName('*');
-    Array.prototype.forEach.call(allElements, function(el) {
-        var includePath = el.dataset.includePath;
-        if (includePath) {
-            var xhttp = new XMLHttpRequest();
-            xhttp.onreadystatechange = function () {
-                if (this.readyState == 4 && this.status == 200) {
-                    el.innerHTML = this.responseText;
-                }
-            };
-            xhttp.open('GET', includePath, true);
-            xhttp.send();
-        }
-    });  
-});
-
-// 로그인 후 유틸메뉴
-$(function(){
-    $(".top_gnb_after li").click(function(){
-        $(this).find("ul").toggleClass("open");
-    });
-});
 
 // 마이페이지
-$(function(){
+$(document).ready(function(){
     $(".my_tab_list>ul>li").click(function(){
         var idx = $(this).index();
         

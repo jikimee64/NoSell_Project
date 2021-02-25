@@ -154,6 +154,7 @@ main .my_fixed>div{
 }
 .my_tab_list .my_tab.on{
     text-decoration: underline;
+    text-underline-position: under;
     color: #4147e1;
 }
 
