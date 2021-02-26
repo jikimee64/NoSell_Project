@@ -1,18 +1,14 @@
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-import "./css/App.css";
-import MainPage from "./page/MainPage";
-import LoginPage from "./components/Auth/LoginPage";
-
-window.Kakao.init("ec5392ab51ef7b87b646b920cfa55d66");
-console.log(window.Kakao.isInitialized());
+import { BrowserRouter as Router, Route } from "react-router-dom";
+import LoginPage from "./pages/LoginPage";
+import MainPage from "./pages/MainPage";
+import RegisterPage from "./pages/RegisterPage";
 
 function App() {
   return (
     <Router>
-      <Switch>
-        <Route exact path="/" component={MainPage} />
-        <Route exact path="/signin" component={LoginPage} />
-      </Switch>
+      <Route exact path="/" component={MainPage} />
+      <Route exact path="/login" component={LoginPage} />
+      <Route exact path="/register" component={RegisterPage} />
     </Router>
   );
 }

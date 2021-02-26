@@ -1,0 +1,74 @@
+@charset "utf-8";
+
+/* 푸터 */
+.footer {
+    width: 100%;
+    margin-top: 30px;
+}
+
+.f_wrap {
+    width: 100%;
+    height: 40px;
+    border: 1px solid #b6b6b6;
+    color: #6f6e6e;
+    border-left: none;
+    border-right: none;
+}
+
+.f_wrap>div {
+    width: 100%;
+    max-width: 1000px;
+    margin: 0 auto;
+}
+
+.footer_top {
+    height: 40px;
+    display: -webkit-flex;
+    display: flex;
+    justify-content: flex-start;
+    -webkit-justify-content: flex-start;
+    align-items: center;
+    -webkit-align-items: center;
+}
+
+.footer_top li {
+    width: 35%;
+    height: 100%;
+}
+
+.footer_top li>a {
+    display: inline-block;
+    width: 100%;
+    height: 95%;
+    border-left: 1px solid #b6b6b6;
+    border-right: 1px solid #b6b6b6;
+    text-align: center;
+    line-height: 2.5rem;
+    color: #6f6e6e;
+    font-size: .8rem;
+    word-break: keep-all;
+
+}
+
+.footer_bottom {
+    width: 100%;
+    display: -webkit-flex;
+    display: flex;
+    flex-direction: column;
+    -webkit-flex-direction: column;
+    padding: 1% 0;
+    font-style: normal;
+    padding: 0 1%;
+}
+
+.footer_bottom>p,
+.footer_bottom>p>em {
+    font-family: 'IBMPlexSansKR-Bold';
+    font-size: .7rem;
+    word-break: keep-all;
+}
+
+.footer_bottom>p:first-child {
+    display: inline;
+    line-height: 1rem;
+}
