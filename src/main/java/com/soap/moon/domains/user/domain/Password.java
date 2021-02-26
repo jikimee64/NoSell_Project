@@ -19,13 +19,13 @@ public class Password {
     @Column(name = "password")
     private String password;
 
-    @Column(name = "login_fail_count")
-    @ColumnDefault("0")
-    private int loginFailCount;
-
-    @Column(name = "password_updated_at")
-    @LastModifiedDate //??
-    private LocalDateTime passwordUpdatedAt;
+//    @Column(name = "login_fail_count")
+//    @ColumnDefault("0")
+//    private int loginFailCount;
+//
+//    @Column(name = "password_updated_at")
+//    @LastModifiedDate //??
+//    private LocalDateTime passwordUpdatedAt;
 
     @Builder //비밀번호 암호화 추가
     public Password(final String password){

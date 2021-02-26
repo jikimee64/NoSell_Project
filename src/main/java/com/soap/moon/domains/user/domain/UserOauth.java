@@ -29,20 +29,25 @@ public class UserOauth extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "provider")
+    @Column(name = "provider_type")
     @Enumerated(EnumType.STRING)
-    private SocialLoginType socialLoginType;
+    private ProviderType providerType;
+
+    @Column(name = "provider_id")
+    private String providerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="user_id")
     public User user;
 
     @Builder
-    public UserOauth(User user, SocialLoginType socialLoginType) {
-        Assert.notNull(socialLoginType, "socialLoginType must not be null");
+    public UserOauth(ProviderType providerType, String providerId, User user) {
+        Assert.notNull(providerType, "socialLoginType must not be null");
+        Assert.notNull(providerId, "providerId must not be null");
         Assert.notNull(user, "user must not be null");
 
-        this.socialLoginType = socialLoginType;
+        this.providerType = providerType;
+        this.providerId = providerId;
         this.user = user;
     }
 

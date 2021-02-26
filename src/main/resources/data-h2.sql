@@ -10,9 +10,9 @@ values (CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'ROLE_ADMIN');
 INSERT INTO USER
 VALUES
 (
-    1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'nosell@nosell.com', CURRENT_TIMESTAMP(), 'nosell_닉네임', 0,
+    1, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'nosell@nosell.com', 'nosell_닉네임',
     '$2a$10$ns9gjAMzHcBYVsLg9kHKE.QRs/EtY7L8jFfQsAD9F5Rvvt/jy0MUi',
-    CURRENT_TIMESTAMP(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
+    '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
 
 INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
@@ -24,9 +24,9 @@ VALUES
 INSERT INTO USER
 VALUES
 (
-    2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'test@test.com', CURRENT_TIMESTAMP(), 'test_닉네임', 0,
+    2, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'test@test.com', 'test_닉네임',
     '$2a$10$e5Wo93q1kSzWD6ehhvOGLubVwYh9dvibacjrrgMl9t65CtBaR8rPG',
-    CURRENT_TIMESTAMP(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
+     '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
 
 INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)
@@ -38,9 +38,9 @@ VALUES
 INSERT INTO USER
 VALUES
 (
-    3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'kate@kate.com', CURRENT_TIMESTAMP(), 'kate_닉네임', 0,
+    3, CURRENT_TIMESTAMP(), CURRENT_TIMESTAMP(), 'kate@kate.com', 'kate_닉네임',
     '$2a$10$oXSC643DxsSawrmoD9115e4RryUnW4kPMqsp1EMKF1Qx8W4qQhIi2',
-    CURRENT_TIMESTAMP(), '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
+    '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
 
 INSERT INTO USER_AUTHORITY (CREATED_AT, UPDATED_AT, AUTHORITY_ID, USER_ID)

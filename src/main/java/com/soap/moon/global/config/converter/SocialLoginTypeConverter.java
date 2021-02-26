@@ -1,13 +1,13 @@
 package com.soap.moon.global.config.converter;
 
-import com.soap.moon.domains.user.domain.SocialLoginType;
+import com.soap.moon.domains.user.domain.ProviderType;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.convert.converter.Converter;
 
 @Configuration
-public class SocialLoginTypeConverter implements Converter<String, SocialLoginType> {
+public class SocialLoginTypeConverter implements Converter<String, ProviderType> {
     @Override
-    public SocialLoginType convert(String s) {
-        return SocialLoginType.valueOf(s.toUpperCase());
+    public ProviderType convert(String s) {
+        return ProviderType.valueOf(s.toUpperCase());
     }
 }

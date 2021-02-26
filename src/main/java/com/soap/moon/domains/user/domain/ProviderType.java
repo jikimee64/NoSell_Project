@@ -3,13 +3,13 @@ package com.soap.moon.domains.user.domain;
 import lombok.Getter;
 
 @Getter
-public enum SocialLoginType {
+public enum ProviderType {
     GOOGLE("GOOGLE"),
     NAVER("NAVER");
 
     String name;
 
-    SocialLoginType(String name) {
+    ProviderType(String name) {
         this.name = name;
     }
 }

@@ -2,7 +2,7 @@ package com.soap.moon.domains.user.service.social;
 
 import com.soap.moon.domains.user.dto.AuthDto;
 
-import com.soap.moon.domains.user.domain.SocialLoginType;
+import com.soap.moon.domains.user.domain.ProviderType;
 import com.soap.moon.domains.user.dto.AuthDto.TokenRes;
 
 public interface SocialOauth {
@@ -30,11 +30,11 @@ public interface SocialOauth {
         return null;
     }
 
-    default SocialLoginType type() {
+    default ProviderType type() {
         if (this instanceof GoogleOauth) {
-            return SocialLoginType.GOOGLE;
+            return ProviderType.GOOGLE;
         } else if (this instanceof NaverOauth) {
-            return SocialLoginType.NAVER;
+            return ProviderType.NAVER;
         } else {
             return null;
         }

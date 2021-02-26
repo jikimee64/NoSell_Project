@@ -59,9 +59,6 @@ public class User extends BaseTimeEntity implements Serializable {
     @Column(name = "status")
     private UserStatus status;
 
-    @Column(name = "last_login_at")
-    private LocalDateTime lastLoginAt;
-
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserAuthority> authorities = new HashSet<>();
 
@@ -74,14 +71,13 @@ public class User extends BaseTimeEntity implements Serializable {
     @Builder
     public User(Account account, Password password, String nickName, String phoneNum,
         String profileImage,
-        UserStatus status, LocalDateTime lastLoginAt) {
+        UserStatus status) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(password, "password must not be null");
         Assert.notNull(phoneNum, "phoneNum must not be null");
         Assert.notNull(nickName, "nickName must not be null");
         Assert.notNull(profileImage, "profileImage must not be null");
         Assert.notNull(status, "status must not be null");
-        Assert.notNull(lastLoginAt, "lastLoginAt must not be null");
 
         this.account = account;
         this.password = password;
@@ -89,39 +85,11 @@ public class User extends BaseTimeEntity implements Serializable {
         this.nickName = nickName;
         this.profileImage = profileImage;
         this.status = status;
-        this.lastLoginAt = lastLoginAt;
     }
 
     public void addAuthority(UserAuthority userAuthority) {
         authorities.add(userAuthority);
         userAuthority.setUser(this);
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (o == null || getClass() != o.getClass()) {
-            return false;
-        }
-        User user = (User) o;
-        return Objects.equals(getId(), user.getId()) && Objects
-            .equals(getAccount(), user.getAccount()) && Objects
-            .equals(getPassword(), user.getPassword()) && Objects
-            .equals(getPhoneNum(), user.getPhoneNum()) && Objects
-            .equals(getNickName(), user.getNickName()) && Objects
-            .equals(getProfileImage(), user.getProfileImage()) && getStatus() == user.getStatus()
-            && Objects.equals(getLastLoginAt(), user.getLastLoginAt()) && Objects
-            .equals(getAuthorities(), user.getAuthorities());
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects
-            .hash(getId(), getAccount(), getPassword(), getPhoneNum(), getNickName(),
-                getProfileImage(),
-                getStatus(), getLastLoginAt(), getAuthorities());
     }
 
 }
