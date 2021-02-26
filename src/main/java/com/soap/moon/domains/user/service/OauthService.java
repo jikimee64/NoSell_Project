@@ -11,13 +11,13 @@ import com.soap.moon.domains.user.domain.UserOauth;
 import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.dto.AuthDto;
 import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes;
+import com.soap.moon.domains.user.exception.MemberDuplicationException;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserOauthRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
 import com.soap.moon.domains.user.service.social.SocialOauth;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import java.io.IOException;
-import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +31,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 @Slf4j
 @Service
@@ -86,54 +87,81 @@ public class OauthService {
         Optional<Authority> authorityRoleUser = authorityRepository.findById(1L);
 
         String finalProviderId = providerId;
-        //비 가입자면 DB저장,
-        User user = userRepository.findByAccount(account).orElseGet(() -> {
-            log.info("구글/네이버 정보 새로 DB 저장");
-            Password password = null;
 
-            if ("NAVER".equals(providerType.getName())) {
-                password = Password.builder()
-                    .password(passwordEncoder.encode(ProviderType.NAVER.getName()))
+        User user = userRepository.findByAccount(account).orElseGet(
+            () -> {
+                log.info("구글/네이버 정보 새로 DB 저장");
+                Password password = null;
+
+                if ("NAVER".equals(providerType.getName())) {
+                    password = Password.builder()
+                        .password(passwordEncoder.encode(ProviderType.NAVER.getName()))
+                        .build();
+                } else {
+                    password = Password.builder()
+                        .password(passwordEncoder.encode(ProviderType.GOOGLE.getName()))
+                        .build();
+                }
+
+                User signUser = User.builder()
+                    .account(account)
+                    .password(password)
+                    .nickName("")
+                    .phoneNum("")
+                    .status(UserStatus.ACTIVE)
+                    .profileImage("")
                     .build();
-            } else {
-                password = Password.builder()
-                    .password(passwordEncoder.encode(ProviderType.GOOGLE.getName()))
-                    .build();
-            }
 
-            User signUser = User.builder()
-                .account(account)
-                .password(password)
-                .nickName("")
-                .phoneNum("")
-                .status(UserStatus.ACTIVE)
-                .profileImage("")
-                .build();
-
-            UserAuthority userAuthority = UserAuthority.builder()
-                .authority(authorityRoleUser.get())
-                .user(signUser)
-                .build();
-
-            signUser.addAuthority(userAuthority);
-
-            userRepository.save(
-                signUser
-            );
-
-            userOauthRepository.save(
-                UserOauth.builder()
+                UserAuthority userAuthority = UserAuthority.builder()
+                    .authority(authorityRoleUser.get())
                     .user(signUser)
-                    .providerType(providerType)
-                    .providerId(finalProviderId)
-                    .build()
-            );
-            return signUser;
-        });
+                    .build();
+
+                signUser.addAuthority(userAuthority);
+
+                userRepository.save(
+                    signUser
+                );
+
+                userOauthRepository.save(
+                    UserOauth.builder()
+                        .user(signUser)
+                        .providerType(providerType)
+                        .providerId(finalProviderId)
+                        .build()
+                );
+                return signUser;
+            }
+        );
+
+//        if (!userRepository.findByAccount(account).isPresent()) {
+//        }
+
+        //기존에 소셜 계정을 통해 가입했다면
+//        userOauthRepository.findByUser(user).ifPresent(ofm -> {
+//            log.info("ofm : " + ofm);
+//            if (ProviderType.GOOGLE.getName().equals(ofm.getProviderType())) {
+//                throw new SocialMemberDuplicationException(ProviderType.GOOGLE.getName());
+//            } else if (ProviderType.NAVER.getName().equals(ofm.getProviderType())) {
+//                throw new SocialMemberDuplicationException(ProviderType.NAVER.getName());
+//            }
+//        });
+
+        userOauthRepository.findByUser(user).ifPresentOrElse(
+            ofm -> {
+                if (ProviderType.GOOGLE.getName().equals(ofm.getProviderType())) {
+                    throw new MemberDuplicationException(ProviderType.GOOGLE.getName());
+                } else if (ProviderType.NAVER.getName().equals(ofm.getProviderType())) {
+                    throw new MemberDuplicationException(ProviderType.NAVER.getName());
+                }
+            },
+            () -> {
+                if(!StringUtils.isEmpty(user))
+                    throw new MemberDuplicationException("자체");
+            }
+        );
 
         Map<String, Object> map = new HashMap<>();
-
-        log.info("providerType.getName() : " + providerType.getName());
 
         //아이디와 패스워드를 조합해서 인스턴스 생성
         UsernamePasswordAuthenticationToken authenticationToken =
@@ -165,28 +193,5 @@ public class OauthService {
             .findFirst()
             .orElseThrow(() -> new IllegalArgumentException("알 수 없는 SocialLoginType 입니다."));
     }
-
-//    private AuthDto.TokenRes jsonParser(String res) {
-//        AuthDto.TokenRes tokenRes = null;
-//        try {
-//            JSONParser parser = new JSONParser();
-//            Object obj = parser.parse(res);
-//            JSONObject jsonObj = (JSONObject) obj;
-//
-//            int expires_in = Integer.parseInt((String) jsonObj.get("expires_in"));
-//            String access_token = (String) jsonObj.get("access_token");
-//            String refresh_token = (String) jsonObj.get("refresh_token");
-//
-//            tokenRes = AuthDto.TokenRes.builder()
-//                .access_token(access_token)
-//                .refresh_token(refresh_token)
-//                .expires_in(expires_in)
-//                .build();
-//        } catch (Exception e) {
-//            log.info("OauthService - jsonParser : parse 에러");
-//        }
-//        return tokenRes;
-//    }
-
 
 }

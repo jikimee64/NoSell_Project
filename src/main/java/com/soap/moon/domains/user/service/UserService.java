@@ -2,6 +2,7 @@ package com.soap.moon.domains.user.service;
 
 import com.soap.moon.domains.user.domain.Account;
 import com.soap.moon.domains.user.domain.Authority;
+import com.soap.moon.domains.user.domain.ProviderType;
 import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.domains.user.domain.UserAuthority;
 import com.soap.moon.domains.user.domain.UserStatus;
@@ -10,10 +11,10 @@ import com.soap.moon.domains.user.dto.UserDto;
 import com.soap.moon.domains.user.dto.UserDto.CheckUserAuthRes;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
+import com.soap.moon.domains.user.repository.UserOauthRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import com.soap.moon.global.util.SecurityUtil;
-import java.time.LocalDateTime;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -28,6 +29,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class UserService {
 
     private final UserRepository userRepository;
+    private final UserOauthRepository userOauthRepository;
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
@@ -52,7 +54,8 @@ public class UserService {
             .password(password)
             .nickName(dto.getNickName())
             .phoneNum(dto.getPhoneNum())
-            .profileImage("https://user-images.githubusercontent.com/52563841/108304539-9a01e200-71eb-11eb-94a7-01ead35e186e.png")
+            .profileImage(
+                "https://user-images.githubusercontent.com/52563841/108304539-9a01e200-71eb-11eb-94a7-01ead35e186e.png")
             .status(UserStatus.ACTIVE)
             .build();
 
@@ -68,18 +71,30 @@ public class UserService {
     /**
      * 중복회원 체크 account컬럼 유니크 제약조건 추가
      */
-    private void validateDuplicateMember(String userId) {
-        Optional<User> findMember = userRepository.findByAccount(getAccountByUserId(userId));
+    private void validateDuplicateMember(String email) {
+        Optional<User> findMember = userRepository.findByAccount(getAccountByUserId(email));
         findMember.ifPresent(fm -> {
-            throw new MemberDuplicationException();
+//            String exEmail = fm.getAccount().getEmail();
+//            int idx = exEmail.indexOf("@");
+//            String socialType = exEmail.substring(idx + 1);
+
+            userOauthRepository.findByUser(fm).ifPresent(ofm -> {
+                log.info("ofm.getProviderType()" + ofm.getProviderType());
+                if ("GOOGLE".equals(ofm.getProviderType().getName())) {
+                    throw new MemberDuplicationException(ProviderType.GOOGLE.getName());
+                } else if ("NAVER".equals(ofm.getProviderType().getName())) {
+                    throw new MemberDuplicationException(ProviderType.NAVER.getName());
+                }
+            });
+            throw new MemberDuplicationException("자체");
         });
     }
 
-    public UserDto.CheckUserAuthRes checkUserAuth(String token){
+    public UserDto.CheckUserAuthRes checkUserAuth(String token) {
         Boolean flag = null;
-        try{
+        try {
             flag = jwtTokenProvider.validateExceptionToken(token);
-        }catch (Exception e){
+        } catch (Exception e) {
             flag = false;
         }
         return CheckUserAuthRes.builder().isAuth(flag).build();
@@ -97,7 +112,6 @@ public class UserService {
     private Account getAccountByUserId(String userId) {
         return Account.builder().email(userId).build();
     }
-
 
 
 }

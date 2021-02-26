@@ -6,7 +6,7 @@ import lombok.Getter;
 public enum ErrorCode {
 
     // Member
-    EMAIL_DUPLICATION(400, "M001", "중복된 아이디입니다."),
+    EMAIL_DUPLICATION(400, "M001", " 계정을 통해 가입한 아이디입니다."),
     MEMBER_IN_ACTIVE(400, "M002", "회원이 정지된 상태입니다."),
     MEMBER_NOT_FOUND(400, "M003", "회원을 찾을 수 없습니다."),
 

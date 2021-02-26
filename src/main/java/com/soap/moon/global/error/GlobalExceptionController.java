@@ -1,7 +1,6 @@
 package com.soap.moon.global.error;
 
 import com.soap.moon.domains.user.exception.CustomAuthenticationException;
-import com.soap.moon.domains.user.exception.CustomJwtRuntimeException;
 import com.soap.moon.domains.user.exception.LoginFailedException;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
 import com.soap.moon.domains.user.exception.MemberNotFoundException;
