@@ -62,7 +62,9 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class CheckUserAuthRes {
-        public Boolean isAuth;
+        private Long id;
+        private String nickName;
+        private String profileImage;
     }
 
 }

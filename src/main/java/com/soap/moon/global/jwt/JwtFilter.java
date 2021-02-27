@@ -9,6 +9,7 @@ import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -30,9 +31,11 @@ public class JwtFilter extends GenericFilterBean {
     public static final String AUTHORIZATION_HEADER = "Authorization";
 
     private JwtTokenProvider tokenProvider;
+    private RedisTemplate<String, Object> redisTemplate;
 
-    public JwtFilter(JwtTokenProvider tokenProvider) {
+    public JwtFilter(JwtTokenProvider tokenProvider, RedisTemplate<String, Object> redisTemplate) {
         this.tokenProvider = tokenProvider;
+        this.redisTemplate = redisTemplate;
     }
 
     @Override
@@ -46,11 +49,20 @@ public class JwtFilter extends GenericFilterBean {
 
         if (StringUtils.hasText(jwt) && tokenProvider.validateToken(jwt)) {
             Authentication authentication = tokenProvider.getAuthentication(jwt);
-            //인증에 성공하면 Spring이 관리하는 SecurityContext에 인증 객체를 설정
-            //Authentication객체를 통해 사용자가 토큰을 통해 접근할 수 있는 리소스가 FIX
-            SecurityContextHolder.getContext().setAuthentication(authentication);
-            log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(),
-                requestURI);
+
+            log.info("jwt : " + jwt);
+
+            //redisTemplate에 access Token이 등록되어 있다면 로그아웃된 사용자
+            if (null != redisTemplate.opsForValue().get(jwt)) {
+                log.info("이미 로그아웃 처리된 사용자");
+            } else {
+                //인증에 성공하면 Spring이 관리하는 SecurityContext에 인증 객체를 설정
+                //Authentication객체를 통해 사용자가 토큰을 통해 접근할 수 있는 리소스가 FIX
+                SecurityContextHolder.getContext().setAuthentication(authentication);
+                log.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(),
+                    requestURI);
+            }
+
         } else {
             log.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
         }

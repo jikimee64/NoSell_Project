@@ -1,11 +1,20 @@
 package com.soap.moon.global.error;
 
+import com.soap.moon.domains.product.exception.ProductNotFoundException;
 import com.soap.moon.domains.user.exception.CustomAuthenticationException;
+import com.soap.moon.domains.user.exception.JwtExpiredException;
+import com.soap.moon.domains.user.exception.JwtMalFormedException;
+import com.soap.moon.domains.user.exception.JwtUnsupportedException;
 import com.soap.moon.domains.user.exception.LoginFailedException;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
+import com.soap.moon.domains.user.exception.MemberLogoutException;
 import com.soap.moon.domains.user.exception.MemberNotFoundException;
 import com.soap.moon.domains.user.exception.MemberStatusInActiveException;
 import com.soap.moon.global.common.CommonResponse;
+import com.soap.moon.global.common.ErrorResponse;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -24,10 +33,10 @@ public class GlobalExceptionController {
         log.info("RuntimeException");
         ex.printStackTrace();
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code("RunTime")
                 .message("알수없는 런타임 에러입니다.")
-                .data("none").build(),
+                .status(000).build(),
             HttpStatus.BAD_REQUEST);
     }
 
@@ -35,10 +44,10 @@ public class GlobalExceptionController {
     public ResponseEntity<?> memberDuplicationException(MemberDuplicationException ex) {
         log.info("memberDuplicationException");
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code(ErrorCode.EMAIL_DUPLICATION.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.EMAIL_DUPLICATION.getStatus()).build(),
+                .status(ErrorCode.EMAIL_DUPLICATION.getStatus()).build(),
             HttpStatus.BAD_REQUEST);
     }
 
@@ -48,10 +57,10 @@ public class GlobalExceptionController {
         log.info("memberStatusInActiveException", ex);
 
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code(ErrorCode.MEMBER_DUPLICATION.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.MEMBER_DUPLICATION.getStatus()).build(),
+                .status(ErrorCode.MEMBER_DUPLICATION.getStatus()).build(),
             HttpStatus.FORBIDDEN);
     }
 
@@ -61,10 +70,23 @@ public class GlobalExceptionController {
         log.info("memberNotFoundException", ex);
 
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code(ErrorCode.MEMBER_NOT_FOUND.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.MEMBER_NOT_FOUND.getStatus()).build(),
+                .status(ErrorCode.MEMBER_NOT_FOUND.getStatus()).build(),
+            HttpStatus.FORBIDDEN);
+    }
+
+    @ExceptionHandler(value = MemberLogoutException.class)
+    public ResponseEntity<?> memberLogoutException(MemberLogoutException ex) {
+
+        log.info("memberLogoutException", ex);
+
+        return new ResponseEntity<>(
+            ErrorResponse.builder()
+                .code(ErrorCode.MEMBER_LOGOUT.getCode())
+                .message(ex.getMessage())
+                .status(ErrorCode.MEMBER_LOGOUT.getStatus()).build(),
             HttpStatus.FORBIDDEN);
     }
 
@@ -74,10 +96,10 @@ public class GlobalExceptionController {
         log.info("customAuthenticationException", ex);
 
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.AUTHENTICATION_FAILED.getStatus())
+                .status(ErrorCode.AUTHENTICATION_FAILED.getStatus())
                 .build(),
             HttpStatus.UNAUTHORIZED);
     }
@@ -88,41 +110,78 @@ public class GlobalExceptionController {
         log.info("LoginFailedException", ex);
 
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code(ErrorCode.LOGIN_FAILED.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.LOGIN_FAILED.getStatus())
+                .status(ErrorCode.LOGIN_FAILED.getStatus())
                 .build(),
             HttpStatus.UNAUTHORIZED);
     }
 
     //시큐리티의 authenticate()에서 비밀번호가 다르거나 존재하지 않을 떄 발생
     @ExceptionHandler(BadCredentialsException.class)
-    protected ResponseEntity<CommonResponse> handleBadCredentialsException(BadCredentialsException ex) {
+    protected ResponseEntity<?> handleBadCredentialsException(BadCredentialsException ex) {
 
         log.info("handleBadCredentialsException", ex);
 
         return new ResponseEntity<>(
-            CommonResponse.builder()
+            ErrorResponse.builder()
                 .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
                 .message(ex.getMessage())
-                .data(ErrorCode.AUTHENTICATION_FAILED.getStatus())
+                .status(ErrorCode.AUTHENTICATION_FAILED.getStatus())
                 .build(),
             HttpStatus.UNAUTHORIZED);
     }
 
     //만료 시간이 지난 인증 통큰 요청시...
-    @ExceptionHandler(InsufficientAuthenticationException.class)
-    protected ResponseEntity<?> handleInsufficientAuthenticationException(InsufficientAuthenticationException e) {
-
-        log.info("handleInsufficientAuthenticationException", e);
-
+    @ExceptionHandler(JwtExpiredException.class)
+    protected ResponseEntity<?> jwtExpiredException(JwtExpiredException ex) {
+        log.info("jwtExpiredException", ex);
         return new ResponseEntity<>(
-            CommonResponse.builder()
-                .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
-                .message(ErrorCode.AUTHENTICATION_FAILED.getMessage())
-                .data(ErrorCode.AUTHENTICATION_FAILED.getStatus())
+            ErrorResponse.builder()
+                .code(ErrorCode.EXPIRED_JWT_TOKE.getCode())
+                .message(ex.getMessage())
+                .status(ErrorCode.EXPIRED_JWT_TOKE.getStatus())
                 .build(),
         HttpStatus.UNAUTHORIZED);
     }
+
+    @ExceptionHandler(JwtUnsupportedException.class)
+    protected ResponseEntity<?> jwtUnsupportedException(JwtUnsupportedException ex) {
+        log.info("jwtUnsupportedException", ex);
+        return new ResponseEntity<>(
+            ErrorResponse.builder()
+                .code(ErrorCode.NOT_APPLY_JWT.getCode())
+                .message(ex.getMessage())
+                .status(ErrorCode.NOT_APPLY_JWT.getStatus())
+                .build(),
+            HttpStatus.UNAUTHORIZED);
+    }
+
+    @ExceptionHandler(JwtMalFormedException.class)
+    protected ResponseEntity<?> jwtMalFormedException(JwtMalFormedException ex) {
+        log.info("jwtMalFormedException", ex);
+        return new ResponseEntity<>(
+            ErrorResponse.builder()
+                .code(ErrorCode.NOT_FORM_JWT.getCode())
+                .message(ex.getMessage())
+                .status(ErrorCode.NOT_FORM_JWT.getStatus())
+                .build(),
+            HttpStatus.UNAUTHORIZED);
+    }
+
+    //상품이 존재하지 않을 경우
+    @ExceptionHandler(value = ProductNotFoundException.class)
+    public ResponseEntity<?> productNotFoundException(ProductNotFoundException ex) {
+
+        log.info("productNotFoundException", ex);
+
+        return new ResponseEntity<>(
+            ErrorResponse.builder()
+                .code(ErrorCode.PRODUCT_NOT_FOUND.getCode())
+                .message(ex.getMessage())
+                .status(ErrorCode.PRODUCT_NOT_FOUND.getStatus()).build(),
+            HttpStatus.NOT_FOUND);
+    }
+
 }

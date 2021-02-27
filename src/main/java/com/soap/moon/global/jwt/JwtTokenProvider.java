@@ -141,7 +141,7 @@ public class JwtTokenProvider implements InitializingBean {
 
     //토근 검사용
     public Boolean validateExceptionToken(String token) throws ExpiredJwtException, io.jsonwebtoken.security.SecurityException,
-        UnsupportedJwtException, IllegalArgumentException {
+        MalformedJwtException, UnsupportedJwtException, IllegalArgumentException {
         Jwts.parserBuilder().setSigningKey(keyAccess).build().parseClaimsJws(token);
         return true;
     }

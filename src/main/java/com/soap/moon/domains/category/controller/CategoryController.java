@@ -47,38 +47,4 @@ public class CategoryController {
                 .build()
             , HttpStatus.OK);
     }
-
-//    @ApiOperation(
-//        httpMethod = "GET", value = "카테고리", notes = "메인페이지 카테고리정보")
-//    @PerformanceTimeRecord
-//    @GetMapping
-//    public ResponseEntity<?> categories() {
-//        return new ResponseEntity<>(
-//            CommonResponse.builder()
-//                .code("200")
-//                .message("ok")
-//                .data(
-//                    categoryService.categoryRoot()
-//                ).build()
-//            , HttpStatus.OK);
-//    }
-
-    //카테고리 하나...
-//    @ApiOperation(
-//        httpMethod = "GET", value = "중분류 카테고리", notes = "중분류 카테고리 Response")
-//    @PerformanceTimeRecord
-//    @GetMapping("/{id}")
-//    public ResponseEntity<?> categoriesTwoDepth(
-//        @ApiParam(value = "1", required = true)
-//        @PathVariable("id") final Long id) {
-//
-//            return new ResponseEntity<>(
-//                CommonResponse.builder()
-//                    .code("200")
-//                    .message("ok")
-//                    .data(
-//                        categoryService.categoryTwoDepth(id)
-//                    ).build()
-//                , HttpStatus.OK);
-//    }
 }

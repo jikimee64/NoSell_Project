@@ -9,18 +9,28 @@ import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.domain.Password;
 import com.soap.moon.domains.user.dto.UserDto;
 import com.soap.moon.domains.user.dto.UserDto.CheckUserAuthRes;
+import com.soap.moon.domains.user.exception.JwtExpiredException;
+import com.soap.moon.domains.user.exception.JwtMalFormedException;
+import com.soap.moon.domains.user.exception.JwtUnsupportedException;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
+import com.soap.moon.domains.user.exception.MemberNotFoundException;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
 import com.soap.moon.domains.user.repository.UserOauthRepository;
 import com.soap.moon.domains.user.repository.UserRepository;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import com.soap.moon.global.util.SecurityUtil;
+import io.jsonwebtoken.ExpiredJwtException;
+import io.jsonwebtoken.MalformedJwtException;
+import io.jsonwebtoken.UnsupportedJwtException;
+import io.jsonwebtoken.security.SecurityException;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.StringUtils;
 
 @Slf4j
 @Service
@@ -92,22 +102,47 @@ public class UserService {
 
     public UserDto.CheckUserAuthRes checkUserAuth(String token) {
         Boolean flag = null;
+        Authentication authentication = null;
+        CheckUserAuthRes build = null;
         try {
             flag = jwtTokenProvider.validateExceptionToken(token);
-        } catch (Exception e) {
-            flag = false;
+            authentication = jwtTokenProvider.getAuthentication(token);
+        } catch (SecurityException | MalformedJwtException ex) {
+            throw new JwtMalFormedException();
+        } catch (ExpiredJwtException e) {
+            throw new JwtExpiredException();
+        } catch (UnsupportedJwtException e) {
+            throw new JwtUnsupportedException();
         }
-        return CheckUserAuthRes.builder().isAuth(flag).build();
+
+        if (flag) {
+            Account account = Account.builder().email(authentication.getName()).build();
+            Optional<User> byAccount = userRepository.findByAccount(account);
+
+            User user = null;
+            if (!StringUtils.isEmpty(byAccount)) {
+                user = byAccount.get();
+                build = CheckUserAuthRes.builder()
+                    .id(user.getId())
+                    .nickName(user.getNickName())
+                    .profileImage(user.getProfileImage())
+                    .build();
+            } else {
+                throw new MemberNotFoundException();
+            }
+        }
+        return build;
+
     }
 
-    public Optional<User> getUserWithAuthorities(String userId) {
-        return userRepository.findOneWithAuthoritiesByAccount(userId);
-    }
-
-    public Optional<User> getMyUserWithAuthorities() {
-        return SecurityUtil.getCurrentUsername()
-            .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(s));
-    }
+//    public Optional<User> getUserWithAuthorities(String userId) {
+//        return userRepository.findOneWithAuthoritiesByAccount(userId);
+//    }
+//
+//    public Optional<User> getMyUserWithAuthorities() {
+//        return SecurityUtil.getCurrentUsername()
+//            .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(s));
+//    }
 
     private Account getAccountByUserId(String userId) {
         return Account.builder().email(userId).build();

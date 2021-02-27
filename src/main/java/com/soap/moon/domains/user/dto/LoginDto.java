@@ -38,8 +38,19 @@ public class LoginDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class LoginRes{
         private String accessToken;
-        private String refreshToken;
+        //
+        // private String refreshToken;
         private Long userId;
+    }
+
+    @ApiModel("로그아웃 요청시 요청값")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class logoutReq{
+        @ApiModelProperty(value = "accessToken", notes = "accessToken", example = "accessToken", required = true)
+        private String accessToken;
     }
 
     @ApiModel("토큰 refresh 요청시 요청값")

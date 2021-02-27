@@ -4,6 +4,7 @@ import com.soap.moon.domains.category.dto.CategoryDto;
 import com.soap.moon.domains.product.domain.Product;
 import com.soap.moon.domains.product.dto.ProductDto;
 import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;
+import com.soap.moon.domains.product.exception.ProductNotFoundException;
 import com.soap.moon.domains.product.repository.ProductRepository;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -47,6 +48,9 @@ public class ProductService {
                         LocalDateTime.parse( s.getCreatedAt().format(formatter), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
                     .build())
             .collect(Collectors.toList());
+
+        if(collect.isEmpty())
+            throw new ProductNotFoundException();
 
         return collect;
     }

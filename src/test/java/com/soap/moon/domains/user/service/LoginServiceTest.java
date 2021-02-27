@@ -15,7 +15,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 @SpringBootTest(properties = "spring.config.location=" +
-    "classpath:/application.yml" +
+    "classpath:/application-local.yml" +
     ",classpath:/application-secret.yml")
 class LoginServiceTest {
 

@@ -1,12 +1,11 @@
 package com.soap.moon.domains.user.service;
 
-import com.soap.moon.domains.category.repository.CategoryUserRepository;
 import com.soap.moon.domains.user.domain.Account;
 import com.soap.moon.domains.user.domain.RedisToken;
 import com.soap.moon.domains.user.domain.Token;
 import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.domains.user.dto.LoginDto;
-import com.soap.moon.domains.user.dto.UserDto;
+import com.soap.moon.domains.user.exception.MemberLogoutException;
 import com.soap.moon.domains.user.repository.UserRepository;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -90,6 +89,9 @@ public class LoginService {
                 try {
                     ValueOperations<String, Object> vop = redisTemplate.opsForValue();
                     RedisToken result = (RedisToken) vop.get(username);
+                    if(result == null){ //로그아웃된 상태
+                        throw new MemberLogoutException();
+                    }
                     refreshTokenFromDb = result.getRefreshToken();
                     log.info("rtfrom db: " + refreshTokenFromDb);
                     log.info("refreshToken : " + refreshToken);

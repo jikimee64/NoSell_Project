@@ -11,6 +11,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.Map;
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -60,7 +62,8 @@ public class OauthController {
     public ResponseEntity<?> callback(
         @PathVariable(name = "socialLoginType") ProviderType providerType,
         @RequestParam(name = "code") String code,
-        @RequestParam(name= "state", required = false) String state) {
+        @RequestParam(name= "state", required = false) String state,
+        HttpServletResponse response) {
 
         Map<String, Object> map = oauthService
             .requestAccessToken(providerType, code, state);
@@ -68,12 +71,18 @@ public class OauthController {
 //        HttpHeaders httpHeaders = new HttpHeaders();
 //        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + (map.get(Token.ACCESS_TOKEN.getName())));
 
+        Cookie cookie = new Cookie("refreshToken", (String)map.get(Token.REFRESH_TOKEN.getName()));
+        cookie.setMaxAge(7 * 24 * 60 * 60); // expires in 7 days
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        response.addCookie(cookie);
+
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
                 .data(new LoginDto.LoginRes(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())),
-                    String.valueOf(map.get(Token.REFRESH_TOKEN.getName())),
+                    //String.valueOf(map.get(Token.REFRESH_TOKEN.getName())),
                     Long.valueOf(String.valueOf(map.get("id"))))).build(),
 //            httpHeaders,
             HttpStatus.OK);

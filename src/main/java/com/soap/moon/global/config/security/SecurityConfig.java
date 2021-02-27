@@ -5,6 +5,7 @@ import com.soap.moon.global.jwt.JwtAuthenticationEntryPoint;
 import com.soap.moon.global.jwt.JwtSecurityConfig;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import org.springframework.context.annotation.Bean;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -19,20 +20,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
+    private final RedisTemplate<String, Object> redisTemplate;
     private final JwtTokenProvider tokenProvider;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     public SecurityConfig(
+        RedisTemplate<String, Object> redisTemplate,
         JwtTokenProvider tokenProvider,
         JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
         JwtAccessDeniedHandler jwtAccessDeniedHandler
     ) {
+        this.redisTemplate = redisTemplate;
         this.tokenProvider = tokenProvider;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
         this.jwtAccessDeniedHandler = jwtAccessDeniedHandler;
     }
-
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -67,10 +70,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             .and()
             .authorizeRequests()
-            .antMatchers("/api/v1/login/**").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
+            .antMatchers(HttpMethod.POST,"/api/v1/logout").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/refresh").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/users/auth").permitAll()
+            //.antMatchers(HttpMethod.GET, "/api/v1/users/auth").permitAll()
             .antMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/v1/oauth/**").permitAll()
@@ -84,7 +88,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             .and()
             //사용자의 모든 요청은 JWT 필터를 통과하는 설정
-            .apply(new JwtSecurityConfig(tokenProvider));
+            .apply(new JwtSecurityConfig(tokenProvider, redisTemplate));
     }
 
 
