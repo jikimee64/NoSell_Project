@@ -47,6 +47,31 @@ public class UserDto {
     }
 
 
+    @ApiModel("회원가입시 이메일 중복 확인")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class EmailCheckReq {
+        @ApiModelProperty(value = "아이디", notes = "userId", example = "test@test.com", required = true)
+        @NotBlank(message = "아이디는 필수 입력 값입니다.")
+        @Email(message = "아이디 형식에 맞지 않습니다.")
+        @Size(max = 30, message = "아이디는 30자 이하로 입력해주세요.")
+        public String email;
+    }
+
+    @ApiModel("회원가입시 휴대폰 인증 확인")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class PhoneCheckReq {
+        @ApiModelProperty(value = "휴대폰번호", notes = "phoneNum", example = "01099991111", required = true)
+        @NotBlank(message = "휴대폰번호는 필수 입력 값입니다.")
+        @Size(max = 12, message = "휴대폰번호는 11자로 입력해주세요.")
+        public String phoneNum;
+    }
+
     @ApiModel("회원 단건 조회 GET")
     @Data
     @Builder

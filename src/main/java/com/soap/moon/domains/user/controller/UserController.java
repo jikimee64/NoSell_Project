@@ -16,6 +16,7 @@ import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -67,7 +68,7 @@ public class UserController {
     @ApiOperation(
         httpMethod = "POST", value = "회원 가입", notes = "회원 가입을 한다.")
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "회원가입 성공", response = SignInReq.class)
+        @ApiResponse(code = 200, message = "회원가입 성공", response = Map.class)
     })
     @PostMapping
     public ResponseEntity<?> signInMember(
@@ -76,6 +77,63 @@ public class UserController {
 
         Map<String, Long> map = new HashMap<>();
         map.put("id", userService.save(dto).getId());
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(map)
+                .build()
+            , HttpStatus.OK);
+    }
+
+    @ApiOperation(
+        httpMethod = "POST", value = "아이디 중복 체크", notes = "회원가입 시 아이디 중복체크를 한다.")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "이메일 중복 체크 성공", response = Map.class)
+    })
+    @PostMapping("/emailCheck")
+    public ResponseEntity<?> checkEmailOfDuplication(
+        @ApiParam(value = "이메일", required = true)
+        @RequestBody @Valid final UserDto.EmailCheckReq dto) {
+
+        Map<String, Boolean> map = new HashMap<>();
+        boolean flag = userService.validateDuplicateMember(dto.getEmail());
+        map.put("confirm",flag);
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(map)
+                .build()
+            , HttpStatus.OK);
+    }
+
+
+    @ApiOperation(
+        httpMethod = "POST", value = "sms 인증 체크", notes = "회원가입 시 휴대폰 인증을 한다.")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "휴대폰 인증 성공", response = Map.class)
+    })
+    @PostMapping("/sendSMS(테스트 XXXXXXXXXXX)")
+    public ResponseEntity<?> checkPhoneSms(
+        @ApiParam(value = "휴대폰번호", required = true)
+        @RequestBody @Valid final UserDto.PhoneCheckReq dto) {
+
+        Random rand  = new Random();
+        String numStr = "";
+        for(int i=0; i<4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr+=ran;
+        }
+
+        log.info("수신자 번호 : " + dto.getPhoneNum());
+        log.info("인증번호 : " + numStr);
+
+        Map<String, String> map = new HashMap<>();
+        if(userService.certifiedPhoneNumber(dto.getPhoneNum(), numStr))
+            map.put("AuthNumber",numStr);
 
         return new ResponseEntity<>(
             CommonResponse.builder()
