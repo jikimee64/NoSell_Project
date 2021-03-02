@@ -123,7 +123,6 @@ public class UserService {
             if (!StringUtils.isEmpty(byAccount)) {
                 user = byAccount.get();
                 build = CheckUserAuthRes.builder()
-                    .id(user.getId())
                     .nickName(user.getNickName())
                     .profileImage(user.getProfileImage())
                     .build();

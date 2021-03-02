@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiModelProperty;
 import java.time.LocalDateTime;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 import javax.validation.constraints.Size;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -29,6 +30,8 @@ public class UserDto {
 
         @ApiModelProperty(value = "비밀번호", notes = "password", example = "password", required = true)
         @NotBlank(message = "패스워드는 필수 입력 값입니다.")
+//        @Pattern(regexp="(?=.*[0-9])(?=.*[a-zA-Z])(?=.*\\W)(?=\\S+$).{8,20}",
+//            message = "비밀번호는 영문 대,소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 8자 ~ 20자의 비밀번호여야 합니다.")
         @Size(max = 15, message = "비밀번호는 15자 이하로 입력해주세요.")
         public String password;
 
@@ -62,7 +65,6 @@ public class UserDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class CheckUserAuthRes {
-        private Long id;
         private String nickName;
         private String profileImage;
     }

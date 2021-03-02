@@ -1,7 +1,6 @@
 package com.soap.moon.domains.user.controller;
 
 import com.soap.moon.domains.user.domain.User;
-import com.soap.moon.domains.user.dto.LoginDto.refreshRes;
 import com.soap.moon.domains.user.dto.UserDto;
 import com.soap.moon.domains.user.dto.UserDto.CheckUserAuthRes;
 import com.soap.moon.domains.user.dto.UserDto.SelectOneRes;
@@ -15,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.HashMap;
+import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -73,15 +74,19 @@ public class UserController {
         @ApiParam(value = "회원가입 폼입력", required = true)
         @RequestBody @Valid final UserDto.SignInReq dto) {
 
+        Map<String, Long> map = new HashMap<>();
+        map.put("id", userService.save(dto).getId());
+
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
-                .data(userService.save(dto).getId())
+                .data(map)
                 .build()
             , HttpStatus.OK);
     }
 
+    //임시 로직
     @ApiOperation(
         httpMethod = "GET", value = "회원 단건 조회", notes = "회원에 대한 정보를 조회한다.(단건)")
     @ApiResponses(value = {

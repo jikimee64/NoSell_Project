@@ -2,8 +2,8 @@ package com.soap.moon.domains.category.service;
 
 import com.soap.moon.domains.category.domain.CategoryUser;
 import com.soap.moon.domains.category.dto.CategoryDto;
+import com.soap.moon.domains.category.dto.CategoryDto.CategoryOfUserRes;
 import com.soap.moon.domains.category.dto.CategoryDto.UserLikeCategory;
-import com.soap.moon.domains.category.dto.CategoryDto.getCategoryOfUserRes;
 import com.soap.moon.domains.category.repository.CategoryUserRepository;
 import com.soap.moon.domains.user.domain.User;
 import com.soap.moon.domains.user.dto.query.UserReviewDto.MyPageCommon;
@@ -29,7 +29,7 @@ public class CategoryService {
     private final CategoryUserRepository categoryUserRepository;
     private final UserRepository userRepository;
 
-    public CategoryDto.getCategoryOfUserRes getCategoryOfUser(Long userId) {
+    public CategoryDto.CategoryOfUserRes getCategoryOfUser(Long userId) {
 
         Map<String, Object> map = new HashMap<>();
 
@@ -62,11 +62,12 @@ public class CategoryService {
 
         MyPageCommon myPageCommon = userRepository
             .findUserInfoWithReviewCountAndSum(user).get(0);
+
         myPageCommon.setCreatedAt(LocalDateTime
             .parse(myPageCommon.getCreatedAt().format(formatter),
                 DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")));
 
-        return getCategoryOfUserRes.builder()
+        return CategoryOfUserRes.builder()
             .categories(collect)
             .myPageCommon(myPageCommon)
             .build();

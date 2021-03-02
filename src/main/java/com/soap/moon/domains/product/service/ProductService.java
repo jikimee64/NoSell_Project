@@ -26,58 +26,40 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private final ProductRepository productRepository;
-//    private final ProductImageRepository productImageRepository;
-//    private final ProductImageRepositoryImpl productImageRepositoryImpl;
+    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public List<mainProductRes> getProductList(Integer page) {
 
         Page<mainProductRes> products = productRepository.findMainPageProduct(PageRequest.of
             (page, 40, Sort.by("id").descending()), null);
-
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        List<mainProductRes> collect = products.getContent().stream()
-            .map(s ->
-                mainProductRes.builder()
-                    .id(s.getId())
-                    .title(s.getTitle())
-                    .price(s.getPrice())
-                    .dealType(s.getDealType())
-                    .image_url(s.getImage_url())
-                    .createdAt(
-                        LocalDateTime.parse( s.getCreatedAt().format(formatter), DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                    .build())
-            .collect(Collectors.toList());
-
-        if(collect.isEmpty())
-            throw new ProductNotFoundException();
-
-        return collect;
+        return getRepositoryInProducts(products);
     }
 
     public List<mainProductRes> getProductListByCategory(Integer page, Integer categoryId) {
 
-        log.info("==== page : " + page + "==== categoryId : " + categoryId);
-
         Page<mainProductRes> products = productRepository.findMainPageProduct(PageRequest.of
             (page, 40, Sort.by("id").descending()), categoryId);
+        return getRepositoryInProducts(products);
+    }
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
-
-        List<mainProductRes> collect = products.getContent().stream()
-            .map(s ->
-                mainProductRes.builder()
-                    .id(s.getId())
-                    .title(s.getTitle())
-                    .price(s.getPrice())
-                    .dealType(s.getDealType())
-                    .image_url(s.getImage_url())
-                    .createdAt(
-                        LocalDateTime.parse( s.getCreatedAt().format(formatter),DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
-                    .build())
-            .collect(Collectors.toList());
-
-        return collect;
+    private List<mainProductRes> getRepositoryInProducts(Page<mainProductRes> products) {
+        if (products.isEmpty()) {
+            throw new ProductNotFoundException();
+        } else {
+            return products.getContent().stream()
+                .map(s ->
+                    mainProductRes.builder()
+                        .id(s.getId())
+                        .title(s.getTitle())
+                        .price(s.getPrice())
+                        .dealType(s.getDealType())
+                        .image_url(s.getImage_url())
+                        .createdAt(
+                            LocalDateTime.parse(s.getCreatedAt().format(formatter),
+                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        .build())
+                .collect(Collectors.toList());
+        }
     }
 
 }

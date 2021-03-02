@@ -181,7 +181,10 @@ public class OauthService {
             jwtTokenProvider.doGenerateRefreshToken(user.getAccount().getEmail()));
 
         Optional<User> byAccount = userRepository.findByAccount(account);
-        map.put("id", byAccount.get().getId());
+        byAccount.ifPresent( v -> {
+            map.put("nickName", v.getNickName());
+            map.put("profileImage", v.getProfileImage());
+        });
 
         return map;
     }
