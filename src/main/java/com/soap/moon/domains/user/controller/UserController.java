@@ -116,7 +116,7 @@ public class UserController {
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "휴대폰 인증 성공", response = Map.class)
     })
-    @PostMapping("/sendSMS(테스트 XXXXXXXXXXX)")
+    @PostMapping("/sendSMS")
     public ResponseEntity<?> checkPhoneSms(
         @ApiParam(value = "휴대폰번호", required = true)
         @RequestBody @Valid final UserDto.PhoneCheckReq dto) {
