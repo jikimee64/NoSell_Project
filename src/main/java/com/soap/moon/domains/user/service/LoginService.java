@@ -56,12 +56,16 @@ public class LoginService {
 
         Account account = Account.builder().email(loginDto.getEmail()).build();
         Optional<User> byAccount = userRepository.findByAccount(account);
-        map.put("id", byAccount.get().getId());
+        byAccount.ifPresent( v -> {
+            map.put("id", v.getId());
+            map.put("nickName", v.getNickName());
+            map.put("profileImage", v.getProfileImage());
+        });
 
         return map;
     }
 
-    public String provideNewAccessToken(LoginDto.refreshReq dto) {
+    public String provideNewAccessToken(LoginDto.RefreshReq dto) {
         String accessToken = null;
         String refreshToken = null;
         String refreshTokenFromDb = null;

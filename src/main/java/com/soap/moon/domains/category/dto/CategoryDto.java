@@ -42,7 +42,7 @@ public class CategoryDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     @Builder
-    public static class getCategoryOfUserRes{
+    public static class CategoryOfUserRes{
         private List<UserLikeCategory> categories;
         private MyPageCommon myPageCommon;
     }

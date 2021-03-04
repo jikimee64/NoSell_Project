@@ -20,6 +20,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.InsufficientAuthenticationException;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
@@ -31,12 +34,34 @@ public class GlobalExceptionController {
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<?> runtimeException(RuntimeException ex) {
         log.info("RuntimeException");
-        ex.printStackTrace();
         return new ResponseEntity<>(
             ErrorResponse.builder()
                 .code("RunTime")
                 .message("알수없는 런타임 에러입니다.")
                 .status(000).build(),
+            HttpStatus.BAD_REQUEST);
+    }
+
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
+        log.info("MethodArgumentNotValidException");
+        BindingResult bindingResult = ex.getBindingResult();
+
+        StringBuilder builder = new StringBuilder();
+        for (FieldError fieldError : bindingResult.getFieldErrors()) {
+            builder.append("[");
+            builder.append(fieldError.getField());
+            builder.append("](은)는 ");
+            builder.append(fieldError.getDefaultMessage());
+            builder.append(" 입력된 값: [");
+            builder.append(fieldError.getRejectedValue());
+            builder.append("]");
+        }
+        return new ResponseEntity<>(
+            ErrorResponse.builder()
+                .code(ErrorCode.VALIDATION.getCode())
+                .message(builder.toString())
+                .status(ErrorCode.VALIDATION.getStatus()).build(),
             HttpStatus.BAD_REQUEST);
     }
 
@@ -53,9 +78,7 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(value = MemberStatusInActiveException.class)
     public ResponseEntity<?> memberStatusInActiveException(MemberStatusInActiveException ex) {
-
         log.info("memberStatusInActiveException", ex);
-
         return new ResponseEntity<>(
             ErrorResponse.builder()
                 .code(ErrorCode.MEMBER_DUPLICATION.getCode())
@@ -66,9 +89,7 @@ public class GlobalExceptionController {
 
     @ExceptionHandler(value = MemberNotFoundException.class)
     public ResponseEntity<?> memberNotFoundException(MemberNotFoundException ex) {
-
         log.info("memberNotFoundException", ex);
-
         return new ResponseEntity<>(
             ErrorResponse.builder()
                 .code(ErrorCode.MEMBER_NOT_FOUND.getCode())
@@ -143,7 +164,7 @@ public class GlobalExceptionController {
                 .message(ex.getMessage())
                 .status(ErrorCode.EXPIRED_JWT_TOKE.getStatus())
                 .build(),
-        HttpStatus.UNAUTHORIZED);
+            HttpStatus.UNAUTHORIZED);
     }
 
     @ExceptionHandler(JwtUnsupportedException.class)

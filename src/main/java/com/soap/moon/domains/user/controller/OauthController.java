@@ -78,13 +78,12 @@ public class OauthController {
         response.addCookie(cookie);
 
         return new ResponseEntity<>(
-            CommonResponse.builder()
-                .code("200")
-                .message("ok")
-                .data(new LoginDto.LoginRes(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())),
-                    //String.valueOf(map.get(Token.REFRESH_TOKEN.getName())),
-                    Long.valueOf(String.valueOf(map.get("id"))))).build(),
-//            httpHeaders,
+            new CommonResponse("200","ok",
+                LoginRes.builder()
+                    .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
+                    .nickName(String.valueOf(map.get("nickName")))
+                    .profileImage(String.valueOf(map.get("profileImage")))
+                    .build()),
             HttpStatus.OK);
     }
 

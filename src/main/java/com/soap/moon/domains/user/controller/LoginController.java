@@ -4,7 +4,7 @@ import com.soap.moon.domains.user.domain.RedisToken;
 import com.soap.moon.domains.user.domain.Token;
 import com.soap.moon.domains.user.dto.LoginDto;
 import com.soap.moon.domains.user.dto.LoginDto.LoginRes;
-import com.soap.moon.domains.user.dto.LoginDto.refreshRes;
+import com.soap.moon.domains.user.dto.LoginDto.RefreshRes;
 import com.soap.moon.domains.user.service.LoginService;
 import com.soap.moon.global.common.CommonResponse;
 import com.soap.moon.global.jwt.JwtTokenProvider;
@@ -48,7 +48,7 @@ public class LoginController {
         @ApiResponse(code = 200, message = "로그인 성공", response = LoginRes.class)
     })
     @PostMapping("/login")
-    public ResponseEntity<?> authorize(
+    public ResponseEntity<?> login(
         @ApiParam(value = "로그인 폼입력값", required = true)
         @Valid @RequestBody LoginDto.LoginReq loginDto,
         HttpServletResponse response) {
@@ -63,18 +63,28 @@ public class LoginController {
         ValueOperations<String, Object> vop = redisTemplate.opsForValue();
         vop.set(loginDto.getEmail(), retok);
 
-        Cookie cookie = new Cookie("refreshToken", (String)map.get(Token.REFRESH_TOKEN.getName()));
+        Cookie cookie = new Cookie("refreshToken", (String) map.get(Token.REFRESH_TOKEN.getName()));
         cookie.setMaxAge(7 * 24 * 60 * 60); // expires in 7 days
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
 
+        //CommonResponse 빌더 패턴으로 생성시 알수없는 에러 발생
         return new ResponseEntity<>(
-            CommonResponse.builder()
-                .code("200")
-                .message("ok")
-                .data(new LoginDto.LoginRes(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())),
-                    Long.valueOf(String.valueOf(map.get("id"))))).build(),
+            new CommonResponse("200","ok",
+                LoginRes.builder()
+                        .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
+                        .nickName(String.valueOf(map.get("nickName")))
+                        .profileImage(String.valueOf(map.get("profileImage")))
+                        .build()),
+//            CommonResponse.builder()
+//                .code("200")
+//                .message("ok")
+//                .data(LoginRes.builder()
+//                        .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
+//                        .nickName(String.valueOf(map.get("nickName")))
+//                        .profileImage(String.valueOf(map.get("profileImage")))
+//                        .build()),
             HttpStatus.OK);
     }
 
@@ -86,7 +96,7 @@ public class LoginController {
     @PostMapping("/logout")
     public ResponseEntity<?> logout(
         @ApiParam(value = "로그아웃시 전송할 accessToken", required = true)
-        @RequestBody LoginDto.logoutReq logoutReq) {
+        @RequestBody LoginDto.LogoutReq logoutReq) {
 
         String username = null;
         String accessToken = logoutReq.getAccessToken();
@@ -94,7 +104,8 @@ public class LoginController {
             Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
             username = authentication.getName();
             log.info("username : " + username);
-        } catch (IllegalArgumentException e) {} catch (ExpiredJwtException e) { //expire됐을 때
+        } catch (IllegalArgumentException e) {
+        } catch (ExpiredJwtException e) { //expire됐을 때
             username = e.getClaims().getSubject();
             log.info("username from expired access token: " + username);
         }
@@ -117,7 +128,7 @@ public class LoginController {
         RedisToken redisToken = new RedisToken();
         redisToken.setAccessToken(accessToken);
         redisTemplate.opsForValue().set(accessToken, redisToken);
-        redisTemplate.expire(accessToken, 30*6*1000, TimeUnit.MILLISECONDS);
+        redisTemplate.expire(accessToken, 30 * 6 * 1000, TimeUnit.MILLISECONDS);
 
         return new ResponseEntity<>(
             CommonResponse.builder()
@@ -130,28 +141,23 @@ public class LoginController {
     @ApiOperation(
         httpMethod = "POST", value = "refresh 토큰 요청", notes = "refreshToken을 요청해 새로운 accessToken을 발급받는다")
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "new AccessToken 요청 성공", response = refreshRes.class)
+        @ApiResponse(code = 200, message = "new AccessToken 요청 성공", response = RefreshRes.class)
     })
     @PostMapping("/refresh")
-    public ResponseEntity<?>  requestForNewAccessToken(
+    public ResponseEntity<?> requestForNewAccessToken(
         @ApiParam(value = "토큰요청시 전송값", required = true)
-        @RequestBody LoginDto.refreshReq dto) {
+        @RequestBody LoginDto.RefreshReq dto) {
 
         String newAccessToken = loginService.provideNewAccessToken(dto);
-
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER,
-//            "Bearer " + (map.get(Token.ACCESS_TOKEN.getName())));
 
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
-                .data(refreshRes.builder().accessToken(newAccessToken).build()).build(),
+                .data(RefreshRes.builder().accessToken(newAccessToken).build()).build(),
 //            httpHeaders,
             HttpStatus.OK);
     }
-
 
 
 }

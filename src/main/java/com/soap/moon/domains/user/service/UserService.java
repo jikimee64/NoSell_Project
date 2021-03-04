@@ -23,9 +23,14 @@ import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SecurityException;
+import java.util.HashMap;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import net.nurigo.java_sdk.api.Message;
+import net.nurigo.java_sdk.exceptions.CoolsmsException;
+import org.json.simple.JSONObject;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -43,6 +48,12 @@ public class UserService {
     private final AuthorityRepository authorityRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
+
+    @Value("${sms.apiKey}")
+    private String apiKey;
+
+    @Value("${sms.apiSecret}")
+    private String apiSecret;
 
     /**
      * 회원가입
@@ -81,7 +92,7 @@ public class UserService {
     /**
      * 중복회원 체크 account컬럼 유니크 제약조건 추가
      */
-    private void validateDuplicateMember(String email) {
+    public boolean validateDuplicateMember(String email) {
         Optional<User> findMember = userRepository.findByAccount(getAccountByUserId(email));
         findMember.ifPresent(fm -> {
 //            String exEmail = fm.getAccount().getEmail();
@@ -98,6 +109,7 @@ public class UserService {
             });
             throw new MemberDuplicationException("자체");
         });
+        return true;
     }
 
     public UserDto.CheckUserAuthRes checkUserAuth(String token) {
@@ -123,7 +135,6 @@ public class UserService {
             if (!StringUtils.isEmpty(byAccount)) {
                 user = byAccount.get();
                 build = CheckUserAuthRes.builder()
-                    .id(user.getId())
                     .nickName(user.getNickName())
                     .profileImage(user.getProfileImage())
                     .build();
@@ -133,6 +144,29 @@ public class UserService {
         }
         return build;
 
+    }
+
+    public boolean certifiedPhoneNumber(String phoneNumber, String cerNum) {
+
+        Message coolsms = new Message(apiKey, apiSecret);
+
+        // 4 params(to, from, type, text) are mandatory. must be filled
+        HashMap<String, String> params = new HashMap<String, String>();
+        params.put("to", phoneNumber);    // 수신전화번호
+        params.put("from", "01023160200");    // 발신전화번호. 테스트시에는 발신,수신 둘다 본인 번호로 하면 됨
+        params.put("type", "SMS");
+        params.put("text", "NoSell 마켓 휴대폰인증 메시지 : 인증번호는" + "[" + cerNum + "]" + "입니다.");
+        params.put("app_version", "test app 1.2"); // application name and version
+
+        try {
+            JSONObject obj = (JSONObject) coolsms.send(params);
+            System.out.println(obj.toString());
+        } catch (CoolsmsException e) {
+            System.out.println(e.getMessage());
+            System.out.println(e.getCode());
+            return false;
+        }
+        return true;
     }
 
 //    public Optional<User> getUserWithAuthorities(String userId) {

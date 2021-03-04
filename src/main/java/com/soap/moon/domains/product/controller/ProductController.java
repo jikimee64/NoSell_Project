@@ -27,7 +27,6 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/products")
 public class ProductController {
 
-    private final CategoryService categoryService;
     private final ProductService productService;
 
     //메인페이지 상품정보
@@ -52,7 +51,7 @@ public class ProductController {
             , HttpStatus.OK);
     }
 
-    //메인페이지 상품정보
+    //메인페이지 카테고리별 상품정보
     @ApiOperation(
         httpMethod = "GET", value = "서브 페이지 카테고리별 상품", notes = "메인페이지 카테고리 클릭 후 그에맞는 상품정보 반환")
     @ApiResponses(value = {

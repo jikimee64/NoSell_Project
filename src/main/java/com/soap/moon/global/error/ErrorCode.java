@@ -14,6 +14,7 @@ public enum ErrorCode {
     // Common
     BAD_REQUEST(400, "ERROR_001", "입력값이 잘못되었습니다."),
     MEMBER_DUPLICATION(400, "ERROR_001", "중복된 회원입니다."),
+    VALIDATION(400, "M005", ""),
 
     // Auth
     AUTHENTICATION_FAILED(401, "AUTH_001", "인증에 실패하였습니다."),

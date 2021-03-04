@@ -38,9 +38,8 @@ public class LoginDto {
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class LoginRes{
         private String accessToken;
-        //
-        // private String refreshToken;
-        private Long userId;
+        private String nickName;
+        private String profileImage;
     }
 
     @ApiModel("로그아웃 요청시 요청값")
@@ -48,7 +47,7 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class logoutReq{
+    public static class LogoutReq{
         @ApiModelProperty(value = "accessToken", notes = "accessToken", example = "accessToken", required = true)
         private String accessToken;
     }
@@ -58,7 +57,7 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class refreshReq{
+    public static class RefreshReq{
         @ApiModelProperty(value = "accessToken", notes = "accessToken", example = "accessToken", required = true)
         private String accessToken;
         @ApiModelProperty(value = "refreshToken", notes = "refreshToken", example = "refreshToken", required = true)
@@ -70,7 +69,7 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class refreshRes{
+    public static class RefreshRes{
         private String accessToken;
     }
 

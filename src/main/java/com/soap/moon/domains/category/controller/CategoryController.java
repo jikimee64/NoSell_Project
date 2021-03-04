@@ -1,6 +1,6 @@
 package com.soap.moon.domains.category.controller;
 
-import com.soap.moon.domains.category.dto.CategoryDto.getCategoryOfUserRes;
+import com.soap.moon.domains.category.dto.CategoryDto.CategoryOfUserRes;
 import com.soap.moon.domains.category.service.CategoryService;
 import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;
 import com.soap.moon.domains.user.domain.User;
@@ -32,7 +32,7 @@ public class CategoryController {
     @ApiOperation(
         httpMethod = "GET", value = "회원 관심 카테고리 조회", notes = "회원에 대한 관심 카테고리(1단계)를 조회한다.")
     @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "회원 관심 카테고리 조회 성공", response = getCategoryOfUserRes.class)
+        @ApiResponse(code = 200, message = "회원 관심 카테고리 조회 성공", response = CategoryOfUserRes.class)
     })
     @GetMapping(value = "/{userId}")
     public ResponseEntity<?> getCategoryOfUser(
