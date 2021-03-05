@@ -20,85 +20,69 @@ body{
 form{
   margin: 0 auto;
 }
-form:last-child {
-  display: none;
-}
 h2{
   text-align: center;
   font-size: 1.5rem;
   font-family: 'GmarketSansMedium';
   padding: 3% 0 8% 0;
 }
-fieldset>span{
-  margin: 0; padding: 0 0 0 3%;
-  font-size: .8rem;
-}
-#signup>fieldset>p{
-  font-size: .8rem;
-  text-align: center;
+.field_wrap{
+  position: relative;
+  margin: 0 auto 2% auto;
+  font-size: 1rem;
 }
 
 /* 본문 inside */
-.field_wrap{
-  position: relative;
-  margin: 0 auto 8% auto;
-  text-align: center;
-}
-.com_btn{
+.field_wrap .confirm_btn{
   width: 100px;
   position: absolute;
-  top: 0; right: 0;
-  border: 1px solid #4147e1;
+  bottom: 28px; right: 0;
+  line-height: 2rem;
+  border: 2px solid #4147e1;
   border-radius: 5px;
   cursor: pointer;
-  font-size: 1rem;
   color: #4147e1;
 }
-label {
-  position: absolute;
-  transform: translateY(6px);
-  left: 13px;
+.field_wrap label {
   color: rgba(66, 60, 60, 0.466);
-  transition: all 0.25s ease;
-  backface-visibility: hidden;
-  pointer-events: none;
-  font-size: 1rem;
+  font-size: .8rem;
+  line-height: 1rem;
+  display: inline-block;
+}
+.field_wrap input{
   line-height: 1.8rem;
-}
-label .req {
-  margin: 2px;
-  color: #4147e1;
-}
-label.active {
-  transform: translateY(40px);
-  left: 2px;
   font-size: 1rem;
-}
-label.active .req {
-  opacity: 0;
-}
-label.highlight {
-  color: rgba(66, 60, 60, 0.466);
-}
-input, textarea {
-  font-size: 1rem;
-  line-height: 1.8rem;
   display: block;
   width: 100%;
-  padding: 5px 10px;
+  padding: 5px;
   background: none;
   border: none;
-  border-bottom: 1px solid #a0b3b0;
+  border-bottom: 2px solid #a0b3b0;
   color: #2b2b2b;
-  transition: border-color .25s ease, box-shadow .25s ease;
 }
-input:focus, textarea:focus {
+.field_wrap  input:focus{
   outline: 0;
   border-color: #4147e1;
 }
 textarea {
   border: 2px solid #a0b3b0;
   resize: vertical;
+}
+
+.field_wrap.success input{
+  border-bottom-color: #4147e1;
+}
+.field_wrap.error input{
+  border-bottom-color: #e74c3c;
+}
+
+.field_wrap small{
+  color: #e74c3c;
+  line-height: 1.8rem;
+  visibility: hidden;
+}
+.field_wrap.error small{
+  visibility: visible;
 }
 
 /* recaptcha */
@@ -144,11 +128,11 @@ textarea {
   display: block;
   width: 100%;
 }
-.hide{
-  display: none;
-}
 
 /* 아이디,비번찾기 */
+.find{
+  text-align: center;
+}
 .find>a{
   display: inline-block;
   font-size: .9rem;
@@ -207,6 +191,7 @@ textarea {
 }
 
 @media(max-width:768px){
+  small{font-size: .8rem;}
   h2{font-size: 1rem;}
   .button{font-size: 1rem;}
   .hide{
@@ -216,8 +201,14 @@ textarea {
     border: 1px solid #969696;
   }
   .test{display: none;}
-  .social{display: none;}
-  .find>a{font-size: .8rem;}
+  .social{
+    display: flex;
+    justify-content: space-between;
+  }
+  .social>a{
+    margin: 0;
+  }
+  .find{display: none;}
   .tab_group li a {font-size: .8rem;}
   .tab_group span{font-size: .8rem;}
   

@@ -165,7 +165,7 @@ header{
     transform: translateY(0px);
 }
 .top_gnb_after .notify ul{right: 0; width: 200px;}
-.top_gnb_after .user ul{left: 0; width: 150px;}
+.top_gnb_after .user ul{right: 0; width: 150px;}
 .top_gnb_after>li ul li {
     display: flex;
     justify-content: space-between;
