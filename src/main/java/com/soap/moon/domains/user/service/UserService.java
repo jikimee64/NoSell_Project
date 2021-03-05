@@ -9,6 +9,7 @@ import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.domain.Password;
 import com.soap.moon.domains.user.dto.UserDto;
 import com.soap.moon.domains.user.dto.UserDto.CheckUserAuthRes;
+import com.soap.moon.domains.user.dto.mapper.UserMapper;
 import com.soap.moon.domains.user.exception.JwtExpiredException;
 import com.soap.moon.domains.user.exception.JwtMalFormedException;
 import com.soap.moon.domains.user.exception.JwtUnsupportedException;
@@ -24,6 +25,7 @@ import io.jsonwebtoken.MalformedJwtException;
 import io.jsonwebtoken.UnsupportedJwtException;
 import io.jsonwebtoken.security.SecurityException;
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -78,6 +80,7 @@ public class UserService {
             .profileImage(
                 "https://user-images.githubusercontent.com/52563841/108304539-9a01e200-71eb-11eb-94a7-01ead35e186e.png")
             .status(UserStatus.ACTIVE)
+            .active(true)
             .build();
 
         UserAuthority userAuthorityEntity = UserAuthority.builder()
@@ -95,9 +98,6 @@ public class UserService {
     public boolean validateDuplicateMember(String email) {
         Optional<User> findMember = userRepository.findByAccount(getAccountByUserId(email));
         findMember.ifPresent(fm -> {
-//            String exEmail = fm.getAccount().getEmail();
-//            int idx = exEmail.indexOf("@");
-//            String socialType = exEmail.substring(idx + 1);
 
             userOauthRepository.findByUser(fm).ifPresent(ofm -> {
                 log.info("ofm.getProviderType()" + ofm.getProviderType());
@@ -169,18 +169,39 @@ public class UserService {
         return true;
     }
 
-//    public Optional<User> getUserWithAuthorities(String userId) {
-//        return userRepository.findOneWithAuthoritiesByAccount(userId);
-//    }
-//
-//    public Optional<User> getMyUserWithAuthorities() {
-//        return SecurityUtil.getCurrentUsername()
-//            .flatMap(s -> userRepository.findOneWithAuthoritiesByAccount(s));
-//    }
-
     private Account getAccountByUserId(String userId) {
         return Account.builder().email(userId).build();
     }
 
+    //닉네임 변경
+    @Transactional
+    public Map<String, String> updateMemberOfNickname(Long memberId, String nickname){
+        User user = userRepository.findById(memberId).orElseThrow(() -> new MemberNotFoundException());
+        user.changeNickname(nickname);
+        Map<String, String> map = new HashMap<>();
+        map.put("nickname", user.getNickName());
+        return map;
+    }
+
+    //비밀번호 변경
+    @Transactional
+    public Map<String, Boolean> updateMemberOfPassword(Long userId, String password) {
+        User byId = userRepository.findById(userId).orElseThrow(() -> new MemberNotFoundException());
+        byId.changePassword(Password.builder().password((passwordEncoder.encode(password))).build());
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("confirm", true);
+        return map;
+    }
+
+    //회원탈퇴
+    @Transactional
+    public Map<String, Boolean> deleteMember(Long userId) {
+        userRepository.findById(userId).ifPresent(selectUser -> {
+            selectUser.changeActive(false);
+        });
+        Map<String, Boolean> map = new HashMap<>();
+        map.put("confirm", true);
+        return map;
+    }
 
 }

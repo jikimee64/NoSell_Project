@@ -26,7 +26,6 @@ import org.springframework.transaction.annotation.Transactional;
 public class ProductService {
 
     private final ProductRepository productRepository;
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
     public List<mainProductRes> getProductList(Integer page) {
 
@@ -54,9 +53,7 @@ public class ProductService {
                         .price(s.getPrice())
                         .dealType(s.getDealType())
                         .image_url(s.getImage_url())
-                        .createdAt(
-                            LocalDateTime.parse(s.getCreatedAt().format(formatter),
-                                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")))
+                        .createdAt(s.getCreatedAt())
                         .build())
                 .collect(Collectors.toList());
         }

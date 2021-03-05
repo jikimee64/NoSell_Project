@@ -3,6 +3,7 @@ package com.soap.moon.domains.user.domain;
 import com.mysema.commons.lang.Assert;
 import com.soap.moon.domains.category.domain.CategoryUser;
 import com.soap.moon.global.common.BaseTimeEntity;
+import com.soap.moon.global.config.converter.BooleanToYNConverter;
 import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Convert;
 import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -59,6 +61,9 @@ public class User extends BaseTimeEntity implements Serializable {
     @Column(name = "status")
     private UserStatus status;
 
+    @Convert(converter=BooleanToYNConverter.class)
+    private boolean active;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<UserAuthority> authorities = new HashSet<>();
 
@@ -70,14 +75,14 @@ public class User extends BaseTimeEntity implements Serializable {
 
     @Builder
     public User(Account account, Password password, String nickName, String phoneNum,
-        String profileImage,
-        UserStatus status) {
+        String profileImage, UserStatus status, boolean active) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(password, "password must not be null");
         Assert.notNull(phoneNum, "phoneNum must not be null");
         Assert.notNull(nickName, "nickName must not be null");
         Assert.notNull(profileImage, "profileImage must not be null");
         Assert.notNull(status, "status must not be null");
+        Assert.notNull(active, "active must not be null");
 
         this.account = account;
         this.password = password;
@@ -85,11 +90,24 @@ public class User extends BaseTimeEntity implements Serializable {
         this.nickName = nickName;
         this.profileImage = profileImage;
         this.status = status;
+        this.active = active;
     }
 
     public void addAuthority(UserAuthority userAuthority) {
         authorities.add(userAuthority);
         userAuthority.setUser(this);
+    }
+
+    public void changeNickname(String nickName){
+        this.nickName = nickName;
+    }
+
+    public void changePassword(Password password){
+        this.password = password;
+    }
+
+    public void changeActive(Boolean active){
+        this.active = active;
     }
 
 }

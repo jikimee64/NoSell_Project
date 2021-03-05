@@ -35,7 +35,7 @@ public class ProductController {
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "메인 페이지 상품 전체 조회 성공", response = mainProductRes.class)
     })
-    @PerformanceTimeRecord
+    //@PerformanceTimeRecord
     @GetMapping("/{page}/list")
     public ResponseEntity<?> getProductList(
         @ApiParam(value = "page 0부터", required = true, example = "0")
@@ -57,7 +57,8 @@ public class ProductController {
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "서브 페이지 카테고리별 상품 조회 성공", response = mainProductRes.class)
     })
-    @PerformanceTimeRecord
+
+    //@PerformanceTimeRecord
     @GetMapping("/{page}/list/categories/{categoryId}")
     public ResponseEntity<?> getProductListByCategory(
         @ApiParam(value = "카테고리 번호(14~53)", required = true, example = "14")

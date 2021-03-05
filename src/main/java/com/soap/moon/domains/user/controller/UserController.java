@@ -24,7 +24,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -128,9 +131,6 @@ public class UserController {
             numStr+=ran;
         }
 
-        log.info("수신자 번호 : " + dto.getPhoneNum());
-        log.info("인증번호 : " + numStr);
-
         Map<String, String> map = new HashMap<>();
         if(userService.certifiedPhoneNumber(dto.getPhoneNum(), numStr))
             map.put("AuthNumber",numStr);
@@ -169,17 +169,71 @@ public class UserController {
             , HttpStatus.OK);
     }
 
-//    @GetMapping("/user")
-//    //@PreAuthorize("hasAnyRole('USER','ADMIN')")
-//    public ResponseEntity<Member> getMyUserInfo() {
-//        return ResponseEntity.ok(memberService.getMyUserWithAuthorities().get());
-//    }
-//
-//    @GetMapping("/user/{username}")
-//    //@PreAuthorize("hasAnyRole('ADMIN')")
-//    public ResponseEntity<Member> getUserInfo(@PathVariable String username) {
-//        return ResponseEntity.ok(memberService.getUserWithAuthorities(username).get());
-//    }
+    //닉네임 변경
+    @ApiOperation(
+        httpMethod = "PATCH", value = "닉네임 변경", notes = "회원수정에서 닉네임을 변경한다.")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "회원 닉네임 변경 성공", response = Map.class)
+    })
+    @PatchMapping(value = "/{id}/nickname")
+    public ResponseEntity<?> updateNickname(
+        @PathVariable("id") final Long memberId,
+        @ApiParam(value = "회원수정 닉네임 DTO", required = true)
+        @RequestBody @Valid final UserDto.updateNicknameReq dto
+        ) {
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(
+                    userService.updateMemberOfNickname(memberId, dto.getNickName()))
+                .build()
+            , HttpStatus.OK);
+    }
+
+    //비밀번호 변경
+    @ApiOperation(
+        httpMethod = "PATCH", value = "비밀번호 변경", notes = "회원수정에서 비밀번호를 변경한다.")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "회원 비밀번호 변경 성공", response = Map.class)
+    })
+    @PatchMapping(value = "/{id}/password")
+    public ResponseEntity<?> updatePassword(
+        @PathVariable("id") final Long memberId,
+        @ApiParam(value = "회원수정 비밀번호 DTO", required = true)
+        @RequestBody @Valid final UserDto.updatePasswodReq dto
+    ) {
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(
+                    userService.updateMemberOfPassword(memberId, dto.getPassword()))
+                .build()
+            , HttpStatus.OK);
+    }
+
+    //회원탈퇴
+    @ApiOperation(
+        httpMethod = "DELETE", value = "회원탈퇴", notes = "회원수정에서 회원탈퇴를 한다.")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "회원 탈퇴 성공", response = Map.class)
+    })
+    @DeleteMapping("/{id}")
+    public ResponseEntity<?> deleteMember(
+        @PathVariable("id") final Long memberId
+    ) {
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(
+                    userService.deleteMember(memberId))
+                .build()
+            , HttpStatus.OK);
+    }
+
+
 
 
 }

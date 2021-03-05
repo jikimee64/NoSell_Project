@@ -65,6 +65,20 @@ public class LoginService {
         return map;
     }
 
+    public String logout(LoginDto.LogoutReq dto){
+        String username = null;
+
+        try {
+            Authentication authentication = jwtTokenProvider.getAuthentication(dto.getAccessToken());
+            username = authentication.getName();
+        } catch (IllegalArgumentException e) {
+        } catch (ExpiredJwtException e) { //expire됐을 때
+            username = e.getClaims().getSubject();
+            log.info("username from expired access token: " + username);
+        }
+        return username;
+    }
+
     public String provideNewAccessToken(LoginDto.RefreshReq dto) {
         String accessToken = null;
         String refreshToken = null;

@@ -71,6 +71,31 @@ public class UserDto {
         public String phoneNum;
     }
 
+    @ApiModel("회원수정시 닉네임 변경")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class updateNicknameReq {
+        @ApiModelProperty(value = "닉네임", notes = "nickName", example = "홍길동", required = true)
+        @NotBlank(message = "닉네임은 필수 입력 값입니다.")
+        @Size(min = 2, message = "닉네임은 최소 2자 이상으로 입력해주세요.")
+        public String nickName;
+    }
+
+    @ApiModel("회원수정시 비밀번호 변경")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class updatePasswodReq {
+        @ApiModelProperty(value = "비밀번호", notes = "password", example = "1q2w3e4r1!", required = true)
+        @NotBlank(message = "패스워드는 필수 입력 값입니다.")
+        @Pattern(regexp="(?=.*[0-9])(?=.*[a-z])(?=.*\\W)(?=\\S+$).{6,15}",
+            message = "비밀번호는 영문 소문자와 숫자, 특수기호가 적어도 1개 이상씩 포함된 6자 ~ 15자의 비밀번호여야 합니다.")
+        public String password;
+    }
+
     @ApiModel("회원 단건 조회 GET")
     @Data
     @Builder

@@ -2,6 +2,13 @@ package com.soap.moon.global.error;
 
 import lombok.Getter;
 
+/**
+ * 400 : Bad Request
+ * 401 : Unauthorized
+ * 403 : Forbidden
+ * 404 : Not Fount
+ * 500 : Internal Server Error
+ */
 @Getter
 public enum ErrorCode {
 

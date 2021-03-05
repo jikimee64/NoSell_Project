@@ -1,4 +1,4 @@
-package com.soap.moon.global.config.security;
+package com.soap.moon.global.config;
 
 import com.soap.moon.global.jwt.JwtAccessDeniedHandler;
 import com.soap.moon.global.jwt.JwtAuthenticationEntryPoint;
@@ -70,9 +70,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
             .and()
             .authorizeRequests()
+            //임시
+            .antMatchers( "/api/v1/users/**").permitAll()
             .antMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
             .antMatchers(HttpMethod.POST,"/api/v1/logout").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
+
             .antMatchers(HttpMethod.POST, "/api/v1/users/emailCheck").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/users/sendSMS").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/refresh").permitAll()

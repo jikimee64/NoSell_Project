@@ -7,6 +7,7 @@ import com.soap.moon.domains.user.dto.LoginDto.LoginRes;
 import com.soap.moon.domains.user.dto.LoginDto.RefreshRes;
 import com.soap.moon.domains.user.service.LoginService;
 import com.soap.moon.global.common.CommonResponse;
+import com.soap.moon.global.config.aop.PerformanceTimeRecord;
 import com.soap.moon.global.jwt.JwtTokenProvider;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.swagger.annotations.Api;
@@ -14,6 +15,7 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.TimeUnit;
 import javax.servlet.http.Cookie;
@@ -40,8 +42,8 @@ public class LoginController {
 
     private final LoginService loginService;
     private final RedisTemplate<String, Object> redisTemplate;
-    private final JwtTokenProvider jwtTokenProvider;
 
+    @PerformanceTimeRecord
     @ApiOperation(
         httpMethod = "POST", value = "로그인", notes = "로그인을 한다.")
     @ApiResponses(value = {
@@ -77,17 +79,10 @@ public class LoginController {
                         .nickName(String.valueOf(map.get("nickName")))
                         .profileImage(String.valueOf(map.get("profileImage")))
                         .build()),
-//            CommonResponse.builder()
-//                .code("200")
-//                .message("ok")
-//                .data(LoginRes.builder()
-//                        .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
-//                        .nickName(String.valueOf(map.get("nickName")))
-//                        .profileImage(String.valueOf(map.get("profileImage")))
-//                        .build()),
             HttpStatus.OK);
     }
 
+    @PerformanceTimeRecord
     @ApiOperation(
         httpMethod = "POST", value = "로그아웃", notes = "로그아웃을 한다. 저장소의 refresh Token이 사라지고 ")
     @ApiResponses(value = {
@@ -98,17 +93,8 @@ public class LoginController {
         @ApiParam(value = "로그아웃시 전송할 accessToken", required = true)
         @RequestBody LoginDto.LogoutReq logoutReq) {
 
-        String username = null;
+        String username = loginService.logout(logoutReq);
         String accessToken = logoutReq.getAccessToken();
-        try {
-            Authentication authentication = jwtTokenProvider.getAuthentication(accessToken);
-            username = authentication.getName();
-            log.info("username : " + username);
-        } catch (IllegalArgumentException e) {
-        } catch (ExpiredJwtException e) { //expire됐을 때
-            username = e.getClaims().getSubject();
-            log.info("username from expired access token: " + username);
-        }
 
         try {
             if (redisTemplate.opsForValue().get(username) != null) {
@@ -123,21 +109,24 @@ public class LoginController {
          * cache logout token for 10 minutes!
          * Access token Blacklist에 30분동안(access token 만료 시간) 올라간다. 로그아웃한 access Token으로는 30분동안 사용 불가
          */
-        log.info(" logout ing : " + accessToken);
         //key, value 저장
         RedisToken redisToken = new RedisToken();
         redisToken.setAccessToken(accessToken);
         redisTemplate.opsForValue().set(accessToken, redisToken);
         redisTemplate.expire(accessToken, 30 * 6 * 1000, TimeUnit.MILLISECONDS);
 
+        Map<String, Boolean> map = new HashMap();
+        map.put("logoutCheck", true);
+
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
                 .message("ok")
-                .data("").build(),
+                .data(map).build(),
             HttpStatus.OK);
     }
 
+    @PerformanceTimeRecord
     @ApiOperation(
         httpMethod = "POST", value = "refresh 토큰 요청", notes = "refreshToken을 요청해 새로운 accessToken을 발급받는다")
     @ApiResponses(value = {
@@ -155,7 +144,6 @@ public class LoginController {
                 .code("200")
                 .message("ok")
                 .data(RefreshRes.builder().accessToken(newAccessToken).build()).build(),
-//            httpHeaders,
             HttpStatus.OK);
     }
 
