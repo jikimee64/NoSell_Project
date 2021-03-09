@@ -14,13 +14,16 @@ import io.swagger.annotations.ApiResponses;
 import javax.validation.constraints.Max;
 import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+@Slf4j
 @Api(tags = {"3. product"}, value = "상품")
 @RestController
 @RequiredArgsConstructor
@@ -57,7 +60,6 @@ public class ProductController {
     @ApiResponses(value = {
         @ApiResponse(code = 200, message = "서브 페이지 카테고리별 상품 조회 성공", response = mainProductRes.class)
     })
-
     //@PerformanceTimeRecord
     @GetMapping("/{page}/list/categories/{categoryId}")
     public ResponseEntity<?> getProductListByCategory(
@@ -72,6 +74,30 @@ public class ProductController {
                 .message("ok")
                 .data(
                     productService.getProductListByCategory(page, categoryId)
+                ).build()
+            , HttpStatus.OK);
+    }
+
+    //메인 페이지 검색
+    @ApiOperation(
+        httpMethod = "GET", value = "메인 페이지 상품(검색)", notes = "검색 후메인페이지 상품정보")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "메인 페이지 상품 전체 조회 성공", response = mainProductRes.class)
+    })
+    //@PerformanceTimeRecord
+    @GetMapping("/{page}/search")
+    public ResponseEntity<?> searchProductList(
+        @ApiParam(value = "page 0부터", required = true, example = "0")
+        @PathVariable(name = "page") @Min(0) Integer page,
+        @ApiParam(value = "검색 키워드", required = true, example = "여성의류")
+        @RequestParam(name = "q") String keyword
+    ){
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(
+                    productService.searchProductList(page, keyword)
                 ).build()
             , HttpStatus.OK);
     }

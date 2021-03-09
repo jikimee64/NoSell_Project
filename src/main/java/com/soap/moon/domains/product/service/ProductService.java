@@ -30,14 +30,22 @@ public class ProductService {
     public List<mainProductRes> getProductList(Integer page) {
 
         Page<mainProductRes> products = productRepository.findMainPageProduct(PageRequest.of
-            (page, 40, Sort.by("id").descending()), null);
+            (page, 40, Sort.by("id").descending()), null, null);
         return getRepositoryInProducts(products);
     }
 
     public List<mainProductRes> getProductListByCategory(Integer page, Integer categoryId) {
 
         Page<mainProductRes> products = productRepository.findMainPageProduct(PageRequest.of
-            (page, 40, Sort.by("id").descending()), categoryId);
+            (page, 40, Sort.by("id").descending()), categoryId, null);
+        return getRepositoryInProducts(products);
+    }
+
+    public List<mainProductRes> searchProductList(Integer page, String keyword) {
+        Page<mainProductRes> products = productRepository.findMainPageProduct(
+            PageRequest.of
+                (page, 40, Sort.by("id").descending()),
+            null, keyword);
         return getRepositoryInProducts(products);
     }
 

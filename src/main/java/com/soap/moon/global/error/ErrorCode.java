@@ -25,7 +25,7 @@ public enum ErrorCode {
 
     // Auth
     AUTHENTICATION_FAILED(401, "AUTH_001", "인증에 실패하였습니다."),
-    LOGIN_FAILED(401, "AUTH_001", "로그인에 실패하였습니다."),
+    LOGIN_FAILED(400, "AUTH_001", "아이디 혹은 비밀번호가 틀립니다."),
     INVALID_JWT_TOKEN(401, "AUTH_003", "유효하지 않은 토큰입니다."),
     EXPIRED_JWT_TOKE(401,"AUTH_004","만료된 토큰입니다."),
     NOT_FORM_JWT(401, "AUTH_005","잘못된 JWT 서명입니다."),

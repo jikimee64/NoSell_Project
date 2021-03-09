@@ -34,6 +34,7 @@ public class GlobalExceptionController {
     @ExceptionHandler(value = RuntimeException.class)
     public ResponseEntity<?> runtimeException(RuntimeException ex) {
         log.info("RuntimeException");
+        ex.printStackTrace();
         return new ResponseEntity<>(
             ErrorResponse.builder()
                 .code("RunTime")
@@ -139,17 +140,15 @@ public class GlobalExceptionController {
             HttpStatus.UNAUTHORIZED);
     }
 
-    //시큐리티의 authenticate()에서 비밀번호가 다르거나 존재하지 않을 떄 발생
+    //시큐리티의 authenticate()에서 아이디 혹은 비밀번호가 다르거나 존재하지 않을 떄 발생
     @ExceptionHandler(BadCredentialsException.class)
     protected ResponseEntity<?> handleBadCredentialsException(BadCredentialsException ex) {
-
         log.info("handleBadCredentialsException", ex);
-
         return new ResponseEntity<>(
             ErrorResponse.builder()
-                .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.AUTHENTICATION_FAILED.getStatus())
+                .code(ErrorCode.LOGIN_FAILED.getCode())
+                .message(ErrorCode.LOGIN_FAILED.getMessage())
+                .status(ErrorCode.LOGIN_FAILED.getStatus())
                 .build(),
             HttpStatus.UNAUTHORIZED);
     }

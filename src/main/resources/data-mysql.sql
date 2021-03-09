@@ -10,7 +10,7 @@ values (NOW(), NOW(), 'ROLE_ADMIN');
 INSERT INTO USER
 VALUES
 (
-    1, NOW(), NOW(), 'nosell@nosell.com', 'nosell_닉네임', 'Y'
+    1, NOW(), NOW(), 'nosell@nosell.com', 'Y', 'nosell_닉네임',
     '$2a$10$ns9gjAMzHcBYVsLg9kHKE.QRs/EtY7L8jFfQsAD9F5Rvvt/jy0MUi',
     '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
@@ -24,7 +24,7 @@ VALUES
 INSERT INTO USER
 VALUES
 (
-    2, NOW(), NOW(), 'test@test.com', 'test_닉네임', 'Y'
+    2, NOW(), NOW(), 'test@test.com', 'Y', 'test_닉네임',
     '$2a$10$e5Wo93q1kSzWD6ehhvOGLubVwYh9dvibacjrrgMl9t65CtBaR8rPG',
     '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 
@@ -38,7 +38,7 @@ VALUES
 INSERT INTO USER
 VALUES
 (
-    3, NOW(), NOW(), 'kate@kate.com',  'kate_닉네임', 'Y'
+    3, NOW(), NOW(), 'kate@kate.com', 'Y', 'kate_닉네임',
     '$2a$10$oXSC643DxsSawrmoD9115e4RryUnW4kPMqsp1EMKF1Qx8W4qQhIi2',
      '01000000000', 'https://user-images.githubusercontent.com/52563841/108356586-aad44700-722f-11eb-84f9-cff25b5a9c45.png','ACTIVE');
 

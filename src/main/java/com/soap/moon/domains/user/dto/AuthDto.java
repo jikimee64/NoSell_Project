@@ -11,19 +11,29 @@ import lombok.NoArgsConstructor;
 
 public class AuthDto {
 
-    @ApiModel("구글/네이버 토큰 GET")
+//    @ApiModel("구글/네이버 토큰 GET")
+//    @Data
+//    @Builder
+//    @AllArgsConstructor
+//    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+//    public static class TokenRes{
+//        private String access_token;
+//        private int expires_in;
+//        private String refresh_token;
+//        //private String scope;
+//        //private String token_type;
+//        //private String id_token;
+//    }
+
+    @ApiModel("Client에서 토큰 받기")
     @Data
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class TokenRes{
-        private String access_token;
-        private int expires_in;
-        private String refresh_token;
-        //private String scope;
-        //private String token_type;
-        //private String id_token;
+    public static class AccessTokenReq{
+        private String accessToken;
     }
+
 
     @ApiModel("구글 유저정보 GET")
     @Data

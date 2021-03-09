@@ -10,6 +10,7 @@ import com.soap.moon.domains.user.domain.UserAuthority;
 import com.soap.moon.domains.user.domain.UserOauth;
 import com.soap.moon.domains.user.domain.UserStatus;
 import com.soap.moon.domains.user.dto.AuthDto;
+import com.soap.moon.domains.user.dto.AuthDto.AccessTokenReq;
 import com.soap.moon.domains.user.dto.AuthDto.NaverProfileRes;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
 import com.soap.moon.domains.user.repository.AuthorityRepository;
@@ -50,33 +51,32 @@ public class OauthService {
     private final PasswordEncoder passwordEncoder;
     private final CustomUserDetailsService customUserDetailsService;
 
-    public void request(ProviderType providerType) {
-        SocialOauth socialOauth = this.findSocialOauthByType(providerType);
-        String redirectURL = socialOauth.getOauthRedirectURL();
-        log.info("URL : " + redirectURL);
-        try {
-            response.sendRedirect(redirectURL);
-        } catch (IOException e) {
-            log.info("request error : " + redirectURL);
-            e.printStackTrace();
-        }
-    }
+//    public void request(ProviderType providerType) {
+//        SocialOauth socialOauth = this.findSocialOauthByType(providerType);
+//        String redirectURL = socialOauth.getOauthRedirectURL();
+//        log.info("URL : " + redirectURL);
+//        try {
+//            response.sendRedirect(redirectURL);
+//        } catch (IOException e) {
+//            log.info("request error : " + redirectURL);
+//            e.printStackTrace();
+//        }
+//    }
 
-    public Map<String, Object> requestAccessToken(ProviderType providerType, String code,
-        String state) {
+    public Map<String, Object> requestAccessToken(ProviderType providerType, AccessTokenReq dto) {
         SocialOauth socialOauth = this.findSocialOauthByType(providerType);
         //state 인자는 naver에서만 필요..(리펙토링 절실)
-        AuthDto.TokenRes tokenRes = socialOauth.requestAccessToken(code, state);
-
+//        AuthDto.TokenRes tokenRes = socialOauth.requestAccessToken(code, state);
+//
         String email = null;
         String providerId = null;
 
         if ("NAVER".equals(providerType.getName())) {
-            NaverProfileRes naverProfileRes = socialOauth.userInfoNaver(tokenRes);
+            NaverProfileRes naverProfileRes = socialOauth.userInfoNaver(dto);
             email = naverProfileRes.getResponse().getEmail();
             providerId = naverProfileRes.getResponse().getId();
         } else {
-            AuthDto.GoogleProfileRes profileRes = socialOauth.userInfoGoogle(tokenRes);
+            AuthDto.GoogleProfileRes profileRes = socialOauth.userInfoGoogle(dto);
             email = profileRes.getEmail();
             providerId = profileRes.getId();
         }

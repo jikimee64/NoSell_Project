@@ -11,7 +11,9 @@ import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 public class UserDto {
 
@@ -116,6 +118,15 @@ public class UserDto {
     public static class CheckUserAuthRes {
         private String nickName;
         private String profileImage;
+    }
+
+    @ApiModel("아이디 찾기시 받을 아이디값")
+    @Data
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor(access = AccessLevel.PUBLIC)
+    public static class MailDto {
+        private String toEmail;
     }
 
 }

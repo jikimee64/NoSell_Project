@@ -33,8 +33,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
      * product.id desc, product_image.id asc;
      */
     @Override
-    public Page<ProductDto.mainProductRes> findMainPageProduct(Pageable pageable, Integer categoryId) {
-
+    public Page<ProductDto.mainProductRes> findMainPageProduct(Pageable pageable, Integer categoryId, String keyword) {
         QueryResults<mainProductRes> results = queryFactory
             .select(Projections.constructor(mainProductRes.class,
                 product.id,
@@ -46,12 +45,13 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
             ))
             .from(product)
             .leftJoin(product.productImages, productImage)
-            .where(productImage.id.in( //대표이미지 GET
+            .where(
+                productImage.id.in( //대표이미지 GET
                 JPAExpressions
                     .select(productImage.id.min())
                     .from(productImage)
                     .groupBy(productImage.product)
-            ), categoryIdEq(categoryId)
+                ),categoryIdEq(categoryId), titleAndDescLike(keyword)
             )
             .orderBy(product.id.desc(), productImage.id.asc())
             .offset(pageable.getOffset())
@@ -68,5 +68,11 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
         return categoryId == null ? null : product.category.id.eq(Long.valueOf(categoryId));
     }
 
+    private BooleanExpression titleAndDescLike(String keyword) {
+        if(!isEmpty(keyword)){
+            return product.title.contains(keyword).or( product.description.contains(keyword));
+        }
+        return null;
+    }
 
 }

@@ -9,6 +9,7 @@ import com.soap.moon.domains.user.exception.MemberNotFoundException;
 import com.soap.moon.domains.user.repository.UserRepository;
 import com.soap.moon.domains.user.service.UserService;
 import com.soap.moon.global.common.CommonResponse;
+import com.soap.moon.global.config.aop.PerformanceTimeRecord;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -17,6 +18,7 @@ import io.swagger.annotations.ApiResponses;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
+import java.util.concurrent.Future;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -102,7 +104,7 @@ public class UserController {
 
         Map<String, Boolean> map = new HashMap<>();
         boolean flag = userService.validateDuplicateMember(dto.getEmail());
-        map.put("confirm",flag);
+        map.put("confirm", flag);
 
         return new ResponseEntity<>(
             CommonResponse.builder()
@@ -124,16 +126,17 @@ public class UserController {
         @ApiParam(value = "휴대폰번호", required = true)
         @RequestBody @Valid final UserDto.PhoneCheckReq dto) {
 
-        Random rand  = new Random();
+        Random rand = new Random();
         String numStr = "";
-        for(int i=0; i<4; i++) {
+        for (int i = 0; i < 4; i++) {
             String ran = Integer.toString(rand.nextInt(10));
-            numStr+=ran;
+            numStr += ran;
         }
 
         Map<String, String> map = new HashMap<>();
-        if(userService.certifiedPhoneNumber(dto.getPhoneNum(), numStr))
-            map.put("AuthNumber",numStr);
+        if (userService.certifiedPhoneNumber(dto.getPhoneNum(), numStr)) {
+            map.put("AuthNumber", numStr);
+        }
 
         return new ResponseEntity<>(
             CommonResponse.builder()
@@ -180,7 +183,7 @@ public class UserController {
         @PathVariable("id") final Long memberId,
         @ApiParam(value = "회원수정 닉네임 DTO", required = true)
         @RequestBody @Valid final UserDto.updateNicknameReq dto
-        ) {
+    ) {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
@@ -234,6 +237,36 @@ public class UserController {
     }
 
 
+    //비밀번호 찾기(이메일 인증)
+    @ApiOperation(
+        httpMethod = "POST", value = "비밀번호 찾기", notes = "비밀번호 찾기")
+    @ApiResponses(value = {
+        @ApiResponse(code = 200, message = "아이디 찾기 성공", response = Map.class)
+    })
+    @PerformanceTimeRecord
+    @PostMapping("/mail")
+    public ResponseEntity<?> findId(
+        @RequestBody @Valid final UserDto.MailDto dto
+    ) {
 
+        Random rand = new Random();
+        String numStr = "";
+        for (int i = 0; i < 4; i++) {
+            String ran = Integer.toString(rand.nextInt(10));
+            numStr += ran;
+        }
+
+        Map<String, String> map = new HashMap<>();
+        userService.findIdInEmail(numStr, dto.getToEmail());
+        map.put("AuthNumber", numStr);
+
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(map)
+                .build()
+            , HttpStatus.OK);
+    }
 
 }

@@ -1,5 +1,6 @@
 package com.soap.moon.domains.user.service;
 
+import com.google.common.util.concurrent.ListenableFuture;
 import com.soap.moon.domains.user.domain.Account;
 import com.soap.moon.domains.user.domain.Authority;
 import com.soap.moon.domains.user.domain.ProviderType;
@@ -27,12 +28,17 @@ import io.jsonwebtoken.security.SecurityException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Optional;
+import java.util.concurrent.Future;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
 import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.mail.SimpleMailMessage;
+import org.springframework.mail.javamail.JavaMailSender;
+import org.springframework.scheduling.annotation.Async;
+import org.springframework.scheduling.annotation.AsyncResult;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -45,6 +51,7 @@ import org.springframework.util.StringUtils;
 @RequiredArgsConstructor
 public class UserService {
 
+    private final JavaMailSender mailSender;
     private final UserRepository userRepository;
     private final UserOauthRepository userOauthRepository;
     private final AuthorityRepository authorityRepository;
@@ -202,6 +209,18 @@ public class UserService {
         Map<String, Boolean> map = new HashMap<>();
         map.put("confirm", true);
         return map;
+    }
+
+    //비밀번호 찾기(이메일 계정으로)
+    @Async
+    public void findIdInEmail(String numStr, String toEmail) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(toEmail);
+        message.setFrom("nosell.market");
+        message.setSubject("테스트 메일");
+        message.setText("랜덤번호 : " + numStr);
+
+        mailSender.send(message);
     }
 
 }

@@ -49,7 +49,7 @@ class LoginControllerTest extends ControllerTest {
             LogoutReq.builder().accessToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub3NlbGxAbm9zZWxsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2MTQ3NjM4ODd9.If8pyaec_UHS4Rbo9TkhNfJQ_mUVj62lBNoXesuYWYCr8OIDk5YnIc7Yw4-RDDbHsZKy57Jt5U6VgRq3g6ZmwQ").build()
         );
         createOrReadByJsonParams(LOGIN_API_URL + "/logout", content,
-            jsonPath("$.data.*", hasSize(0))); //is : equalTo
+            jsonPath("$.data.*", hasSize(1))); //is : equalTo
     }
 
     @DisplayName("refresh_tokne을 이용한 new access_token 요청")

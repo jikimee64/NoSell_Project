@@ -2,6 +2,7 @@ package com.soap.moon.domains.user.controller;
 
 import com.soap.moon.domains.user.domain.ProviderType;
 import com.soap.moon.domains.user.domain.Token;
+import com.soap.moon.domains.user.dto.AuthDto.AccessTokenReq;
 import com.soap.moon.domains.user.dto.LoginDto;
 import com.soap.moon.domains.user.dto.LoginDto.LoginRes;
 import com.soap.moon.domains.user.service.OauthService;
@@ -19,6 +20,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -37,17 +39,17 @@ public class OauthController {
      *
      * @param providerType (GOOGLE, NAVER)
      */
-    @ApiOperation(
-        httpMethod = "GET", value = "소셜 로그인", notes = "소셜 로그인 버튼 클릭, 내부에서 callback메소드로 이동")
-    @ApiResponses(value = {
-        @ApiResponse(code = 200, message = "소셜 로그인 성공", response = LoginRes.class)
-    })
-    @GetMapping(value = "/{socialLoginType}")
-    public void socialLoginType(
-        @PathVariable(name = "socialLoginType") ProviderType providerType) {
-        log.info(">> 사용자로부터 SNS 로그인 요청을 받음 :: {} Social Login", providerType);
-        oauthService.request(providerType);
-    }
+//    @ApiOperation(
+//        httpMethod = "GET", value = "소셜 로그인", notes = "소셜 로그인 버튼 클릭, 내부에서 callback메소드로 이동")
+//    @ApiResponses(value = {
+//        @ApiResponse(code = 200, message = "소셜 로그인 성공", response = LoginRes.class)
+//    })
+//    @GetMapping(value = "/{socialLoginType}")
+//    public void socialLoginType(
+//        @PathVariable(name = "socialLoginType") ProviderType providerType) {
+//        log.info(">> 사용자로부터 SNS 로그인 요청을 받음 :: {} Social Login", providerType);
+//        oauthService.request(providerType);
+//    }
 
     /**
      * Social Login API Server 요청에 의한 callback 을 처리
@@ -57,19 +59,15 @@ public class OauthController {
      * @return SNS Login 요청 결과로 받은 Json 형태의 String 문자열 (access_token, refresh_token 등)
      */
     @ApiOperation(
-        httpMethod = "GET", value = "소셜 로그인 callback", notes = "클라이언트에서 /api/v1/oauth/{socialLoginType} 요청시 마지막에 타는 메소드")
-    @GetMapping(value = "/{socialLoginType}/callback")
+        httpMethod = "GET", value = "소셜 로그인", notes = "소셜로그인 시 타는 메소드")
+    @GetMapping(value = "/{socialLoginType}/accessToken")
     public ResponseEntity<?> callback(
         @PathVariable(name = "socialLoginType") ProviderType providerType,
-        @RequestParam(name = "code") String code,
-        @RequestParam(name= "state", required = false) String state,
+        @RequestBody AccessTokenReq dto,
         HttpServletResponse response) {
 
         Map<String, Object> map = oauthService
-            .requestAccessToken(providerType, code, state);
-
-//        HttpHeaders httpHeaders = new HttpHeaders();
-//        httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + (map.get(Token.ACCESS_TOKEN.getName())));
+            .requestAccessToken(providerType, dto);
 
         Cookie cookie = new Cookie("refreshToken", (String)map.get(Token.REFRESH_TOKEN.getName()));
         cookie.setMaxAge(7 * 24 * 60 * 60); // expires in 7 days

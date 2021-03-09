@@ -37,24 +37,24 @@ class OauthControllerTest extends ControllerTest {
     @MockBean
     OauthService oauthService;
 
-    @DisplayName("소셜 callback 메소드")
-    @Test
-    void 소셜_callback_메소드() throws Exception{
-        Map<String, Object> map = new HashMap<>();
-        map.put(Token.ACCESS_TOKEN.getName(), "access_token");
-        map.put(Token.REFRESH_TOKEN.getName(), "access_token");
-        map.put("nickName", "닉네임");
-        map.put("profileImage", "프로필이미지");
-
-        when(oauthService.requestAccessToken(any(), any(), any())).thenReturn(map);
-        mockMvc.perform(get(OAUTH_API_URL + "/{socialLoingType}/callback", ProviderType.GOOGLE)
-            .param("code", "code")
-            .param("state", "state")
-            .accept(MediaType.APPLICATION_JSON))
-            .andExpect(status().isOk())
-            .andExpect(cookie().exists("refreshToken"))
-            .andExpect(jsonPath("$.data.*", hasSize(3)))
-            .andDo(print());
-    }
+//    @DisplayName("소셜 callback 메소드")
+//    @Test
+//    void 소셜_callback_메소드() throws Exception{
+//        Map<String, Object> map = new HashMap<>();
+//        map.put(Token.ACCESS_TOKEN.getName(), "access_token");
+//        map.put(Token.REFRESH_TOKEN.getName(), "access_token");
+//        map.put("nickName", "닉네임");
+//        map.put("profileImage", "프로필이미지");
+//
+//        when(oauthService.requestAccessToken(any(), any(), any())).thenReturn(map);
+//        mockMvc.perform(get(OAUTH_API_URL + "/{socialLoingType}/callback", ProviderType.GOOGLE)
+//            .param("code", "code")
+//            .param("state", "state")
+//            .accept(MediaType.APPLICATION_JSON))
+//            .andExpect(status().isOk())
+//            .andExpect(cookie().exists("refreshToken"))
+//            .andExpect(jsonPath("$.data.*", hasSize(3)))
+//            .andDo(print());
+//    }
 
 }
