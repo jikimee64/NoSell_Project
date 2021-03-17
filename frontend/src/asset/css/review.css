@@ -1,0 +1,141 @@
+@charset "utf-8";
+
+.reviews {
+    padding: 2%;
+    border-radius: 5px;
+    background-color: #F2F2F2;
+}
+
+/* 상단 후기점수 */
+.reviews>div {
+    width: 94%;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    padding: 2% 0;
+    margin: 0 auto;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.15);
+}
+
+.review_title h2 {
+    text-indent: 3px;
+    font-size: 2rem;
+}
+
+.review_score {
+    padding-bottom: 1%;
+}
+
+.review_score p {
+    padding: 2% 0;
+    font-size: .9rem;
+    display: flex;
+    align-items: flex-end;
+}
+
+.review_score p i.smile {
+    display: inline-block;
+    width: 30px;
+    height: 28px;
+    background: url(../img/sprit_7.svg) no-repeat;
+    background-size: 1500% 1500%;
+    background-position: -32px -231px;
+}
+
+.review_score p i.sad {
+    display: inline-block;
+    width: 30px;
+    height: 28px;
+    background: url(../img/sprit_7.svg) no-repeat 0 0;
+    background-size: 1500% 1500%;
+    background-position: -1px -231px;
+}
+
+.review_score span {
+    font-size: .8rem;
+}
+
+.review_score span::before {
+    content: '(';
+}
+
+.review_score span::after {
+    content: ')';
+}
+
+/* 하단 후기 */
+.review_text {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+
+.review_text li {
+    max-width: 700px;
+    min-width: 260px;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.10), 0 2px 4px 0 rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+    padding: 2%;
+    margin: 2%;
+}
+
+.text_name {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: flex-end;
+    line-height: normal;
+}
+
+.text_name img {
+    width: 40px;
+    height: 40px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.text_name h3 {
+    display: inline-block;
+    font-size: 1.1rem;
+    font-weight: normal;
+    text-indent: 5px;
+}
+
+.text_name span.text_day {
+    display: block;
+    font-size: .7rem;
+}
+
+p.review {
+    padding-top: 10px;
+    font-size: .9rem;
+    line-height: normal;
+    /* text-overflow: ellipsis;
+  overflow: hidden; */
+}
+
+.more {
+    background-color: #4147e1;
+    border: 2px solid #4147e1;
+    color: #fff;
+    border-radius: 5px;
+    padding: 1% 2%;
+    display: block;
+    margin: 5% auto 0;
+    transition: all .3s;
+    font-size: .8rem;
+}
+
+.more i {
+    text-indent: 3px;
+    vertical-align: middle;
+}
+
+.more:hover {
+    color: #4147e1;
+    background-color: #f2f2f2;
+}
+

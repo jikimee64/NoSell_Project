@@ -11,13 +11,13 @@ const AuthTemplate = ({ children }) => {
         </Link>
       </h1>
       <article className="tab_cont">{children}</article>
-      <ul class="tab_group">
-        <li class="tab active">
+      <ul className="tab_group">
+        <li className="tab active">
           <span>
             처음이신가요?<Link to="/register">회원가입</Link>
           </span>
         </li>
-        <li class="tab">
+        <li className="tab">
           <Link to="/login">로그인</Link>
         </li>
       </ul>

@@ -2,6 +2,7 @@ import React from "react";
 import AuthForm from "./AuthForm";
 import { useState, useCallback } from "react";
 import { withRouter } from "react-router-dom";
+import { authRegister, emailCheck } from "../../api/auth";
 
 const RegisterForm = ({ history }) => {
   const [form, setForm] = useState({
@@ -9,7 +10,16 @@ const RegisterForm = ({ history }) => {
     password: "",
     passwordConfirm: "",
     phone: "",
+    phoneAuth: "",
     nickName: "",
+  });
+
+  const [isValid, setIsValid] = useState({
+    isEmail: false,
+    isPassword: false,
+    isPasswordConfirm: false,
+    isPhone: false,
+    isNickName: false,
   });
 
   const onChangeForm = useCallback((e) => {
@@ -23,10 +33,29 @@ const RegisterForm = ({ history }) => {
   const onSubmit = useCallback(
     (e) => {
       e.preventDefault();
-
-      history.push("/login");
+      const tryRegister = async () => {
+        try {
+          await authRegister({
+            email: form.email,
+            nickName: form.nickName,
+            password: form.password,
+            phoneNum: form.phone,
+          });
+          history.push("/login");
+        } catch (error) {
+          alert("Register Failed...");
+          setForm({
+            email: "",
+            password: "",
+            passwordConfirm: "",
+            phone: "",
+            nickName: "",
+          });
+        }
+      };
+      tryRegister();
     },
-    [history]
+    [form, history]
   );
 
   return <AuthForm type="register" {...{ form, onChangeForm, onSubmit }} />;

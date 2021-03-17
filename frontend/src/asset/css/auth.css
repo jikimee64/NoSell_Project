@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-body {
-    color: #2b2b2b;
-}
-
 .form {
     max-width: 600px;
     margin: 0 auto;
@@ -21,19 +17,19 @@ body {
 }
 
 /* 본문 내용 */
-form {
+.form form {
     margin: 0 auto;
 }
 
 
-h2 {
+.form h2 {
     text-align: center;
     font-size: 1.5rem;
     font-family: 'GmarketSansMedium';
     padding: 3% 0 8% 0;
 }
 
-fieldset>span {
+.form fieldset>span {
     margin: 0;
     padding: 0 0 0 3%;
     font-size: .8rem;
@@ -49,13 +45,11 @@ fieldset>span {
     position: relative;
     margin: 0 auto 8% auto;
     text-align: center;
+    display:flex;
 }
 
 .com_btn {
     width: 100px;
-    position: absolute;
-    top: 0;
-    right: 0;
     border: 1px solid #4147e1;
     border-radius: 5px;
     cursor: pointer;
@@ -63,7 +57,7 @@ fieldset>span {
     color: #4147e1;
 }
 
-label {
+.form label {
     position: absolute;
     transform: translateY(6px);
     left: 13px;
@@ -75,31 +69,30 @@ label {
     line-height: 1.8rem;
 }
 
-label .req {
+.form label .req {
     margin: 2px;
     color: #4147e1;
 }
 
-label.active {
+.form label.active {
     transform: translateY(40px);
     left: 2px;
     font-size: 1rem;
 }
 
-label.active .req {
+.form label.active .req {
     opacity: 0;
 }
 
-label.highlight {
+.form label.highlight {
     color: rgba(66, 60, 60, 0.466);
 }
 
-input,
-textarea {
+.form  input,
+.form textarea {
     font-size: 1rem;
     line-height: 1.8rem;
-    display: block;
-    width: 100%;
+    flex:1;
     padding: 5px 10px;
     background: none;
     border: none;
@@ -108,13 +101,13 @@ textarea {
     transition: border-color .25s ease, box-shadow .25s ease;
 }
 
-input:focus,
-textarea:focus {
+.form  input:focus,
+.form  textarea:focus {
     outline: 0;
     border-color: #4147e1;
 }
 
-textarea {
+.form textarea {
     border: 2px solid #a0b3b0;
     resize: vertical;
 }
@@ -168,6 +161,10 @@ textarea {
     width: 100%;
 }
 
+.find {
+    justify-content: center;
+}
+
 /* 아이디,비번찾기 */
 .find>a {
     display: inline-block;
@@ -188,31 +185,31 @@ textarea {
 }
 
 .social>button {
-    margin: 0 auto;
-    display: block;
+    display: flex;
     width: 45%;
+    height: 40px;
     font-size: .8rem;
     line-height: 2.5rem;
     text-align: center;
-    background-color: #14a34d;
     border-radius: 3px;
     color: #fff;
     margin: 1% auto;
+    overflow:hidden;
+    align-items: center;
+    justify-content: center;    
 }
 
-.social>button:last-child {
-    background-color: #fff;
-    color: #333;
-    border: 1px solid #969696;
+.social_naver {
+    background:green;
 }
 
-.social>button>img {
-    display: inline-block;
-    text-align: left;
-    width: 13px;
-    height: 13px;
-    vertical-align: middle;
-    margin: 0 5% 0 0;
+.social_google {
+    width: 100%;
+}
+
+.social_google>div {
+    display:flex;
+    align-items: center;
 }
 
 /* 하단 탭 */
@@ -236,8 +233,14 @@ textarea {
     display: inline-block;
 }
 
+.form input[type="number"]::-webkit-outer-spin-button,
+.form input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
 @media(max-width:768px) {
-    h2 {
+    .form  h2 {
         font-size: 1rem;
     }
 

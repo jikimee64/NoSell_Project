@@ -7,7 +7,7 @@ const AuthForm = ({ type, form, onChangeForm, onSubmit }) => {
   return (
     <form
       action="#"
-      accept-charset="utf-8"
+      acceptCharset="utf-8"
       name="login_form"
       method="post"
       id="login"
@@ -16,7 +16,7 @@ const AuthForm = ({ type, form, onChangeForm, onSubmit }) => {
       <h2>{type}</h2>
       <fieldset>
         <div className="field_wrap">
-          <label for="email" className={!!form.email ? "active" : ""}>
+          <label htmlFor="email" className={!!form.email ? "active" : ""}>
             {emailInfo(form.email)}
             <span className="req">*</span>
           </label>
@@ -25,13 +25,14 @@ const AuthForm = ({ type, form, onChangeForm, onSubmit }) => {
             id="email"
             name="email"
             required
-            autocomplete="off"
+            autoComplete="off"
             value={form.email}
             onChange={onChangeForm}
           />
+          {type === "register" && <button className="com_btn">중복확인</button>}
         </div>
         <div className="field_wrap">
-          <label for="pw" className={!!form.password ? "active" : ""}>
+          <label htmlFor="pw" className={!!form.password ? "active" : ""}>
             {pwInfo(form.password)}
             <span className="req">*</span>
           </label>
@@ -40,18 +41,15 @@ const AuthForm = ({ type, form, onChangeForm, onSubmit }) => {
             id="pw"
             name="password"
             required
-            autocomplete="off"
-            minlength="6"
-            maxlength="15"
+            autoComplete="off"
+            minLength="4"
+            maxLength="15"
             value={form.password}
             onChange={onChangeForm}
           />
         </div>
         {type === "register" && <RegisterTail {...{ form, onChangeForm }} />}
-        <div className="field_wrap test">
-          <input type="checkbox" />
-          <span>I'm not a robot</span>
-        </div>
+
         <button type="submit" className="button button_block">
           {type}
         </button>

@@ -11,8 +11,6 @@ function settingPrice(price) {
 }
 
 const BoardItem = ({ title, price, dealType, image_url, createdAt }) => {
-  //console.log(props);
-  console.log(createdAt);
   return (
     <li className="item">
       <div className="item_img">
