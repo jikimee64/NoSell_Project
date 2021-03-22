@@ -2,63 +2,66 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>signup</title>
-    <link rel="stylesheet" href="./common/css/fontawesome/fontawesome-all.css">
-    <link rel="stylesheet" href="./common/css/reset.css">
-    <link rel="stylesheet" href="./common/css/signup-login.css">   
-    <link rel="stylesheet" href="./common/css/fontawesome/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>signup</title>
+  <link rel="stylesheet" href="./common/css/fontawesome/fontawesome-all.css">
+  <link rel="stylesheet" href="./common/css/reset.css">
+  <link rel="stylesheet" href="./common/css/signup-login.css">
+  <link rel="stylesheet" href="./common/css/fontawesome/style.css">
 </head>
 <body>
-    <section class="form">
+<section class="form">
 
-        <h1 class="form_logo">
-            <a href="./index.html"><img src="./common/img/logo.svg" alt="logo"></a>
-        </h1>
+  <h1 class="form_logo">
+    <a href="./index.html"><img src="./common/img/logo.svg" alt="logo"></a>
+  </h1>
 
-        <article class="tab_con">
-            <form action="/signup" accept-charset="utf-8" name="signup_form" method="post" id="signup" class="form">
-                <h2>회원가입</h2>
-                <fieldset>
-                    <div class="field_wrap">
-                        <label for="sign_email">아이디(이메일)</label>
-                        <input type="email" id="sign_email" placeholder="이메일 주소 입력" autocomplete="off" />
-                        <button type="button" class="confirm_btn">중복확인</button>
-                        <small>error message</small>
-                    </div>
-                    <div class="field_wrap">
-                        <label for="sign_pw">비밀번호</label>
-                        <input type="password" id="sign_pw" placeholder="영문,숫자,특수문자 포함 6-15자" autocomplete="off"/>
-                        <small>error message</small>
-                    </div>
-                    <div class="field_wrap">
-                        <label for="sign_pw_confirm">비밀번호 확인</label>
-                        <input type="password" id="sign_pw_confirm" placeholder="영문,숫자,특수문자 포함 6-15자" autocomplete="off"/>
-                        <small>error massage</small>
-                    </div>
-                    <div class="field_wrap">
-                        <label for="sign_phone">휴대폰 번호</label>
-                        <input type="tel" id="sign_phone" placeholder="123-4567-8910" autocomplete="off" />
-                        <button type="button" class="confirm_btn">인증요청</button>
-                        <small>error message</small>
-                    </div>
-                    <div class="field_wrap">
-                        <label for="sign_name">닉네임</label>
-                        <input type="text" id="sign_name" placeholder="최소 2자이상 입력" autocomplete="off" minlength="2" maxlength="12" />
-                        <small>error message</small>
-                    </div>
-                    <p class="find">가입시 이용약관및 개인정보 취급방침,위치정보제공에 동의합니다.</p>
-                    <button type="submit" id="submit" class="button button_block">회원가입</button>
-                </fieldset>
-            </form> 
-        </article>
+  <article class="tab_con">
+    <form action="/signup" accept-charset="utf-8" name="signup_form" method="post" id="signup"
+          class="form">
+      <h2>회원가입</h2>
+      <fieldset>
+        <div class="field_wrap">
+          <label for="sign_email">아이디(이메일)</label>
+          <input type="email" id="sign_email" placeholder="이메일 주소 입력" autocomplete="off"/>
+          <button type="button" class="confirm_btn">중복확인</button>
+          <small>error message</small>
+        </div>
+        <div class="field_wrap">
+          <label for="sign_pw">비밀번호</label>
+          <input type="password" id="sign_pw" placeholder="영문,숫자,특수문자 포함 6-15자" autocomplete="off"/>
+          <small>error message</small>
+        </div>
+        <div class="field_wrap">
+          <label for="sign_pw_confirm">비밀번호 확인</label>
+          <input type="password" id="sign_pw_confirm" placeholder="영문,숫자,특수문자 포함 6-15자"
+                 autocomplete="off"/>
+          <small>error massage</small>
+        </div>
+        <div class="field_wrap">
+          <label for="sign_phone">휴대폰 번호</label>
+          <input type="tel" id="sign_phone" placeholder="123-4567-8910" autocomplete="off"/>
+          <button type="button" class="confirm_btn">인증요청</button>
+          <small>error message</small>
+        </div>
+        <div class="field_wrap">
+          <label for="sign_name">닉네임</label>
+          <input type="text" id="sign_name" placeholder="최소 2자이상 입력" autocomplete="off"
+                 minlength="2" maxlength="12"/>
+          <small>error message</small>
+        </div>
+        <p class="find">가입시 이용약관및 개인정보 취급방침,위치정보제공에 동의합니다.</p>
+        <button type="submit" id="submit" class="button button_block">회원가입</button>
+      </fieldset>
+    </form>
+  </article>
 
-        <ul class="tab_group">
-            <li class="tab active"> <span>처음이신가요?<a href="./signup.html">회원가입</a></span></li>
-            <li class="tab"><a href="./login.html">로그인</a></li>
-        </ul> 
+  <ul class="tab_group">
+    <li class="tab active"><span>처음이신가요?<a href="./signup.html">회원가입</a></span></li>
+    <li class="tab"><a href="./login.html">로그인</a></li>
+  </ul>
 </section>
-<script src="./common/js/signup.js"></script>  
+<script src="./common/js/signup.js"></script>
 </body>
 </html>

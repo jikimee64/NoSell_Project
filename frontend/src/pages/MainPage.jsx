@@ -5,11 +5,11 @@ import "../asset/css/media.css";
 
 const MainPage = () => {
   return (
-    <>
-      <h1>Main Page</h1>
-      <BoardList />
-      <Footer />
-    </>
+      <>
+        <h1>Main Page</h1>
+        <BoardList/>
+        <Footer/>
+      </>
   );
 };
 

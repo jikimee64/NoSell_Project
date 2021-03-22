@@ -7,7 +7,7 @@ import org.springframework.data.domain.AuditorAware;
 public class JpaConfig {
 
     @Bean
-    public AuditorAware<String> auditorProvider(){
+    public AuditorAware<String> auditorProvider() {
         return () -> Optional.of("사용자 아이디");
     }
 

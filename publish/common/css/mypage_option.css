@@ -1,184 +1,183 @@
 @charset "utf-8";
 
 .mypage_con {
-    text-align: center;
+  text-align: center;
 }
 
 input:focus {
-    outline: none;
+  outline: none;
 }
 
 /*개인 이미지 등록 */
 .pf_pic {
-    display: inline-block;
+  display: inline-block;
 }
 
 .pf_pic form {
-    width: 100%;
-    position: relative;
+  width: 100%;
+  position: relative;
 }
 
 .pf_pic form img {
-    display: inline-block;
+  display: inline-block;
 }
 
 .pf_pic form img:nth-child(1) {
-    width: 80px;
+  width: 80px;
 }
 
 .pf_pic form img:nth-child(2) {
-    width: 30px;
-    margin-left: -30px;
-    cursor: pointer;
+  width: 30px;
+  margin-left: -30px;
+  cursor: pointer;
 }
 
 .pf_pic form .pf_img {
-    width: 40px;
-    height: 60px;
-    position: absolute;
-    bottom: 0;
-    right: 50px;
-    cursor: pointer;
-    opacity: 0;
+  width: 40px;
+  height: 60px;
+  position: absolute;
+  bottom: 0;
+  right: 50px;
+  cursor: pointer;
+  opacity: 0;
 }
 
 .pf_pic p {
-    color: #969696;
-    padding: 2% 0;
+  color: #969696;
+  padding: 2% 0;
 }
 
 /* 개인 정보 */
 .pf_text ul {
-    display: block;
-    width: 90%;
-    margin: 0 auto;
+  display: block;
+  width: 90%;
+  margin: 0 auto;
 }
 
 .pf_text ul li {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    font-size: .8rem;
-    padding: 3%;
-    position: relative;
-    text-align: left;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  font-size: .8rem;
+  padding: 3%;
+  position: relative;
+  text-align: left;
 }
 
 .pf_wrap label {
-    width: 15%;
-    line-height: 2rem;
+  width: 15%;
+  line-height: 2rem;
 }
 
 .pf_wrap input {
-    width: 65%;
-    line-height: 2rem;
-    border: none;
-    border-bottom: 1px solid #969696;
+  width: 65%;
+  line-height: 2rem;
+  border: none;
+  border-bottom: 1px solid #969696;
 }
 
 .pf_wrap .pf_btn {
-    width: 15%;
-    background-color: #f3f3f3;
-    border-radius: 5px;
+  width: 15%;
+  background-color: #f3f3f3;
+  border-radius: 5px;
 }
 
 .pf_wrap .error,
 .pf_wrap span {
-    position: absolute;
-    bottom: 0;
-    left: 20%;
-    line-height: normal;
-    color: #e74c3c;
-    display: none;
+  position: absolute;
+  bottom: 0;
+  left: 20%;
+  line-height: normal;
+  color: #e74c3c;
+  display: none;
 }
 
 /* 회원탈퇴 팝업 */
 .pf_bye {
-    width: 90%;
-    text-align: right;
-    margin: 15% 0 0 0;
-    padding: 4%;
-    display: inline-block;
-    font-size: .8rem;
-    cursor: pointer;
+  width: 90%;
+  text-align: right;
+  margin: 15% 0 0 0;
+  padding: 4%;
+  display: inline-block;
+  font-size: .8rem;
+  cursor: pointer;
 }
 
 .open_modal {
-    width: 100%;
-    height: 100%;
-    position: fixed;
-    background-color: rgba(0, 0, 0, .8);
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    z-index: 10;
-    visibility: hidden;
-    opacity: 0;
-    pointer-events: none;
-    transition: all 0.3s;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: rgba(0, 0, 0, .8);
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 10;
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transition: all 0.3s;
 
 }
 
 .open_modal:target {
-    visibility: visible;
-    opacity: 1;
-    pointer-events: auto;
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
 }
 
-.open_modal>div {
-    min-width: 100px;
-    min-height: 100px;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background-color: #f3f3f3;
-    border-radius: 5px;
-    padding: 3%;
-    font-size: .9rem;
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-around;
+.open_modal > div {
+  min-width: 100px;
+  min-height: 100px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #f3f3f3;
+  border-radius: 5px;
+  padding: 3%;
+  font-size: .9rem;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
 }
 
-.open_modal>div p {
-    flex-basis: 100%;
+.open_modal > div p {
+  flex-basis: 100%;
 }
 
 .close_modal {
-    flex-basis: 45%;
-    display: inline-block;
-    text-align: center;
-    padding: 5%;
-    margin-top: 20%;
-    min-width: 30px;
-    color: #fff;
-    background-color: #4147e1;
-    border-radius: 3px;
+  flex-basis: 45%;
+  display: inline-block;
+  text-align: center;
+  padding: 5%;
+  margin-top: 20%;
+  min-width: 30px;
+  color: #fff;
+  background-color: #4147e1;
+  border-radius: 3px;
 }
 
 
+@media (max-width: 768px) {
+  .pf_wrap label {
+    width: 100%;
+  }
 
-@media(max-width:768px) {
-    .pf_wrap label {
-        width: 100%;
-    }
+  .pf_wrap input {
+    width: 75%;
+  }
 
-    .pf_wrap input {
-        width: 75%;
-    }
+  .pf_wrap .pf_btn {
+    width: 20%;
+  }
 
-    .pf_wrap .pf_btn {
-        width: 20%;
-    }
-
-    .pf_wrap .error,
-    .pf_wrap span {
-        bottom: -2%;
-        left: 3%;
-    }
+  .pf_wrap .error,
+  .pf_wrap span {
+    bottom: -2%;
+    left: 3%;
+  }
 
 
 }

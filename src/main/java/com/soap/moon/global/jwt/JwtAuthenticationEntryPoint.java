@@ -22,7 +22,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         AuthenticationException authException) throws IOException {
         // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
 
-        String exception = (String)request.getAttribute("exception");
+        String exception = (String) request.getAttribute("exception");
         ErrorCode errorCode;
 
         log.debug("log: exception: {} ", exception);
@@ -30,7 +30,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         /**
          * 토큰 없는 경우
          */
-        if(exception == null) {
+        if (exception == null) {
             log.info("JwtAuthenticationEntryPoint() : 토큰 없는 경우");
             errorCode = ErrorCode.INVALID_JWT_TOKEN;
             setResponse(response, errorCode);
@@ -40,9 +40,9 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         /**
          * 토큰 만료된 경우
          */
-        if(exception.equals(ErrorCode.EXPIRED_JWT_TOKE.getCode())) {
+        if (exception.equals(ErrorCode.EXPIRED_JWT_TOKEN.getMessage())) {
             log.info("JwtAuthenticationEntryPoint() : 토큰 만료된 경우");
-            errorCode = ErrorCode.EXPIRED_JWT_TOKE;
+            errorCode = ErrorCode.EXPIRED_JWT_TOKEN;
             setResponse(response, errorCode);
             return;
         }
@@ -50,14 +50,12 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
         /**
          * 토큰 시그니처가 다른 경우
          */
-        if(exception.equals(ErrorCode.INVALID_JWT_TOKEN.getCode())) {
+        if (exception.equals(ErrorCode.INVALID_JWT_TOKEN.getMessage())) {
             log.info("JwtAuthenticationEntryPoint() : 토큰 시그니처가 다른 경우");
             errorCode = ErrorCode.INVALID_JWT_TOKEN;
             setResponse(response, errorCode);
         }
-
         log.info("JwtAuthenticationEntryPoint");
-
     }
 
     /**
@@ -66,8 +64,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
     private void setResponse(HttpServletResponse response, ErrorCode errorCode) throws IOException {
         response.setContentType("application/json;charset=UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
-        response.getWriter().println("{ \"code\" : \"" +  errorCode.getCode()
-            + "\", \"message\" : \"" +  errorCode.getMessage()
+        response.getWriter().println("{ \"message\" : \"" + errorCode.getMessage()
             + "\" }");
     }
 

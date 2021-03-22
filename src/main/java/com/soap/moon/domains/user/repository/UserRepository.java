@@ -18,5 +18,4 @@ public interface UserRepository extends JpaRepository<User, Long>, UserRepositor
 //    Optional<User> findUserWithUserReview(@Param("userId") Long userId);
 
 
-
 }

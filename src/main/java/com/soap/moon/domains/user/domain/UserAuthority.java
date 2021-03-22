@@ -24,7 +24,7 @@ public class UserAuthority extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+    @Column(name = "id")
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
@@ -43,7 +43,7 @@ public class UserAuthority extends BaseTimeEntity {
         this.authority = authority;
     }
 
-    public void setUser(User user){
+    public void setUser(User user) {
         this.user = user;
     }
 

@@ -14,9 +14,14 @@ import javax.validation.Payload;
 /* annotation을 Runtime까지 유지합니다. */
 @Retention(RetentionPolicy.RUNTIME)
 public @interface Enum {
+
     String message() default "Invalid value. This is not permitted.";
+
     Class<?>[] groups() default {};
+
     Class<? extends Payload>[] payload() default {};
+
     Class<? extends java.lang.Enum<?>> enumClass();
+
     boolean ignoreCase() default false;
 }

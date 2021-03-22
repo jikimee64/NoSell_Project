@@ -1,4 +1,5 @@
 # NoSell 프로젝트
+
 ![로고](https://user-images.githubusercontent.com/52563841/109815334-e11fb680-7c72-11eb-89c8-5272873990df.png)
 
 ## 🔖 0. 소개
@@ -10,6 +11,7 @@ NoSell 프로젝트는 독자적인 경매방식을 추가하여 헬로마켓을
 - **인원** : 3명 (퍼블리셔 1명, 프론트 엔드 1명, 백 엔드 1명)
 
 ## 💻 1. 사용 기술
+
 |분야|사용 기술|비고|
 |---|---|---|
 |프론트 엔드| HTML, CSS, JavaScript, React, BootStrap4.X
@@ -18,6 +20,7 @@ NoSell 프로젝트는 독자적인 경매방식을 추가하여 헬로마켓을
 |TOOL|IntelliJ, VSCODE, Notion, Gradle
 
 ## 🔖 2. Build & Start
+
 ## Front
 
 ```

@@ -18,7 +18,8 @@ public class ObjectMapperConfig {
         return builder -> {
             builder.simpleDateFormat(dateTimeFormat);
             builder.serializers(new LocalDateSerializer(DateTimeFormatter.ofPattern(dateFormat)));
-            builder.serializers(new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateTimeFormat)));
+            builder.serializers(
+                new LocalDateTimeSerializer(DateTimeFormatter.ofPattern(dateTimeFormat)));
         };
     }
 

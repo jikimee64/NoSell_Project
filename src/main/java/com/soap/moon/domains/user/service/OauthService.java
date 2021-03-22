@@ -109,7 +109,8 @@ public class OauthService {
                     .nickName("")
                     .phoneNum("")
                     .status(UserStatus.ACTIVE)
-                    .profileImage("")
+                    .profileImage(
+                        "https://user-images.githubusercontent.com/52563841/108304539-9a01e200-71eb-11eb-94a7-01ead35e186e.png")
                     .build();
 
                 UserAuthority userAuthority = UserAuthority.builder()
@@ -156,8 +157,9 @@ public class OauthService {
                 }
             },
             () -> {
-                if(!StringUtils.isEmpty(user))
+                if (!StringUtils.isEmpty(user)) {
                     throw new MemberDuplicationException("자체");
+                }
             }
         );
 
@@ -181,7 +183,7 @@ public class OauthService {
             jwtTokenProvider.doGenerateRefreshToken(user.getAccount().getEmail()));
 
         Optional<User> byAccount = userRepository.findByAccount(account);
-        byAccount.ifPresent( v -> {
+        byAccount.ifPresent(v -> {
             map.put("nickName", v.getNickName());
             map.put("profileImage", v.getProfileImage());
         });

@@ -30,7 +30,8 @@ public class AuthDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class AccessTokenReq{
+    public static class AccessTokenReq {
+
         private String accessToken;
     }
 
@@ -40,10 +41,11 @@ public class AuthDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class GoogleProfileRes{
+    public static class GoogleProfileRes {
+
         private String id;
         private String email;
-        private String picture;
+        //private String picture;
     }
 
 
@@ -52,7 +54,8 @@ public class AuthDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class NaverProfileRes{
+    public static class NaverProfileRes {
+
         private Response response;
         private String resultcode;
         private String message;
@@ -61,7 +64,8 @@ public class AuthDto {
         @Builder
         @AllArgsConstructor
         @NoArgsConstructor(access = AccessLevel.PUBLIC)
-        public static class Response{
+        public static class Response {
+
             private String id;
             private String name;
             private String email;
@@ -72,7 +76,6 @@ public class AuthDto {
         }
 
     }
-
 
 
 }

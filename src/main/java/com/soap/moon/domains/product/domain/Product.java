@@ -73,7 +73,8 @@ public class Product extends BaseTimeEntity {
 
     @Builder
     public Product(String title, String description, ProductStatus productStatus, int price,
-        DealType dealType, DeliveryType deliveryType, SalesStatus salesStatus, User user, Category category){
+        DealType dealType, DeliveryType deliveryType, SalesStatus salesStatus, User user,
+        Category category) {
         Assert.notNull(title, "title must not be null");
         Assert.notNull(description, "description must not be null");
         Assert.notNull(productStatus, "productStatus must not be null");
@@ -96,7 +97,7 @@ public class Product extends BaseTimeEntity {
     }
 
     //연관관계 메서드
-    public void addProductImage(ProductImage productImage){
+    public void addProductImage(ProductImage productImage) {
 
     }
 }

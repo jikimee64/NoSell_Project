@@ -21,8 +21,9 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @Configuration
 @EnableSwagger2
 public class SwaggerConfig {
+
     @Bean
-    public Docket apiV1(){
+    public Docket apiV1() {
 
         return new Docket(DocumentationType.SWAGGER_2)
             .apiInfo(this.apiInfo())
@@ -51,7 +52,8 @@ public class SwaggerConfig {
     }
 
     List<SecurityReference> defaultAuth() {
-        AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+        AuthorizationScope authorizationScope = new AuthorizationScope("global",
+            "accessEverything");
         AuthorizationScope[] authorizationScopes = new AuthorizationScope[1];
         authorizationScopes[0] = authorizationScope;
         return Arrays.asList(new SecurityReference("JWT", authorizationScopes));
@@ -63,7 +65,8 @@ public class SwaggerConfig {
             "description",
             "version",
             "https://woowacourse.github.io/javable/",
-            new Contact("Contact Me", "https://woowacourse.github.io/javable/", "tigger@tigger.com"),
+            new Contact("Contact Me", "https://woowacourse.github.io/javable/",
+                "tigger@tigger.com"),
             "tigger Licenses",
             "https://woowacourse.github.io/javable/",
             new ArrayList<>()

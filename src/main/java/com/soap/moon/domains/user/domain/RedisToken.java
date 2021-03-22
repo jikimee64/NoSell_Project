@@ -9,9 +9,11 @@ import org.springframework.data.redis.core.RedisHash;
 @Data
 @RedisHash
 public class RedisToken implements Serializable {
+
     private static final long serialVersionUID = -7353484588260422449L;
 
-    public RedisToken(){}
+    public RedisToken() {
+    }
 
     private String username;
     private String refreshToken;

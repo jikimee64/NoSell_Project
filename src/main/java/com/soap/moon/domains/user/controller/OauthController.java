@@ -9,6 +9,7 @@ import com.soap.moon.domains.user.service.OauthService;
 import com.soap.moon.global.common.CommonResponse;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import io.swagger.annotations.ApiParam;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import java.util.Map;
@@ -20,6 +21,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -55,28 +57,29 @@ public class OauthController {
      * Social Login API Server 요청에 의한 callback 을 처리
      *
      * @param providerType (GOOGLE, FACEBOOK, NAVER, KAKAO)
-     * @param code            API Server 로부터 넘어노는 code
+     * @param code         API Server 로부터 넘어노는 code
      * @return SNS Login 요청 결과로 받은 Json 형태의 String 문자열 (access_token, refresh_token 등)
      */
     @ApiOperation(
-        httpMethod = "GET", value = "소셜 로그인", notes = "소셜로그인 시 타는 메소드")
-    @GetMapping(value = "/{socialLoginType}/accessToken")
+        httpMethod = "POST", value = "소셜 로그인", notes = "소셜로그인 시 타는 메소드")
+    @PostMapping(value = "/{socialLoginType}/accessToken")
     public ResponseEntity<?> callback(
         @PathVariable(name = "socialLoginType") ProviderType providerType,
+        @ApiParam(value = "accessToken", required = true)
         @RequestBody AccessTokenReq dto,
         HttpServletResponse response) {
 
         Map<String, Object> map = oauthService
             .requestAccessToken(providerType, dto);
 
-        Cookie cookie = new Cookie("refreshToken", (String)map.get(Token.REFRESH_TOKEN.getName()));
+        Cookie cookie = new Cookie("refreshToken", (String) map.get(Token.REFRESH_TOKEN.getName()));
         cookie.setMaxAge(7 * 24 * 60 * 60); // expires in 7 days
         cookie.setSecure(true);
         cookie.setHttpOnly(true);
         response.addCookie(cookie);
 
         return new ResponseEntity<>(
-            new CommonResponse("200","ok",
+            new CommonResponse("200", "ok",
                 LoginRes.builder()
                     .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
                     .nickName(String.valueOf(map.get("nickName")))

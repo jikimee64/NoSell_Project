@@ -1,26 +1,23 @@
 package com.soap.moon.global.error;
 
 import com.soap.moon.domains.product.exception.ProductNotFoundException;
-import com.soap.moon.domains.user.exception.CustomAuthenticationException;
 import com.soap.moon.domains.user.exception.JwtExpiredException;
 import com.soap.moon.domains.user.exception.JwtMalFormedException;
 import com.soap.moon.domains.user.exception.JwtUnsupportedException;
-import com.soap.moon.domains.user.exception.LoginFailedException;
 import com.soap.moon.domains.user.exception.MemberDuplicationException;
 import com.soap.moon.domains.user.exception.MemberLogoutException;
 import com.soap.moon.domains.user.exception.MemberNotFoundException;
-import com.soap.moon.domains.user.exception.MemberStatusInActiveException;
-import com.soap.moon.global.common.CommonResponse;
-import com.soap.moon.global.common.ErrorResponse;
-import io.jsonwebtoken.ExpiredJwtException;
-import io.jsonwebtoken.MalformedJwtException;
-import io.jsonwebtoken.UnsupportedJwtException;
+import com.soap.moon.domains.user.exception.MemberStatusNotActiveException;
+import com.soap.moon.domains.user.exception.ValidationException;
+import com.soap.moon.global.common.ExceptionResponse;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.InsufficientAuthenticationException;
-import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -32,176 +29,113 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 public class GlobalExceptionController {
 
     @ExceptionHandler(value = RuntimeException.class)
-    public ResponseEntity<?> runtimeException(RuntimeException ex) {
-        log.info("RuntimeException");
-        ex.printStackTrace();
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code("RunTime")
-                .message("알수없는 런타임 에러입니다.")
-                .status(000).build(),
-            HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> handleRuntimeException(RuntimeException ex) {
+        log.error(ex.getMessage());
+        //ex.printStackTrace();
+        return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
+            .body(ErrorCode.RUNTIME_EXCEPTION.getMessage());
     }
 
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<?> methodArgumentNotValidException(MethodArgumentNotValidException ex) {
-        log.info("MethodArgumentNotValidException");
-        BindingResult bindingResult = ex.getBindingResult();
-
-        StringBuilder builder = new StringBuilder();
-        for (FieldError fieldError : bindingResult.getFieldErrors()) {
-            builder.append("[");
-            builder.append(fieldError.getField());
-            builder.append("](은)는 ");
-            builder.append(fieldError.getDefaultMessage());
-            builder.append(" 입력된 값: [");
-            builder.append(fieldError.getRejectedValue());
-            builder.append("]");
-        }
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.VALIDATION.getCode())
-                .message(builder.toString())
-                .status(ErrorCode.VALIDATION.getStatus()).build(),
-            HttpStatus.BAD_REQUEST);
-    }
+//    @ExceptionHandler(MethodArgumentNotValidException.class)
+//    public ResponseEntity<?> handleValidationException(MethodArgumentNotValidException ex) {
+//        log.error(ex.getMessage());
+//        Map<String, String> errors = new HashMap<>();
+//        ex.getBindingResult().getAllErrors().forEach((error) -> {
+//            String fieldName = ((FieldError) error).getField();
+//            String errorMessage = error.getDefaultMessage();
+//            errors.put(fieldName, errorMessage);
+//        });
+//        return new ResponseEntity<>(
+//            ExceptionResponse.builder()
+//                .message(errors).build(),
+//            HttpStatus.BAD_REQUEST);
+//    }
 
     @ExceptionHandler(value = MemberDuplicationException.class)
-    public ResponseEntity<?> memberDuplicationException(MemberDuplicationException ex) {
-        log.info("memberDuplicationException");
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.EMAIL_DUPLICATION.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.EMAIL_DUPLICATION.getStatus()).build(),
-            HttpStatus.BAD_REQUEST);
+    public ResponseEntity<?> handleMemberDuplicationException(MemberDuplicationException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(new ExceptionResponse(ErrorCode.EMAIL_DUPLICATION.getMessage()));
     }
 
-    @ExceptionHandler(value = MemberStatusInActiveException.class)
-    public ResponseEntity<?> memberStatusInActiveException(MemberStatusInActiveException ex) {
-        log.info("memberStatusInActiveException", ex);
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.MEMBER_DUPLICATION.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.MEMBER_DUPLICATION.getStatus()).build(),
-            HttpStatus.FORBIDDEN);
+    /**
+     * 회원 계정 정지 상태
+     */
+    @ExceptionHandler(value = MemberStatusNotActiveException.class)
+    public ResponseEntity<?> handleMemberStatusNotActiveException(
+        MemberStatusNotActiveException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.SERVICE_UNAVAILABLE)
+            .body(ErrorCode.MEMBER_NOT_ACTIVE.getMessage());
     }
 
     @ExceptionHandler(value = MemberNotFoundException.class)
-    public ResponseEntity<?> memberNotFoundException(MemberNotFoundException ex) {
-        log.info("memberNotFoundException", ex);
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.MEMBER_NOT_FOUND.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.MEMBER_NOT_FOUND.getStatus()).build(),
-            HttpStatus.FORBIDDEN);
+    public ResponseEntity<?> handleMemberNotFoundException(MemberNotFoundException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(ErrorCode.MEMBER_NOT_FOUND.getMessage());
     }
 
     @ExceptionHandler(value = MemberLogoutException.class)
-    public ResponseEntity<?> memberLogoutException(MemberLogoutException ex) {
-
-        log.info("memberLogoutException", ex);
-
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.MEMBER_LOGOUT.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.MEMBER_LOGOUT.getStatus()).build(),
-            HttpStatus.FORBIDDEN);
+    public ResponseEntity<?> handleLogoutException(MemberLogoutException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(ErrorCode.MEMBER_LOGOUT.getMessage());
     }
 
-    @ExceptionHandler(value = CustomAuthenticationException.class)
-    public ResponseEntity<?> customAuthenticationException(CustomAuthenticationException ex) {
+//    @ExceptionHandler(value = ValidationException.class)
+//    public ResponseEntity<?> handleValidationException(ValidationException ex){
+//        log.error(ex.getMessage());
+//        List<ExceptionResponse> responses = ex.getErrors().stream().map(ExceptionResponse::new).collect(Collectors.toList());
+//        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+//            .body(responses);
+//    }
 
-        log.info("customAuthenticationException", ex);
-
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.AUTHENTICATION_FAILED.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.AUTHENTICATION_FAILED.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
+    @ExceptionHandler(ValidationException.class)
+    public ResponseEntity<?> handleValidationException(ValidationException ex) {
+        log.error(ex.getMessage());
+        List<ExceptionResponse> responses = ex.getErrors().stream().map(ExceptionResponse::new)
+            .collect(Collectors.toList());
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST)
+            .body(responses.get(0));
     }
 
-    @ExceptionHandler(value = LoginFailedException.class)
-    public ResponseEntity<?> loginFailedException(LoginFailedException ex) {
-
-        log.info("LoginFailedException", ex);
-
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.LOGIN_FAILED.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.LOGIN_FAILED.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
-    }
-
-    //시큐리티의 authenticate()에서 아이디 혹은 비밀번호가 다르거나 존재하지 않을 떄 발생
+    /**
+     * 시큐리티의 authenticate()에서 아이디 혹은 비밀번호가 다르거나 존재하지 않을 떄 발생
+     */
     @ExceptionHandler(BadCredentialsException.class)
     protected ResponseEntity<?> handleBadCredentialsException(BadCredentialsException ex) {
-        log.info("handleBadCredentialsException", ex);
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.LOGIN_FAILED.getCode())
-                .message(ErrorCode.LOGIN_FAILED.getMessage())
-                .status(ErrorCode.LOGIN_FAILED.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(ErrorCode.LOGIN_FAILED.getMessage());
     }
 
-    //만료 시간이 지난 인증 통큰 요청시...
     @ExceptionHandler(JwtExpiredException.class)
-    protected ResponseEntity<?> jwtExpiredException(JwtExpiredException ex) {
-        log.info("jwtExpiredException", ex);
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.EXPIRED_JWT_TOKE.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.EXPIRED_JWT_TOKE.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
+    protected ResponseEntity<?> handleJwtExpiredException(JwtExpiredException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(ErrorCode.EXPIRED_JWT_TOKEN.getMessage());
     }
 
     @ExceptionHandler(JwtUnsupportedException.class)
-    protected ResponseEntity<?> jwtUnsupportedException(JwtUnsupportedException ex) {
-        log.info("jwtUnsupportedException", ex);
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.NOT_APPLY_JWT.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.NOT_APPLY_JWT.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
+    protected ResponseEntity<?> handleJwtUnsupportedException(JwtUnsupportedException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(ErrorCode.NOT_APPLY_JWT.getMessage());
     }
 
     @ExceptionHandler(JwtMalFormedException.class)
-    protected ResponseEntity<?> jwtMalFormedException(JwtMalFormedException ex) {
-        log.info("jwtMalFormedException", ex);
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.NOT_FORM_JWT.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.NOT_FORM_JWT.getStatus())
-                .build(),
-            HttpStatus.UNAUTHORIZED);
+    protected ResponseEntity<?> handleJwtMalFormedException(JwtMalFormedException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.UNAUTHORIZED)
+            .body(ErrorCode.NOT_FORM_JWT.getMessage());
     }
 
-    //상품이 존재하지 않을 경우
     @ExceptionHandler(value = ProductNotFoundException.class)
-    public ResponseEntity<?> productNotFoundException(ProductNotFoundException ex) {
-
-        log.info("productNotFoundException", ex);
-
-        return new ResponseEntity<>(
-            ErrorResponse.builder()
-                .code(ErrorCode.PRODUCT_NOT_FOUND.getCode())
-                .message(ex.getMessage())
-                .status(ErrorCode.PRODUCT_NOT_FOUND.getStatus()).build(),
-            HttpStatus.NOT_FOUND);
+    public ResponseEntity<?> handleProductNotFoundException(ProductNotFoundException ex) {
+        log.error(ex.getMessage());
+        return ResponseEntity.status(HttpStatus.NOT_FOUND)
+            .body(ErrorCode.PRODUCT_NOT_FOUND.getMessage());
     }
 
 }

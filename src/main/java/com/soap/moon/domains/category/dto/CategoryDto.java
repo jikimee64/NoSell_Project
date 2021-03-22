@@ -33,7 +33,8 @@ public class CategoryDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     @Builder
-    public static class UserLikeCategory{
+    public static class UserLikeCategory {
+
         private Long categoryId;
         private String name;
     }
@@ -42,7 +43,8 @@ public class CategoryDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     @Builder
-    public static class CategoryOfUserRes{
+    public static class CategoryOfUserRes {
+
         private List<UserLikeCategory> categories;
         private MyPageCommon myPageCommon;
     }

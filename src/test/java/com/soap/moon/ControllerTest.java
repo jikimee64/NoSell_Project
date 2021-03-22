@@ -31,8 +31,8 @@ import org.springframework.web.context.WebApplicationContext;
 //@ActiveProfiles("local")
 @Transactional
 @SpringBootTest(properties = "spring.config.location=" +
-        "classpath:/application-dev.yml" +
-        ",classpath:/application-secret.yml")
+    "classpath:/application-dev.yml" +
+    ",classpath:/application-secret.yml")
 @ExtendWith({MockitoExtension.class, SpringExtension.class})
 public class ControllerTest {
 
@@ -49,7 +49,8 @@ public class ControllerTest {
 
     private HttpHeaders getHttpHeaders() {
         HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.add("Authorization", "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub3NlbGxAbm9zZWxsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2MTQ3NjM4ODd9.If8pyaec_UHS4Rbo9TkhNfJQ_mUVj62lBNoXesuYWYCr8OIDk5YnIc7Yw4-RDDbHsZKy57Jt5U6VgRq3g6ZmwQ");
+        httpHeaders.add("Authorization",
+            "Bearer eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub3NlbGxAbm9zZWxsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2MTQ3NjM4ODd9.If8pyaec_UHS4Rbo9TkhNfJQ_mUVj62lBNoXesuYWYCr8OIDk5YnIc7Yw4-RDDbHsZKy57Jt5U6VgRq3g6ZmwQ");
         return httpHeaders;
     }
 
@@ -61,7 +62,8 @@ public class ControllerTest {
             .andDo(print());
     }
 
-    public ResultActions readInHeader(final String uri, final ResultMatcher expect) throws Exception {
+    public ResultActions readInHeader(final String uri, final ResultMatcher expect)
+        throws Exception {
         return mockMvc.perform(get(uri)
             .accept(MediaType.APPLICATION_JSON)
             .headers(getHttpHeaders()))
@@ -70,7 +72,8 @@ public class ControllerTest {
             .andDo(print());
     }
 
-    public ResultActions readByPathVariables(final String uri, final Long id, final ResultMatcher expect) throws Exception {
+    public ResultActions readByPathVariables(final String uri, final Long id,
+        final ResultMatcher expect) throws Exception {
         return mockMvc.perform(get(uri, id)
             .accept(MediaType.APPLICATION_JSON))
             .andExpect(status().isOk())
@@ -78,7 +81,8 @@ public class ControllerTest {
             .andDo(print());
     }
 
-    public ResultActions createOrReadByJsonParams(final String uri, final String jsonParams, final ResultMatcher expect) throws Exception{
+    public ResultActions createOrReadByJsonParams(final String uri, final String jsonParams,
+        final ResultMatcher expect) throws Exception {
         return mockMvc.perform(post(uri)
             .content(jsonParams)
             .accept(MediaType.APPLICATION_JSON)

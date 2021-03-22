@@ -50,12 +50,10 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             // token을 사용하는 방식이기 때문에 csrf
             .csrf().disable() //csrf 방지
 
-
             .exceptionHandling()
             //인증 또는 인가에 실패한 경우 Exception 처리
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)
             .accessDeniedHandler(jwtAccessDeniedHandler)
-
 
             // enable h2-console
             .and()
@@ -71,9 +69,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .and()
             .authorizeRequests()
             //임시
-            .antMatchers( "/api/v1/users/**").permitAll()
-            .antMatchers(HttpMethod.POST,"/api/v1/login").permitAll()
-            .antMatchers(HttpMethod.POST,"/api/v1/logout").permitAll()
+            .antMatchers("/**").permitAll()
+            //임시
+            .antMatchers("/api/v1/users/**").permitAll()
+            .antMatchers(HttpMethod.POST, "/api/v1/login").permitAll()
+            .antMatchers(HttpMethod.POST, "/api/v1/logout").permitAll()
             .antMatchers(HttpMethod.POST, "/api/v1/users").permitAll()
 
             .antMatchers(HttpMethod.POST, "/api/v1/users/emailCheck").permitAll()
@@ -82,14 +82,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //.antMatchers(HttpMethod.GET, "/api/v1/users/auth").permitAll()
             .antMatchers(HttpMethod.GET, "/api/v1/categories/**").permitAll()
             .antMatchers(HttpMethod.GET, "/api/v1/products/**").permitAll()
-            .antMatchers(HttpMethod.GET, "/api/v1/oauth/**").permitAll()
+            .antMatchers("/api/v1/oauth/**").permitAll()
             //.antMatchers("/api/v1/members/**").permitAll()
 
             //인증을 반드시 통과해야하며, 인가(USER 권한)이 있는 사용자만 접근 가능
             //.antMatchers("/api/v1/users/**").hasAnyAuthority(Role.USER.getCode())
 
             .anyRequest().authenticated()
-
 
             .and()
             //사용자의 모든 요청은 JWT 필터를 통과하는 설정

@@ -22,7 +22,7 @@ public class HttpClientConfig {
     private int readTimeout;
 
     @Bean
-    public RestTemplate restTemplate(){
+    public RestTemplate restTemplate() {
         HttpComponentsClientHttpRequestFactory factory = new HttpComponentsClientHttpRequestFactory();
         HttpClient httpClient = HttpClientBuilder.create()
             .setMaxConnTotal(maxConnTotal) //TODO:매직넘버, 프로퍼티 설정으로 개선

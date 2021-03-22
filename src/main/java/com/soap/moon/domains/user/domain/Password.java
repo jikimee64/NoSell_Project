@@ -28,7 +28,7 @@ public class Password {
 //    private LocalDateTime passwordUpdatedAt;
 
     @Builder //비밀번호 암호화 추가
-    public Password(final String password){
+    public Password(final String password) {
         //소셜로그인 경우 패스워드가 필요없기 때문에 null 허용
         //Assert.notNull(password, "password must not be null!!");
         this.password = password;

@@ -1,9 +1,9 @@
 import React from "react";
 import AuthForm from "./AuthForm";
-import { useState, useCallback } from "react";
-import { withRouter } from "react-router-dom";
+import {useState, useCallback} from "react";
+import {withRouter} from "react-router-dom";
 
-const RegisterForm = ({ history }) => {
+const RegisterForm = ({history}) => {
   const [form, setForm] = useState({
     email: "",
     password: "",
@@ -13,7 +13,7 @@ const RegisterForm = ({ history }) => {
   });
 
   const onChangeForm = useCallback((e) => {
-    const { name, value } = e.target;
+    const {name, value} = e.target;
     setForm((form) => ({
       ...form,
       [name]: value,
@@ -21,15 +21,15 @@ const RegisterForm = ({ history }) => {
   }, []);
 
   const onSubmit = useCallback(
-    (e) => {
-      e.preventDefault();
+      (e) => {
+        e.preventDefault();
 
-      history.push("/login");
-    },
-    [history]
+        history.push("/login");
+      },
+      [history]
   );
 
-  return <AuthForm type="register" {...{ form, onChangeForm, onSubmit }} />;
+  return <AuthForm type="register" {...{form, onChangeForm, onSubmit}} />;
 };
 
 export default withRouter(RegisterForm);

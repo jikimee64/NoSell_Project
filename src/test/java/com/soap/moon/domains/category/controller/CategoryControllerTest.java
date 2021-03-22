@@ -34,9 +34,11 @@ class CategoryControllerTest extends ControllerTest {
 
     @DisplayName("회원에 대한 관심 카테고리(1단계)를 조회한다.")
     @Test
-    void 회원_관심_카테고리_조회() throws Exception{
-        MyPageCommon myPage = MyPageCommon.builder().nickName("닉네임").createdAt(LocalDateTime.now()).count(1L).starsSum(2.0).build();
-        List<UserLikeCategory> categories = Arrays.asList(UserLikeCategory.builder().categoryId(1L).name("카테고리1").build());
+    void 회원_관심_카테고리_조회() throws Exception {
+        MyPageCommon myPage = MyPageCommon.builder().nickName("닉네임").createdAt(LocalDateTime.now())
+            .count(1L).starsSum(2.0).build();
+        List<UserLikeCategory> categories = Arrays
+            .asList(UserLikeCategory.builder().categoryId(1L).name("카테고리1").build());
         CategoryOfUserRes build = CategoryOfUserRes.builder().categories(categories)
             .myPageCommon(myPage).build();
         when(categoryService.getCategoryOfUser(any())).thenReturn(build);

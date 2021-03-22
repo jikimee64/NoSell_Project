@@ -43,7 +43,7 @@ public class ProductController {
     public ResponseEntity<?> getProductList(
         @ApiParam(value = "page 0부터", required = true, example = "0")
         @PathVariable(name = "page") @Min(0) Integer page
-    ){
+    ) {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
@@ -67,7 +67,7 @@ public class ProductController {
         @PathVariable(name = "categoryId") @Min(14) @Max(53) Integer categoryId,
         @ApiParam(value = "page 0부터", required = true, example = "0")
         @PathVariable(name = "page") @Min(0) Integer page
-    ){
+    ) {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")
@@ -91,7 +91,7 @@ public class ProductController {
         @PathVariable(name = "page") @Min(0) Integer page,
         @ApiParam(value = "검색 키워드", required = true, example = "여성의류")
         @RequestParam(name = "q") String keyword
-    ){
+    ) {
         return new ResponseEntity<>(
             CommonResponse.builder()
                 .code("200")

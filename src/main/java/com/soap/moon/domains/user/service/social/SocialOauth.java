@@ -21,7 +21,6 @@ public interface SocialOauth {
     //AuthDto.TokenRes requestAccessToken(String code, String state);
 
     //String requestUserInfo(GoogleAuthDto.TokenRes tokenRes);
-
     default AuthDto.GoogleProfileRes userInfoGoogle(AccessTokenReq dto) {
         return null;
     }

@@ -14,13 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 public class CommonResponse {
 
-    @ApiModelProperty(value="상태코드")
+    @ApiModelProperty(value = "상태코드")
     private String code;
 
-    @ApiModelProperty(value="메시지")
+    @ApiModelProperty(value = "메시지")
     private String message;
 
-    @ApiModelProperty(value="데이터")
+    @ApiModelProperty(value = "데이터")
     private Object data;
-
 }

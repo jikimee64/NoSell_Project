@@ -21,14 +21,14 @@ public class Authority extends BaseTimeEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name ="id")
+    @Column(name = "id")
     private Long id;
 
     @Column(name = "authority_name", length = 50, nullable = false)
     private String authorityName;
 
     @Builder
-    public Authority(String authorityName){
+    public Authority(String authorityName) {
         Assert.notNull(authorityName, "authorityName must not be null!!");
         this.authorityName = authorityName;
     }

@@ -7,7 +7,7 @@
 }
 
 /* 상단 후기점수 */
-.reviews>div {
+.reviews > div {
   width: 94%;
   display: flex;
   justify-content: space-between;
@@ -118,7 +118,7 @@ p.review {
   overflow: hidden; */
 }
 
-.more{
+.more {
   background-color: #4147e1;
   border: 2px solid #4147e1;
   color: #fff;
@@ -129,17 +129,17 @@ p.review {
   transition: all .3s;
   font-size: .8rem;
 }
-.more i{
+
+.more i {
   text-indent: 3px;
   vertical-align: middle;
 }
-.more:hover{
+
+.more:hover {
   color: #4147e1;
   background-color: #f2f2f2;
 }
 
 
-
-
-
-@media (max-width: 768px) {}
+@media (max-width: 768px) {
+}

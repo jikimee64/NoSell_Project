@@ -2,99 +2,100 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my_review</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <link rel="stylesheet" href="./common/css/mypage_review.css">
-    <script src="./common/js/include.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my_review</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <link rel="stylesheet" href="./common/css/mypage_review.css">
+  <script src="./common/js/include.js"></script>
 </head>
 
 <body>
-    <header id="header" class="header"></header>
-    <main>
-        <section id="my_fixed" class="my_fixed"></section>
-        <section class="mypage_con" id="mypage_con">
-            <article class="reviews">
-                <div>
-                    <div class="review_title">
-                        <h2>4.0</h2>
-                        <p class="star_rating">
-                            <span class="wrap_star"><span></span></span>
-                            <span class="star_count">02</span>
-                        </p>
-                    </div>
-                    <div class="review_score">
-                        <p>칭찬받았어요<i class="smile"></i><span>01</span></p>
-                        <p>노력해볼게요<i class="sad"></i><span>00</span></p>
-                    </div>
-                </div>
-                <ul class="review_text">
-                    <li>
-                        <div class="text_name">
-                            <img src="./common/img/p_img.jpg" />
-                            <h3>슈퍼<span class="text_day">2021.03.01</span></h3>
-                        </div>
-                        <p class="review">감사합니다 잘쓸게요! 너무 맘에 들어요! 친절하고 굳굳굳! 상품설명이 자세하고, 응답도 빠르고 시간약속을 잘 지켜주시다니! 무엇보다
-                            상품상태가 설명한것과 같고, 친절하고 매너가 좋았어요~ 좋은 상품을 저렴하게 판매해주셔서 감사합니다.</p>
-                    </li>
-                    <li>
-                        <div class="text_name">
-                            <img src="./common/img/p_img2.jpg" />
-                            <h3>슈퍼<span class="text_day">2021.02.28</span></h3>
-                        </div>
-                        <p class="review">감사합니다 잘쓸게요!</p>
-                    </li>
-                    <li>
-                        <div class="text_name">
-                            <img src="./common/img/user-circle.svg" />
-                            <h3>참새<span class="text_day">2021.01.30</span></h3>
-                        </div>
-                        <p class="review">감사합니다 잘쓸게요!</p>
-                    </li>
-                    <li>
-                        <div class="text_name">
-                            <img src="./common/img/user-circle.svg" />
-                            <h3>방앗간<span class="text_day">2021.01.28</span></h3>
-                        </div>
-                        <p class="review">감사합니다 잘쓸게요!</p>
-                    </li>
-                    <li>
-                        <div class="text_name">
-                            <img src="./common/img/user-circle.svg" />
-                            <h3>방앗간<span class="text_day">2021.01.28</span></h3>
-                        </div>
-                        <p class="review">감사합니다 잘쓸게요!</p>
-                    </li>
-                    <li>
-                        <div class="text_name">
-                            <img src="./common/img/user-circle.svg" />
-                            <h3>방앗간<span class="text_day">2021.01.28</span></h3>
-                        </div>
-                        <p class="review">감사합니다 잘쓸게요!</p>
-                    </li>
-                </ul>
-                <button class="more">더보기<i class="fas fa-chevron-down"></i></button>
-            </article>
-        </section>
-    </main>
-    <footer id="footer" class="footer"></footer>
-    <script>
-        // 더보기 버튼 로드
-        $(function () {
-            $(".review_text li").slice(0, 3).show();
-            $(".more").on('click', function (e) {
-                e.preventDefault();
-                $(".review_text li:hidden").slice(0, 3).slideDown();
-                if ($(".review_text li:hidden").length == 0) {
-                    $(".review_text li:hidden").fadeOut('slow');
-                }
-                $('html,body').animate({
-                    scrollTop: $(this).offset().top
-                }, 1500);
-            });
-        });
-    </script>
+<header id="header" class="header"></header>
+<main>
+  <section id="my_fixed" class="my_fixed"></section>
+  <section class="mypage_con" id="mypage_con">
+    <article class="reviews">
+      <div>
+        <div class="review_title">
+          <h2>4.0</h2>
+          <p class="star_rating">
+            <span class="wrap_star"><span></span></span>
+            <span class="star_count">02</span>
+          </p>
+        </div>
+        <div class="review_score">
+          <p>칭찬받았어요<i class="smile"></i><span>01</span></p>
+          <p>노력해볼게요<i class="sad"></i><span>00</span></p>
+        </div>
+      </div>
+      <ul class="review_text">
+        <li>
+          <div class="text_name">
+            <img src="./common/img/p_img.jpg"/>
+            <h3>슈퍼<span class="text_day">2021.03.01</span></h3>
+          </div>
+          <p class="review">감사합니다 잘쓸게요! 너무 맘에 들어요! 친절하고 굳굳굳! 상품설명이 자세하고, 응답도 빠르고 시간약속을 잘 지켜주시다니!
+            무엇보다
+            상품상태가 설명한것과 같고, 친절하고 매너가 좋았어요~ 좋은 상품을 저렴하게 판매해주셔서 감사합니다.</p>
+        </li>
+        <li>
+          <div class="text_name">
+            <img src="./common/img/p_img2.jpg"/>
+            <h3>슈퍼<span class="text_day">2021.02.28</span></h3>
+          </div>
+          <p class="review">감사합니다 잘쓸게요!</p>
+        </li>
+        <li>
+          <div class="text_name">
+            <img src="./common/img/user-circle.svg"/>
+            <h3>참새<span class="text_day">2021.01.30</span></h3>
+          </div>
+          <p class="review">감사합니다 잘쓸게요!</p>
+        </li>
+        <li>
+          <div class="text_name">
+            <img src="./common/img/user-circle.svg"/>
+            <h3>방앗간<span class="text_day">2021.01.28</span></h3>
+          </div>
+          <p class="review">감사합니다 잘쓸게요!</p>
+        </li>
+        <li>
+          <div class="text_name">
+            <img src="./common/img/user-circle.svg"/>
+            <h3>방앗간<span class="text_day">2021.01.28</span></h3>
+          </div>
+          <p class="review">감사합니다 잘쓸게요!</p>
+        </li>
+        <li>
+          <div class="text_name">
+            <img src="./common/img/user-circle.svg"/>
+            <h3>방앗간<span class="text_day">2021.01.28</span></h3>
+          </div>
+          <p class="review">감사합니다 잘쓸게요!</p>
+        </li>
+      </ul>
+      <button class="more">더보기<i class="fas fa-chevron-down"></i></button>
+    </article>
+  </section>
+</main>
+<footer id="footer" class="footer"></footer>
+<script>
+  // 더보기 버튼 로드
+  $(function () {
+    $(".review_text li").slice(0, 3).show();
+    $(".more").on('click', function (e) {
+      e.preventDefault();
+      $(".review_text li:hidden").slice(0, 3).slideDown();
+      if ($(".review_text li:hidden").length == 0) {
+        $(".review_text li:hidden").fadeOut('slow');
+      }
+      $('html,body').animate({
+        scrollTop: $(this).offset().top
+      }, 1500);
+    });
+  });
+</script>
 </body>
 
 </html>

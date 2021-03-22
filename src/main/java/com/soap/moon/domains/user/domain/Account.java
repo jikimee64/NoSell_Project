@@ -14,11 +14,11 @@ import lombok.NoArgsConstructor;
 public class Account {
 
     @javax.validation.constraints.Email
-    @Column(name = "email", nullable = false, updatable=false)
+    @Column(name = "email", nullable = false, updatable = false)
     private String email;
 
     @Builder
-    public Account(String email){
+    public Account(String email) {
         Assert.notNull(email, "email must not be null!!");
         this.email = email;
     }

@@ -34,7 +34,7 @@ public class ProductImage extends BaseTimeEntity {
     private Product product;
 
     @Builder
-    public ProductImage(String image_url, Product product){
+    public ProductImage(String image_url, Product product) {
         Assert.notNull(image_url, "image_url must not be null");
         Assert.notNull(product, "product must not be null");
 

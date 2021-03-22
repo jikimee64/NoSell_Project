@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useCallback } from "react";
+import React, {useState, useEffect, useCallback} from "react";
 import "../../asset/css/boardList.css";
 import BoardMore from "./BoardMore";
-import { getMainList } from "../../api/product";
+import {getMainList} from "../../api/product";
 import BoardItem from "./BoardItem";
 
 const BoardList = () => {
@@ -42,23 +42,27 @@ const BoardList = () => {
     setPage((page) => ++page);
   }, []);
 
-  const { loading, data, error } = loadData;
+  const {loading, data, error} = loadData;
 
   if (!data.length) {
-    if (loading) return <h3>Loading~</h3>;
+    if (loading) {
+      return <h3>Loading~</h3>;
+    }
     return <h3>Not Found Data...</h3>;
   }
-  if (error) return <h3>Error...</h3>;
+  if (error) {
+    return <h3>Error...</h3>;
+  }
 
   return (
-    <main id="main" className="main">
-      <ul className="list">
-        {data.map((item) => (
-          <BoardItem key={item.id} {...{ ...item }} />
-        ))}
-      </ul>
-      <BoardMore onHandleMore={onHandleMore} />
-    </main>
+      <main id="main" className="main">
+        <ul className="list">
+          {data.map((item) => (
+              <BoardItem key={item.id} {...{...item}} />
+          ))}
+        </ul>
+        <BoardMore onHandleMore={onHandleMore}/>
+      </main>
   );
 };
 

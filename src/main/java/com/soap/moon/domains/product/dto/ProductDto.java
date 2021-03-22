@@ -21,6 +21,7 @@ public class ProductDto {
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
     public static class mainProductRes {
+
         public Long id;
         public String title;
         public int price;

@@ -14,9 +14,9 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 @EnableAspectJAutoProxy
 public class MoonApplication {
 
-	public static void main(String[] args) {
-		SpringApplication.run(MoonApplication.class, args);
-	}
+    public static void main(String[] args) {
+        SpringApplication.run(MoonApplication.class, args);
+    }
 
 //	@Bean
 //	public AuditorAware<String> auditorProvider(){

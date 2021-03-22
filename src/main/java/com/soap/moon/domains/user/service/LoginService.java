@@ -56,7 +56,7 @@ public class LoginService {
 
         Account account = Account.builder().email(loginDto.getEmail()).build();
         Optional<User> byAccount = userRepository.findByAccount(account);
-        byAccount.ifPresent( v -> {
+        byAccount.ifPresent(v -> {
             map.put("id", v.getId());
             map.put("nickName", v.getNickName());
             map.put("profileImage", v.getProfileImage());
@@ -65,11 +65,12 @@ public class LoginService {
         return map;
     }
 
-    public String logout(LoginDto.LogoutReq dto){
+    public String logout(LoginDto.LogoutReq dto) {
         String username = null;
 
         try {
-            Authentication authentication = jwtTokenProvider.getAuthentication(dto.getAccessToken());
+            Authentication authentication = jwtTokenProvider
+                .getAuthentication(dto.getAccessToken());
             username = authentication.getName();
         } catch (IllegalArgumentException e) {
         } catch (ExpiredJwtException e) { //expire됐을 때
@@ -107,7 +108,7 @@ public class LoginService {
                 try {
                     ValueOperations<String, Object> vop = redisTemplate.opsForValue();
                     RedisToken result = (RedisToken) vop.get(username);
-                    if(result == null){ //로그아웃된 상태
+                    if (result == null) { //로그아웃된 상태
                         throw new MemberLogoutException();
                     }
                     refreshTokenFromDb = result.getRefreshToken();

@@ -113,7 +113,7 @@ public class NaverOauth implements SocialOauth {
 
 //            ResponseEntity<GoogleAuthDto.GoogleProfileRes> responseEntity =
 //                restTemplate.postForEntity(GOOGLE_SNS_USERINFO_URL, params,
-//                    GoogleAuthDto.GoogleProfileRes.class);
+//                    GoogleAuthDto.GoogleProfileRes.class);ㄴ
             if (responseEntity.getStatusCode() == HttpStatus.OK) {
                 log.info("네이버 정보 : " + responseEntity.getBody());
                 return responseEntity.getBody();

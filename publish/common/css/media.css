@@ -1,114 +1,203 @@
 @charset "utf-8";
 
 
-
 /* 모바일용 */
-@media (max-width:500px) {
-    
-    #header_a{justify-content: center; padding:5% 1.5% 0 1.5%;}
-    #header_a>h1{width:0; display: none;}
-    .search{width: 90%;}
-    .top_gnb, .top_gnb_after{display: none;}
-    .wrap{border: none; width: 0; height: 0; padding: 0;}
-    #header_b .cate_btn{display: none;}
-    #slider{height: 130px; margin: 0;}
-    .img_btn{display: none;} 
-    .top_btn{display: none;}
-    .more_load>a{font-size: .8rem;}
-    .home>a{font-size: .7rem;}
+@media (max-width: 500px) {
 
-    /* 모바일 메뉴바 */
-    .m_menubar {
-        display: block;
-        width: 100%;
-        min-width: 320px;
-        padding: 1%;
-        background-color: #F3F3F3;
-        position: fixed;
-        bottom: 0; left: 0;
-        z-index: 50;
-    }
-    .m_menu{
-        width: 100%;
-        display: flex;
-        align-items: center;
-    }
-    .m_menu>li{width: 100%;}
-    .m_menu>li>a {
-        width: 100%;
-        text-align: center;
-        display: inline-block;
-        border-left: 2px solid #ececec;
-    }
-    .m_menu>li:first-child>a {border-left: none;}
-    .m_menu>li>a>i {
-        width: 25px;
-        height: 28px;
-        display: inline-block;
-        background: url('../img/sprit_7.svg') no-repeat;
-        background-size: 1700% 1700%;
-    }
-    .m_menu>li>a>i.m_home {background-position: -180px -190px;}
-    .m_menu>li>a>i.m_category {background-position: -211px -190px;}
-    .m_menu>li>a>i.m_plus{ background-position: -120px -190px;}
-    .m_menu>li>a>i.m_mymenu {background-position: -244px -190px;}
+  #header_a {
+    justify-content: center;
+    padding: 5% 1.5% 0 1.5%;
+  }
 
-    /* 카테고리 메뉴 .gnb */
-    .gnb{
-        position: fixed;
-        top: auto; bottom: 0;
-    }
-    .sub{padding: 3% 0 15% 0;}
-    .sub li{flex: 0 1 25%;}
-    .sub>li>a {line-height: 1rem; font-size: .7rem;}
-    .sub_bottom{display: none;}
-    .sub_bottom.on{opacity: 0;  visibility: hidden;}
+  #header_a > h1 {
+    width: 0;
+    display: none;
+  }
 
-    .item {
-        width: 50%;
-    }
+  .search {
+    width: 90%;
+  }
+
+  .top_gnb, .top_gnb_after {
+    display: none;
+  }
+
+  .wrap {
+    border: none;
+    width: 0;
+    height: 0;
+    padding: 0;
+  }
+
+  #header_b .cate_btn {
+    display: none;
+  }
+
+  #slider {
+    height: 130px;
+    margin: 0;
+  }
+
+  .img_btn {
+    display: none;
+  }
+
+  .top_btn {
+    display: none;
+  }
+
+  .more_load > a {
+    font-size: .8rem;
+  }
+
+  .home > a {
+    font-size: .7rem;
+  }
+
+  /* 모바일 메뉴바 */
+  .m_menubar {
+    display: block;
+    width: 100%;
+    min-width: 320px;
+    padding: 1%;
+    background-color: #F3F3F3;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 50;
+  }
+
+  .m_menu {
+    width: 100%;
+    display: flex;
+    align-items: center;
+  }
+
+  .m_menu > li {
+    width: 100%;
+  }
+
+  .m_menu > li > a {
+    width: 100%;
+    text-align: center;
+    display: inline-block;
+    border-left: 2px solid #ececec;
+  }
+
+  .m_menu > li:first-child > a {
+    border-left: none;
+  }
+
+  .m_menu > li > a > i {
+    width: 25px;
+    height: 28px;
+    display: inline-block;
+    background: url('../img/sprit_7.svg') no-repeat;
+    background-size: 1700% 1700%;
+  }
+
+  .m_menu > li > a > i.m_home {
+    background-position: -180px -190px;
+  }
+
+  .m_menu > li > a > i.m_category {
+    background-position: -211px -190px;
+  }
+
+  .m_menu > li > a > i.m_plus {
+    background-position: -120px -190px;
+  }
+
+  .m_menu > li > a > i.m_mymenu {
+    background-position: -244px -190px;
+  }
+
+  /* 카테고리 메뉴 .gnb */
+  .gnb {
+    position: fixed;
+    top: auto;
+    bottom: 0;
+  }
+
+  .sub {
+    padding: 3% 0 15% 0;
+  }
+
+  .sub li {
+    flex: 0 1 25%;
+  }
+
+  .sub > li > a {
+    line-height: 1rem;
+    font-size: .7rem;
+  }
+
+  .sub_bottom {
+    display: none;
+  }
+
+  .sub_bottom.on {
+    opacity: 0;
+    visibility: hidden;
+  }
+
+  .item {
+    width: 50%;
+  }
 }
 
 
-
 /* 태블릿용 */
-@media(min-width:500px) and (max-width:930px) {
-    .search{width: 50%;}
-    .top_gnb>li:last-child{
-        display: none;
-    }
-    .top_gnb_after>li.notify{display: none;}
+@media (min-width: 500px) and (max-width: 930px) {
+  .search {
+    width: 50%;
+  }
 
-    /* 카테고리 메뉴 .gnb */
-    .sub{padding: 5% 30% 5% 0;}
-    .sub li{flex: 0 1 20%;}
+  .top_gnb > li:last-child {
+    display: none;
+  }
 
-    .sub_bottom{
-        height: 100%;
-        width: 30%;
-        position: absolute;
-        left: 70%; 
-        top: 0;
-        transform: translateX(0);
-        display: flex;
-        flex-direction: column;
-        justify-content: flex-start;
-        padding: 3% 0;
-    }
+  .top_gnb_after > li.notify {
+    display: none;
+  }
 
-    .sub_bottom>li{
-        width: 100%;
-        height: 25%;
-        display: block;
-    }
-    .sub_bottom>li>a{
-        display: block;
-        line-height: 3rem;
-        font-size: .8rem;
-    }
-    .item {
-        width: 33.33%;
-    }
+  /* 카테고리 메뉴 .gnb */
+  .sub {
+    padding: 5% 30% 5% 0;
+  }
+
+  .sub li {
+    flex: 0 1 20%;
+  }
+
+  .sub_bottom {
+    height: 100%;
+    width: 30%;
+    position: absolute;
+    left: 70%;
+    top: 0;
+    transform: translateX(0);
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding: 3% 0;
+  }
+
+  .sub_bottom > li {
+    width: 100%;
+    height: 25%;
+    display: block;
+  }
+
+  .sub_bottom > li > a {
+    display: block;
+    line-height: 3rem;
+    font-size: .8rem;
+  }
+
+  .item {
+    width: 33.33%;
+  }
 
 
 }

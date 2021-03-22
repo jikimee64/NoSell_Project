@@ -17,11 +17,14 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 @Aspect
 @Component
 public class LoggerAspect {
+
     @Around("@annotation(com.soap.moon.global.config.aop.PerformanceTimeRecord)")
     public Object logExecutionTime(ProceedingJoinPoint joinPoint) throws Throwable {
 
-        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder.currentRequestAttributes()).getRequest();
-        HttpServletResponse response = ((ServletRequestAttributes)RequestContextHolder.currentRequestAttributes()).getResponse();
+        HttpServletRequest request = ((ServletRequestAttributes) RequestContextHolder
+            .currentRequestAttributes()).getRequest();
+        HttpServletResponse response = ((ServletRequestAttributes) RequestContextHolder
+            .currentRequestAttributes()).getResponse();
         String userIp = request.getRemoteAddr();
 
         long start = System.currentTimeMillis();

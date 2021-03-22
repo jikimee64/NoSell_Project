@@ -44,9 +44,11 @@ class LoginControllerTest extends ControllerTest {
 
     @DisplayName(" 로그아웃")
     @Test
-    void 로그아웃() throws Exception{
+    void 로그아웃() throws Exception {
         String content = objectMapper.writeValueAsString(
-            LogoutReq.builder().accessToken("eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub3NlbGxAbm9zZWxsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2MTQ3NjM4ODd9.If8pyaec_UHS4Rbo9TkhNfJQ_mUVj62lBNoXesuYWYCr8OIDk5YnIc7Yw4-RDDbHsZKy57Jt5U6VgRq3g6ZmwQ").build()
+            LogoutReq.builder().accessToken(
+                "eyJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJub3NlbGxAbm9zZWxsLmNvbSIsImF1dGgiOiJST0xFX1VTRVIiLCJleHAiOjE2MTQ3NjM4ODd9.If8pyaec_UHS4Rbo9TkhNfJQ_mUVj62lBNoXesuYWYCr8OIDk5YnIc7Yw4-RDDbHsZKy57Jt5U6VgRq3g6ZmwQ")
+                .build()
         );
         createOrReadByJsonParams(LOGIN_API_URL + "/logout", content,
             jsonPath("$.data.*", hasSize(1))); //is : equalTo

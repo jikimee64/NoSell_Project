@@ -1,55 +1,64 @@
 @charset "utf-8";
 
-body{
+body {
   color: #2b2b2b;
 }
-.form{
+
+.form {
   max-width: 600px;
   margin: 0 auto;
   padding: 3%;
 }
 
 /* 로고 */
-.form_logo{
+.form_logo {
   max-width: 170px;
   margin: 0 auto 3% auto;
 }
-.form_logo img{width: 100%;}
+
+.form_logo img {
+  width: 100%;
+}
 
 /* 본문 내용 */
-form{
+form {
   margin: 0 auto;
 }
-h2{
+
+h2 {
   text-align: center;
   font-size: 1.5rem;
   font-family: 'GmarketSansMedium';
   padding: 3% 0 8% 0;
 }
-.field_wrap{
+
+.field_wrap {
   position: relative;
   margin: 0 auto 2% auto;
   font-size: 1rem;
 }
 
 /* 본문 inside */
-.field_wrap .confirm_btn{
+.field_wrap .confirm_btn {
   width: 100px;
   position: absolute;
-  bottom: 28px; right: 0;
+  bottom: 28px;
+  right: 0;
   line-height: 2rem;
   border: 2px solid #4147e1;
   border-radius: 5px;
   cursor: pointer;
   color: #4147e1;
 }
+
 .field_wrap label {
   color: rgba(66, 60, 60, 0.466);
   font-size: .8rem;
   line-height: 1rem;
   display: inline-block;
 }
-.field_wrap input{
+
+.field_wrap input {
   line-height: 1.8rem;
   font-size: 1rem;
   display: block;
@@ -60,33 +69,37 @@ h2{
   border-bottom: 2px solid #a0b3b0;
   color: #2b2b2b;
 }
-.field_wrap  input:focus{
+
+.field_wrap input:focus {
   outline: 0;
   border-color: #4147e1;
 }
+
 textarea {
   border: 2px solid #a0b3b0;
   resize: vertical;
 }
 
-.field_wrap.success input{
+.field_wrap.success input {
   border-bottom-color: #4147e1;
 }
-.field_wrap.error input{
+
+.field_wrap.error input {
   border-bottom-color: #e74c3c;
 }
 
-.field_wrap small{
+.field_wrap small {
   color: #e74c3c;
   line-height: 1.8rem;
   visibility: hidden;
 }
-.field_wrap.error small{
+
+.field_wrap.error small {
   visibility: visible;
 }
 
 /* recaptcha */
-.test{
+.test {
   padding: 6% 0;
   width: 60%;
   margin-bottom: 4%;
@@ -97,10 +110,12 @@ textarea {
   background-color: rgba(0, 0, 0, .1);
   word-break: keep-all;
 }
-.test>input{
+
+.test > input {
   width: auto;
 }
-.test>span{
+
+.test > span {
   padding: 0 2%;
   font-size: .8rem;
 }
@@ -120,32 +135,36 @@ textarea {
   border: 1px solid #4147e1;
   border-radius: 3px;
 }
+
 .button:hover, .button:focus {
   color: #4147e1;
   background-color: transparent;
 }
+
 .button-block {
   display: block;
   width: 100%;
 }
 
 /* 아이디,비번찾기 */
-.find{
+.find {
   text-align: center;
 }
-.find>a{
+
+.find > a {
   display: inline-block;
   font-size: .9rem;
   padding: 0 3%;
   color: #969696;
 }
-.find>a:first-child{
+
+.find > a:first-child {
   padding-right: 4%;
   border-right: 1px solid #a0b3b0;
 }
 
 /* 소셜 로그인 */
-.social>a{
+.social > a {
   margin: 0 auto;
   display: block;
   width: 45%;
@@ -157,12 +176,14 @@ textarea {
   color: #fff;
   margin: 1% auto;
 }
-.social>a:last-child{
+
+.social > a:last-child {
   color: #2b2b2b;
   background-color: #fff;
   border: 1px solid #969696;
 }
-.social>a>img{
+
+.social > a > img {
   display: inline-block;
   text-align: left;
   width: 13px;
@@ -176,11 +197,13 @@ textarea {
   width: 100%;
   margin: 3% 0;
 }
+
 .tab_group li {
   width: 50%;
   margin: 0 auto;
   text-align: center;
 }
+
 .tab_group li a {
   padding: 3% 0;
   font-size: 1.1rem;
@@ -190,28 +213,51 @@ textarea {
   display: inline-block;
 }
 
-@media(max-width:768px){
-  small{font-size: .8rem;}
-  h2{font-size: 1rem;}
-  .button{font-size: 1rem;}
-  .hide{
+@media (max-width: 768px) {
+  small {
+    font-size: .8rem;
+  }
+
+  h2 {
+    font-size: 1rem;
+  }
+
+  .button {
+    font-size: 1rem;
+  }
+
+  .hide {
     display: block;
     background-color: #fff;
     color: #2b2b2b;
     border: 1px solid #969696;
   }
-  .test{display: none;}
-  .social{
+
+  .test {
+    display: none;
+  }
+
+  .social {
     display: flex;
     justify-content: space-between;
   }
-  .social>a{
+
+  .social > a {
     margin: 0;
   }
-  .find{display: none;}
-  .tab_group li a {font-size: .8rem;}
-  .tab_group span{font-size: .8rem;}
-  
+
+  .find {
+    display: none;
+  }
+
+  .tab_group li a {
+    font-size: .8rem;
+  }
+
+  .tab_group span {
+    font-size: .8rem;
+  }
+
 }
 
 

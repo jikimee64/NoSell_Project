@@ -4,9 +4,9 @@ import RegisterForm from "../components/auth/RegisterForm";
 
 const RegisterPage = () => {
   return (
-    <AuthTemplate>
-      <RegisterForm />
-    </AuthTemplate>
+      <AuthTemplate>
+        <RegisterForm/>
+      </AuthTemplate>
   );
 };
 

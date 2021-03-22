@@ -73,12 +73,12 @@ public class LoginController {
 
         //CommonResponse 빌더 패턴으로 생성시 알수없는 에러 발생
         return new ResponseEntity<>(
-            new CommonResponse("200","ok",
+            new CommonResponse("200", "ok",
                 LoginRes.builder()
-                        .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
-                        .nickName(String.valueOf(map.get("nickName")))
-                        .profileImage(String.valueOf(map.get("profileImage")))
-                        .build()),
+                    .accessToken(String.valueOf(map.get(Token.ACCESS_TOKEN.getName())))
+                    .nickName(String.valueOf(map.get("nickName")))
+                    .profileImage(String.valueOf(map.get("profileImage")))
+                    .build()),
             HttpStatus.OK);
     }
 

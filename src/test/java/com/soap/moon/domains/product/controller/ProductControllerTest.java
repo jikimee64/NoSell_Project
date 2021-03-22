@@ -30,7 +30,7 @@ class ProductControllerTest extends ControllerTest {
 
     @DisplayName("메인페이지에 출력하는 상품정보를 조회한다.")
     @Test
-    void 메인페이지_상품_조회() throws Exception{
+    void 메인페이지_상품_조회() throws Exception {
         when(productService.getProductList(any())).thenReturn(getStubProducts());
         readByPathVariables(PRODUCT_API_URL + "/{page}/list", 0L,
             jsonPath("$.data.*", hasSize(5)));
@@ -38,11 +38,18 @@ class ProductControllerTest extends ControllerTest {
 
     List<mainProductRes> getStubProducts() {
         return List.of(
-            mainProductRes.builder().id(1L).title("상품_1").price(10000).dealType(DealType.DIRECT_DEAL).image_url("image_1").createdAt(LocalDateTime.now()).build(),
-            mainProductRes.builder().id(2L).title("상품_2").price(12000).dealType(DealType.NO_SELL).image_url("image_2").createdAt(LocalDateTime.now()).build(),
-            mainProductRes.builder().id(3L).title("상품_3").price(14000).dealType(DealType.ONLINE).image_url("image_3").createdAt(LocalDateTime.now()).build(),
-            mainProductRes.builder().id(4L).title("상품_4").price(16000).dealType(DealType.DIRECT_DEAL).image_url("image_4").createdAt(LocalDateTime.now()).build(),
-            mainProductRes.builder().id(5L).title("상품_5").price(18000).dealType(DealType.NO_SELL).image_url("image_5").createdAt(LocalDateTime.now()).build()
+            mainProductRes.builder().id(1L).title("상품_1").price(10000)
+                .dealType(DealType.DIRECT_DEAL).image_url("image_1").createdAt(LocalDateTime.now())
+                .build(),
+            mainProductRes.builder().id(2L).title("상품_2").price(12000).dealType(DealType.NO_SELL)
+                .image_url("image_2").createdAt(LocalDateTime.now()).build(),
+            mainProductRes.builder().id(3L).title("상품_3").price(14000).dealType(DealType.ONLINE)
+                .image_url("image_3").createdAt(LocalDateTime.now()).build(),
+            mainProductRes.builder().id(4L).title("상품_4").price(16000)
+                .dealType(DealType.DIRECT_DEAL).image_url("image_4").createdAt(LocalDateTime.now())
+                .build(),
+            mainProductRes.builder().id(5L).title("상품_5").price(18000).dealType(DealType.NO_SELL)
+                .image_url("image_5").createdAt(LocalDateTime.now()).build()
         );
     }
 }

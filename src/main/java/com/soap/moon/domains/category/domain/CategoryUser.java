@@ -34,6 +34,4 @@ public class CategoryUser extends BaseTimeEntity {
     private Category category;
 
 
-
-
 }

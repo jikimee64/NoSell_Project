@@ -30,7 +30,7 @@ public class Category extends BaseTimeEntity {
     private Long parentId;
 
     @Builder
-    public Category(String name, Long parentId){
+    public Category(String name, Long parentId) {
         this.name = name;
         this.parentId = parentId;
     }

@@ -12,7 +12,8 @@ public class UserReviewDto {
     @Builder
     @NoArgsConstructor
     @AllArgsConstructor
-    public static class MyPageCommon{
+    public static class MyPageCommon {
+
         private String nickName;
         private LocalDateTime createdAt;
         private long count;

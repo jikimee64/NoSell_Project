@@ -2,74 +2,74 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>my_option</title>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
-    <link rel="stylesheet" href="./common/css/mypage_option.css">
-    <script src="./common/js/include.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>my_option</title>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-latest.min.js"></script>
+  <link rel="stylesheet" href="./common/css/mypage_option.css">
+  <script src="./common/js/include.js"></script>
 </head>
 <body>
-    <header id="header" class="header"></header>
-    <main>
-        <section id="my_fixed" class="my_fixed"></section>
-        <section class="mypage_con" id="mypage_con">
-            <div class="pf_pic">
-                <form>
-                    <img src="./common/img/user-circle.svg" alt="프로필사진">
-                    <img src="./common/img/camera-circle.svg" alt="프로필사진 등록">
-                    <input type="file" class="pf_img" id="pf_img" accept="image/jpeg, image/png">
-                </form>
-                <p id="pfEmail">kate12345@naver.com</p>
-            </div>
-            <form class="pf_text" id="pf_text">
-                <ul>
-                    <li class="pf_wrap">
-                        <label for="pf_name">닉네임</label>
-                        <input type="text" id="pf_name" minlength="2" maxlength="12" placeholder="케이트"/>
-                        <small class="error">error message</small>
-                        <button type="submit" class="pf_btn">변경</button>
-                    </li>
-                    <li class="pf_wrap">
-                        <label for="phone_input">휴대폰 번호</label>
-                        <input type="tel" id="phone_input" placeholder="010-1234-5678" readonly/>
-                        <button type="submit" class="pf_btn">변경</button>
-                    </li>
-                    <li class="pf_wrap">
-                        <label for="phone_input1"></label>
-                        <input type="tel" id="phone_input1" placeholder="변경할 번호를 입력하세요" />
-                        <small class="error">error message</small>
-                        <button type="submit" class="pf_btn">인증요청</button>
-                    </li>
-                    <li class="pf_wrap">
-                        <label for="phone_input2"></label>
-                        <input type="tel" id="phone_input2" placeholder="인증번호를 입력해주세요"/>
-                        <button type="submit" class="pf_btn">확인</button>
-                    </li>
-                    <li class="pf_wrap">
-                        <label for="password">비밀번호</label>
-                        <input type="password" id="password" placeholder="**********" readonly/>
-                        <button type="submit" class="pf_btn">변경</button>
-                    </li>
-                    <li class="pf_wrap">
-                        <label for="new_password">신규 비밀번호</label>
-                        <input type="password" id="new_password" placeholder="신규 비밀번호를 입력해주세요"/>
-                        <small class="error">error message</small>
-                        <button type="submit" class="pf_btn">변경</button>
-                    </li>
-                </ul>
-            </form>
-            <a href="#open_modal" class="pf_bye btn">회원탈퇴</a>
-            <div id="open_modal" class="open_modal">
-                <div>
-                  <p><b>탈퇴</b> 하시겠습니까?</p>
-                  <a href="#" class="close_modal">예</a>
-                  <a href="#" class="close_modal">아니오</a>
-                </div>
-              </div>
-        </section>       
-    </main>
-    <footer id="footer" class="footer"></footer>
-    <script src="./common/js/mypage_option.js"></script>
+<header id="header" class="header"></header>
+<main>
+  <section id="my_fixed" class="my_fixed"></section>
+  <section class="mypage_con" id="mypage_con">
+    <div class="pf_pic">
+      <form>
+        <img src="./common/img/user-circle.svg" alt="프로필사진">
+        <img src="./common/img/camera-circle.svg" alt="프로필사진 등록">
+        <input type="file" class="pf_img" id="pf_img" accept="image/jpeg, image/png">
+      </form>
+      <p id="pfEmail">kate12345@naver.com</p>
+    </div>
+    <form class="pf_text" id="pf_text">
+      <ul>
+        <li class="pf_wrap">
+          <label for="pf_name">닉네임</label>
+          <input type="text" id="pf_name" minlength="2" maxlength="12" placeholder="케이트"/>
+          <small class="error">error message</small>
+          <button type="submit" class="pf_btn">변경</button>
+        </li>
+        <li class="pf_wrap">
+          <label for="phone_input">휴대폰 번호</label>
+          <input type="tel" id="phone_input" placeholder="010-1234-5678" readonly/>
+          <button type="submit" class="pf_btn">변경</button>
+        </li>
+        <li class="pf_wrap">
+          <label for="phone_input1"></label>
+          <input type="tel" id="phone_input1" placeholder="변경할 번호를 입력하세요"/>
+          <small class="error">error message</small>
+          <button type="submit" class="pf_btn">인증요청</button>
+        </li>
+        <li class="pf_wrap">
+          <label for="phone_input2"></label>
+          <input type="tel" id="phone_input2" placeholder="인증번호를 입력해주세요"/>
+          <button type="submit" class="pf_btn">확인</button>
+        </li>
+        <li class="pf_wrap">
+          <label for="password">비밀번호</label>
+          <input type="password" id="password" placeholder="**********" readonly/>
+          <button type="submit" class="pf_btn">변경</button>
+        </li>
+        <li class="pf_wrap">
+          <label for="new_password">신규 비밀번호</label>
+          <input type="password" id="new_password" placeholder="신규 비밀번호를 입력해주세요"/>
+          <small class="error">error message</small>
+          <button type="submit" class="pf_btn">변경</button>
+        </li>
+      </ul>
+    </form>
+    <a href="#open_modal" class="pf_bye btn">회원탈퇴</a>
+    <div id="open_modal" class="open_modal">
+      <div>
+        <p><b>탈퇴</b> 하시겠습니까?</p>
+        <a href="#" class="close_modal">예</a>
+        <a href="#" class="close_modal">아니오</a>
+      </div>
+    </div>
+  </section>
+</main>
+<footer id="footer" class="footer"></footer>
+<script src="./common/js/mypage_option.js"></script>
 </body>
 </html>

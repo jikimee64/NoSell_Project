@@ -36,7 +36,8 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class LoginRes{
+    public static class LoginRes {
+
         private String accessToken;
         private String nickName;
         private String profileImage;
@@ -47,7 +48,8 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class LogoutReq{
+    public static class LogoutReq {
+
         @ApiModelProperty(value = "accessToken", notes = "accessToken", example = "accessToken", required = true)
         private String accessToken;
     }
@@ -57,7 +59,8 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class RefreshReq{
+    public static class RefreshReq {
+
         @ApiModelProperty(value = "accessToken", notes = "accessToken", example = "accessToken", required = true)
         private String accessToken;
         @ApiModelProperty(value = "refreshToken", notes = "refreshToken", example = "refreshToken", required = true)
@@ -69,7 +72,8 @@ public class LoginDto {
     @Builder
     @AllArgsConstructor
     @NoArgsConstructor(access = AccessLevel.PUBLIC)
-    public static class RefreshRes{
+    public static class RefreshRes {
+
         private String accessToken;
     }
 

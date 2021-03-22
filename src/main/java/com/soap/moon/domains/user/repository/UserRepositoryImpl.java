@@ -21,18 +21,8 @@ public class UserRepositoryImpl implements UserRepositoryCustom {
     private final JPAQueryFactory queryFactory;
 
     /**
-     * SELECT
-     *         nickname,
-     *         user.created_at,
-     *         count(*),
-     *         sum(user_review.stars)
-     *     FROM
-     *         user
-     *     left outer join
-     *         user_review
-     *             on user.id = user_id
-     *     where
-     *         user_id = 1
+     * SELECT nickname, user.created_at, count(*), sum(user_review.stars) FROM user left outer join
+     * user_review on user.id = user_id where user_id = 1
      */
     @Override
     public List<MyPageCommon> findUserInfoWithReviewCountAndSum(User userParam) {

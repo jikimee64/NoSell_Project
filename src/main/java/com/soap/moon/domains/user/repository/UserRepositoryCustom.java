@@ -6,6 +6,7 @@ import java.util.List;
 
 //QueryDsl 전용
 public interface UserRepositoryCustom {
+
     List<MyPageCommon> findUserInfoWithReviewCountAndSum(User userParam);
 
 }

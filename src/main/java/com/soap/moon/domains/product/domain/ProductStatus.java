@@ -10,6 +10,8 @@ public enum ProductStatus {
 
     private String status;
 
-    ProductStatus(String status){ this.status = status; }
+    ProductStatus(String status) {
+        this.status = status;
+    }
 
 }

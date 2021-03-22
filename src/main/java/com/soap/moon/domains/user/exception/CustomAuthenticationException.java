@@ -4,11 +4,11 @@ import com.soap.moon.global.error.ErrorCode;
 
 public class CustomAuthenticationException extends RuntimeException {
 
-    public CustomAuthenticationException(){
+    public CustomAuthenticationException() {
         super(ErrorCode.AUTHENTICATION_FAILED.getMessage());
     }
 
-    public CustomAuthenticationException(Exception ex){
+    public CustomAuthenticationException(Exception ex) {
         super(ex);
     }
 }

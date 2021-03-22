@@ -37,7 +37,7 @@ public class UserOauth extends BaseTimeEntity {
     private String providerId;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     public User user;
 
     @Builder
