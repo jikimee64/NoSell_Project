@@ -10,9 +10,13 @@ function settingPrice(price) {
   return price.replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+<<<<<<< HEAD
 const BoardItem = ({title, price, dealType, image_url, createdAt}) => {
   //console.log(props);
   console.log(createdAt);
+=======
+const BoardItem = ({ title, price, dealType, image_url, createdAt }) => {
+>>>>>>> 2e8e26f9b3f739b8c1815878baa3ee16a931aecf
   return (
       <li className="item">
         <div className="item_img">

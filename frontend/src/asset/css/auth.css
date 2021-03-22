@@ -1,9 +1,12 @@
 @charset "utf-8";
 
+<<<<<<< HEAD
 body {
   color: #2b2b2b;
 }
 
+=======
+>>>>>>> 2e8e26f9b3f739b8c1815878baa3ee16a931aecf
 .form {
   max-width: 600px;
   margin: 0 auto;
@@ -21,6 +24,7 @@ body {
 }
 
 /* 본문 내용 */
+<<<<<<< HEAD
 form {
   margin: 0 auto;
 }
@@ -37,6 +41,24 @@ fieldset > span {
   margin: 0;
   padding: 0 0 0 3%;
   font-size: .8rem;
+=======
+.form form {
+    margin: 0 auto;
+}
+
+
+.form h2 {
+    text-align: center;
+    font-size: 1.5rem;
+    font-family: 'GmarketSansMedium';
+    padding: 3% 0 8% 0;
+}
+
+.form fieldset>span {
+    margin: 0;
+    padding: 0 0 0 3%;
+    font-size: .8rem;
+>>>>>>> 2e8e26f9b3f739b8c1815878baa3ee16a931aecf
 }
 
 #signup > fieldset > p {
@@ -46,6 +68,7 @@ fieldset > span {
 
 /* 본문 inside */
 .field_wrap {
+<<<<<<< HEAD
   position: relative;
   margin: 0 auto 8% auto;
   text-align: center;
@@ -117,6 +140,76 @@ textarea:focus {
 textarea {
   border: 2px solid #a0b3b0;
   resize: vertical;
+=======
+    position: relative;
+    margin: 0 auto 8% auto;
+    text-align: center;
+    display:flex;
+}
+
+.com_btn {
+    width: 100px;
+    border: 1px solid #4147e1;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1rem;
+    color: #4147e1;
+}
+
+.form label {
+    position: absolute;
+    transform: translateY(6px);
+    left: 13px;
+    color: rgba(66, 60, 60, 0.466);
+    transition: all 0.25s ease;
+    backface-visibility: hidden;
+    pointer-events: none;
+    font-size: 1rem;
+    line-height: 1.8rem;
+}
+
+.form label .req {
+    margin: 2px;
+    color: #4147e1;
+}
+
+.form label.active {
+    transform: translateY(40px);
+    left: 2px;
+    font-size: 1rem;
+}
+
+.form label.active .req {
+    opacity: 0;
+}
+
+.form label.highlight {
+    color: rgba(66, 60, 60, 0.466);
+}
+
+.form  input,
+.form textarea {
+    font-size: 1rem;
+    line-height: 1.8rem;
+    flex:1;
+    padding: 5px 10px;
+    background: none;
+    border: none;
+    border-bottom: 1px solid #a0b3b0;
+    color: #2b2b2b;
+    transition: border-color .25s ease, box-shadow .25s ease;
+}
+
+.form  input:focus,
+.form  textarea:focus {
+    outline: 0;
+    border-color: #4147e1;
+}
+
+.form textarea {
+    border: 2px solid #a0b3b0;
+    resize: vertical;
+>>>>>>> 2e8e26f9b3f739b8c1815878baa3ee16a931aecf
 }
 
 /* recaptcha */
@@ -168,6 +261,10 @@ textarea {
   width: 100%;
 }
 
+.find {
+    justify-content: center;
+}
+
 /* 아이디,비번찾기 */
 .find > a {
   display: inline-block;
@@ -187,6 +284,7 @@ textarea {
 
 }
 
+<<<<<<< HEAD
 .social > button {
   margin: 0 auto;
   display: block;
@@ -213,6 +311,34 @@ textarea {
   height: 13px;
   vertical-align: middle;
   margin: 0 5% 0 0;
+=======
+.social>button {
+    display: flex;
+    width: 45%;
+    height: 40px;
+    font-size: .8rem;
+    line-height: 2.5rem;
+    text-align: center;
+    border-radius: 3px;
+    color: #fff;
+    margin: 1% auto;
+    overflow:hidden;
+    align-items: center;
+    justify-content: center;    
+}
+
+.social_naver {
+    background:green;
+}
+
+.social_google {
+    width: 100%;
+}
+
+.social_google>div {
+    display:flex;
+    align-items: center;
+>>>>>>> 2e8e26f9b3f739b8c1815878baa3ee16a931aecf
 }
 
 /* 하단 탭 */
@@ -228,6 +354,7 @@ textarea {
 }
 
 .tab_group li a {
+<<<<<<< HEAD
   padding: 3% 0;
   font-size: 1.1rem;
   transition: .5s ease;
@@ -260,5 +387,45 @@ textarea {
   .tab_group span {
     font-size: .8rem;
   }
+=======
+    padding: 3% 0;
+    font-size: 1.1rem;
+    transition: .5s ease;
+    font-family: 'GmarketSansBold';
+    color: #4147e1;
+    display: inline-block;
+}
+
+.form input[type="number"]::-webkit-outer-spin-button,
+.form input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+@media(max-width:768px) {
+    .form  h2 {
+        font-size: 1rem;
+    }
+
+    .button {
+        font-size: 1rem;
+    }
+
+    .test {
+        display: none;
+    }
+
+    .find>a {
+        font-size: .8rem;
+    }
+
+    .tab_group li a {
+        font-size: .8rem;
+    }
+
+    .tab_group span {
+        font-size: .8rem;
+    }
+>>>>>>> 2e8e26f9b3f739b8c1815878baa3ee16a931aecf
 
 }

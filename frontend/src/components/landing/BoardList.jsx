@@ -1,17 +1,18 @@
-import React, {useState, useEffect, useCallback} from "react";
-import "../../asset/css/boardList.css";
+import React, { useState, useEffect, useCallback } from "react";
 import BoardMore from "./BoardMore";
-import {getMainList} from "../../api/product";
+import { getMainList, getTargetList } from "../../api/product";
 import BoardItem from "./BoardItem";
 
-const BoardList = () => {
+import "../../asset/css/boardList.css";
+
+const BoardList = ({ categoryId }) => {
   const [page, setPage] = useState(0);
   const [loadData, setLoadData] = useState({
     loading: false,
     data: [],
     error: null,
   });
-
+  console.log(page);
   useEffect(() => {
     setLoadData((prev) => ({
       ...prev,
@@ -19,7 +20,12 @@ const BoardList = () => {
     }));
     const requestData = async () => {
       try {
-        const res = await getMainList(page);
+        let res = null;
+        if (categoryId) {
+          res = await getTargetList(page, categoryId);
+        } else {
+          res = await getMainList(page);
+        }
         console.log(res);
         const getList = res.data.data;
         setLoadData((prev) => ({
@@ -36,7 +42,7 @@ const BoardList = () => {
       }
     };
     requestData();
-  }, [page]);
+  }, [page, categoryId]);
 
   const onHandleMore = useCallback(() => {
     setPage((page) => ++page);
