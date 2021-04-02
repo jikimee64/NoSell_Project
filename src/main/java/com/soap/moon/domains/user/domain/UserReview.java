@@ -28,13 +28,13 @@ public class UserReview extends BaseTimeEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "writer")
-    private String writer;
-
     @Column(name = "writer_id")
     private Long writerId;
 
-    @Column(name = "content")
+    @Column(name = "writer")
+    private String writer;
+
+    @Column(name = "text")
     private String content;
 
     @Column(name = "good")

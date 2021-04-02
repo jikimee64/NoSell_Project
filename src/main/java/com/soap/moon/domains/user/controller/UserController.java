@@ -29,6 +29,7 @@ import java.util.Map;
 import java.util.Random;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import javax.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -327,5 +328,27 @@ public class UserController {
                 .build()
             , HttpStatus.OK);
     }
+
+    // user에 대한 판매 상품
+    @ApiOperation(value = "회원 마이페이지 판매상품", notes = "회원 마이페이지 판매상품")
+    @GetMapping("/{page}/list/{userId}/sales")
+    public ResponseEntity<?> findUserSalesProducts(
+        @PathVariable(name = "userId") final Long memberId,
+        @PathVariable(name = "page") @Min(0) Integer page
+    ){
+        return new ResponseEntity<>(
+            CommonResponse.builder()
+                .code("200")
+                .message("ok")
+                .data(userService.findUserSalesProducts(page, memberId))
+                .build()
+            , HttpStatus.OK);
+    }
+
+    // user에 대한 구매 상품
+
+    // user에 대한 찜 상품
+
+
 
 }

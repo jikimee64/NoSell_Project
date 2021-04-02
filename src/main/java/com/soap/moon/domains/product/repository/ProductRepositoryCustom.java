@@ -9,5 +9,4 @@ public interface ProductRepositoryCustom {
 
     Page<mainProductRes> findMainPageProduct(Pageable pageable, Integer categoryId, String keyword);
 
-
 }

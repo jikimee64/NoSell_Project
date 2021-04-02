@@ -7,6 +7,7 @@ import com.google.cloud.storage.BlobId;
 import com.google.cloud.storage.BlobInfo;
 import com.google.cloud.storage.Storage;
 import com.google.cloud.storage.StorageOptions;
+import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;
 import com.soap.moon.domains.user.domain.Account;
 import com.soap.moon.domains.user.domain.Authority;
 import com.soap.moon.domains.user.domain.Password;
@@ -38,8 +39,10 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.nurigo.java_sdk.api.Message;
@@ -47,6 +50,9 @@ import net.nurigo.java_sdk.exceptions.CoolsmsException;
 import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.io.ResourceLoader;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.scheduling.annotation.Async;
@@ -317,6 +323,24 @@ public class UserService {
         message.setText("랜덤번호 : " + numStr);
 
         mailSender.send(message);
+    }
+
+    // user에 대한 판매 상품
+    public List<mainProductRes> findUserSalesProducts(final Integer page, final Long memberId){
+            Page<mainProductRes> products = userRepository.findSalesProductsByUser(PageRequest.of
+            (page, 40, Sort.by("id").descending()), memberId);
+        return products.getContent().stream()
+            .map(s ->
+                mainProductRes.builder()
+                    .id(s.getId())
+                    .title(s.getTitle())
+                    .price(s.getPrice())
+                    .dealType(s.getDealType())
+                    .salesStatus(s.getSalesStatus())
+                    .image_url(s.getImage_url())
+                    .createdAt(s.getCreatedAt())
+                    .build())
+            .collect(Collectors.toList());
     }
 
 }

@@ -10,6 +10,7 @@ import com.querydsl.core.types.dsl.BooleanExpression;
 import com.querydsl.jpa.JPAExpressions;
 import com.querydsl.jpa.impl.JPAQueryFactory;
 import com.soap.moon.domains.product.domain.Product;
+import com.soap.moon.domains.product.domain.SalesStatus;
 import com.soap.moon.domains.product.dto.ProductDto;
 import com.soap.moon.domains.product.dto.ProductDto.mainProductRes;
 import java.util.List;
@@ -41,6 +42,7 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                 product.title,
                 product.price,
                 product.dealType,
+                product.salesStatus,
                 productImage.image_url,
                 product.createdAt
             ))
@@ -52,7 +54,8 @@ public class ProductRepositoryImpl implements ProductRepositoryCustom {
                         .select(productImage.id.min())
                         .from(productImage)
                         .groupBy(productImage.product)
-                ), categoryIdEq(categoryId), titleAndDescLike(keyword)
+                ), categoryIdEq(categoryId), titleAndDescLike(keyword),
+                product.salesStatus.eq(SalesStatus.valueOf("SALE"))
             )
             .orderBy(product.id.desc(), productImage.id.asc())
             .offset(pageable.getOffset())

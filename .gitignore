@@ -198,7 +198,7 @@ gradle-app.setting
 # End of https://www.toptal.com/developers/gitignore/api/java,gradle,intellij,windows
 
 ### VS Code ###
-.vscode/
+/frontend/.vscode/
 
 ### Custom ###
 /src/main/resources/application-secret.yml

@@ -60,6 +60,7 @@ public class ProductService {
                         .title(s.getTitle())
                         .price(s.getPrice())
                         .dealType(s.getDealType())
+                        .salesStatus(s.getSalesStatus())
                         .image_url(s.getImage_url())
                         .createdAt(s.getCreatedAt())
                         .build())

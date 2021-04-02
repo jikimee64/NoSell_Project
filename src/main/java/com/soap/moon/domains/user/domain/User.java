@@ -72,15 +72,15 @@ public class User extends BaseTimeEntity implements Serializable {
         String profileImage, UserStatus status) {
         Assert.notNull(account, "account must not be null");
         Assert.notNull(password, "password must not be null");
-        Assert.notNull(phoneNum, "phoneNum must not be null");
         Assert.notNull(nickName, "nickName must not be null");
+        Assert.notNull(phoneNum, "phoneNum must not be null");
         Assert.notNull(profileImage, "profileImage must not be null");
         Assert.notNull(status, "status must not be null");
 
         this.account = account;
         this.password = password;
-        this.phoneNum = phoneNum;
         this.nickName = nickName;
+        this.phoneNum = phoneNum;
         this.profileImage = profileImage;
         this.status = status;
     }
